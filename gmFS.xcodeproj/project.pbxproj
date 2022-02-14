@@ -14,6 +14,8 @@
 		086EF7AF27BAB0F40089A108 /* gmFSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7AE27BAB0F40089A108 /* gmFSTests.swift */; };
 		086EF7B927BAB0F40089A108 /* gmFSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7B827BAB0F40089A108 /* gmFSUITests.swift */; };
 		086EF7BB27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7BA27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift */; };
+		086EF7C927BAB1E30089A108 /* Connector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7C827BAB1E30089A108 /* Connector.swift */; };
+		086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,9 @@
 		086EF7B427BAB0F40089A108 /* gmFSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gmFSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		086EF7B827BAB0F40089A108 /* gmFSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gmFSUITests.swift; sourceTree = "<group>"; };
 		086EF7BA27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gmFSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		086EF7C827BAB1E30089A108 /* Connector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connector.swift; sourceTree = "<group>"; };
+		086EF7CA27BAB4C60089A108 /* gmFS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = gmFS.entitlements; sourceTree = "<group>"; };
+		086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +84,7 @@
 				086EF7AD27BAB0F40089A108 /* gmFSTests */,
 				086EF7B727BAB0F40089A108 /* gmFSUITests */,
 				086EF79B27BAB0F20089A108 /* Products */,
+				086EF7CB27BAB4C60089A108 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +101,8 @@
 		086EF79C27BAB0F20089A108 /* gmFS */ = {
 			isa = PBXGroup;
 			children = (
+				086EF7CA27BAB4C60089A108 /* gmFS.entitlements */,
+				086EF7C727BAB1970089A108 /* WIFI */,
 				086EF79D27BAB0F20089A108 /* gmFSApp.swift */,
 				086EF79F27BAB0F20089A108 /* ContentView.swift */,
 				086EF7A127BAB0F40089A108 /* Assets.xcassets */,
@@ -125,6 +134,22 @@
 				086EF7BA27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift */,
 			);
 			path = gmFSUITests;
+			sourceTree = "<group>";
+		};
+		086EF7C727BAB1970089A108 /* WIFI */ = {
+			isa = PBXGroup;
+			children = (
+				086EF7C827BAB1E30089A108 /* Connector.swift */,
+			);
+			path = WIFI;
+			sourceTree = "<group>";
+		};
+		086EF7CB27BAB4C60089A108 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +284,7 @@
 			files = (
 				086EF7A027BAB0F20089A108 /* ContentView.swift in Sources */,
 				086EF79E27BAB0F20089A108 /* gmFSApp.swift in Sources */,
+				086EF7C927BAB1E30089A108 /* Connector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +442,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = gmFS/gmFS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"gmFS/Preview Content\"";
@@ -445,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = gmFS/gmFS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"gmFS/Preview Content\"";

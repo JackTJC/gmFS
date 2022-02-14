@@ -32,5 +32,10 @@ class gmFSTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testWifiConnector()throws{
+        let connector = WifiConnector("ziroom-303", "4001001112")
+        connector.Connect()
+    }
 
 }
