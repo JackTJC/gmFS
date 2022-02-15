@@ -8,6 +8,8 @@
 import Foundation
 import NetworkExtension
 
+
+
 class WifiConnector{
     var ssid:String
     var passwd:String
