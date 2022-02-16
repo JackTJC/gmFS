@@ -19,12 +19,17 @@
 		0878259227BC0257008BD120 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259027BC0257008BD120 /* libssl.a */; };
 		0878259327BC0257008BD120 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259127BC0257008BD120 /* libcrypto.a */; };
 		0878259627BC0448008BD120 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 0878259527BC0448008BD120 /* include */; };
-		2BD243AA27BCB7DF004D8955 /* sm2test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A627BCB7DE004D8955 /* sm2test.c */; };
-		2BD243AB27BCB7DF004D8955 /* sm9test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A727BCB7DF004D8955 /* sm9test.c */; };
-		2BD243AC27BCB7DF004D8955 /* sm3test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A827BCB7DF004D8955 /* sm3test.c */; };
-		2BD243AD27BCB7DF004D8955 /* zuctest.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A927BCB7DF004D8955 /* zuctest.c */; };
-		2BF365B527BCC24D00D8EAEB /* GmSSLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF365B427BCC24D00D8EAEB /* GmSSLTests.m */; };
-		2BF365B827BCC3DB00D8EAEB /* gmFSTests-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF365B727BCC3DB00D8EAEB /* gmFSTests-Bridging-Header.m */; };
+		2B9393D127BD272900DBD1F4 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259127BC0257008BD120 /* libcrypto.a */; };
+		2B9393D227BD272900DBD1F4 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259027BC0257008BD120 /* libssl.a */; };
+		2B9393D427BD285E00DBD1F4 /* GmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9393D327BD285E00DBD1F4 /* GmTest.swift */; };
+		2BCD316A27BD102100E9B2B3 /* crypto in Resources */ = {isa = PBXBuildFile; fileRef = 2BCD316927BD102100E9B2B3 /* crypto */; };
+		2BCD316B27BD132A00E9B2B3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259127BC0257008BD120 /* libcrypto.a */; };
+		2BCD316C27BD132A00E9B2B3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259027BC0257008BD120 /* libssl.a */; };
+		2BCD31AE27BD23D900E9B2B3 /* GmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCD31AD27BD23D900E9B2B3 /* GmTests.m */; };
+		2BCD31B427BD23E700E9B2B3 /* zuctest.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A927BCB7DF004D8955 /* zuctest.c */; };
+		2BCD31B627BD23E700E9B2B3 /* sm9test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A727BCB7DF004D8955 /* sm9test.c */; };
+		2BCD31B727BD23E700E9B2B3 /* sm2test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A627BCB7DE004D8955 /* sm2test.c */; };
+		2BCD31B827BD23E700E9B2B3 /* sm3test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A827BCB7DF004D8955 /* sm3test.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,13 @@
 			remoteInfo = gmFS;
 		};
 		086EF7B527BAB0F40089A108 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 086EF79227BAB0F20089A108 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 086EF79927BAB0F20089A108;
+			remoteInfo = gmFS;
+		};
+		2BCD31AF27BD23D900E9B2B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 086EF79227BAB0F20089A108 /* Project object */;
 			proxyType = 1;
@@ -61,15 +73,16 @@
 		0878259027BC0257008BD120 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		0878259127BC0257008BD120 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		0878259527BC0448008BD120 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
+		2B9393D327BD285E00DBD1F4 /* GmTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmTest.swift; sourceTree = "<group>"; };
+		2BCD316927BD102100E9B2B3 /* crypto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = crypto; sourceTree = "<group>"; };
+		2BCD31A127BD1FCD00E9B2B3 /* gmtest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmtest.h; sourceTree = "<group>"; };
+		2BCD31AB27BD23D900E9B2B3 /* GmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BCD31AD27BD23D900E9B2B3 /* GmTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GmTests.m; sourceTree = "<group>"; };
 		2BD243A627BCB7DE004D8955 /* sm2test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sm2test.c; sourceTree = "<group>"; };
 		2BD243A727BCB7DF004D8955 /* sm9test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sm9test.c; sourceTree = "<group>"; };
 		2BD243A827BCB7DF004D8955 /* sm3test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sm3test.c; sourceTree = "<group>"; };
 		2BD243A927BCB7DF004D8955 /* zuctest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zuctest.c; sourceTree = "<group>"; };
 		2BD243AE27BCB804004D8955 /* e_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e_os.h; sourceTree = "<group>"; };
-		2BD243AF27BCB834004D8955 /* gmssltest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmssltest.h; sourceTree = "<group>"; };
-		2BF365B427BCC24D00D8EAEB /* GmSSLTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GmSSLTests.m; sourceTree = "<group>"; };
-		2BF365B627BCC3DB00D8EAEB /* gmFSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gmFSTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		2BF365B727BCC3DB00D8EAEB /* gmFSTests-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "gmFSTests-Bridging-Header.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +100,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BCD316B27BD132A00E9B2B3 /* libcrypto.a in Frameworks */,
+				2BCD316C27BD132A00E9B2B3 /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +109,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BCD31A827BD23D900E9B2B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B9393D127BD272900DBD1F4 /* libcrypto.a in Frameworks */,
+				2B9393D227BD272900DBD1F4 /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +130,7 @@
 				086EF79C27BAB0F20089A108 /* gmFS */,
 				086EF7AD27BAB0F40089A108 /* gmFSTests */,
 				086EF7B727BAB0F40089A108 /* gmFSUITests */,
+				2BCD31AC27BD23D900E9B2B3 /* GmTests */,
 				086EF79B27BAB0F20089A108 /* Products */,
 				086EF7CB27BAB4C60089A108 /* Frameworks */,
 			);
@@ -117,6 +142,7 @@
 				086EF79A27BAB0F20089A108 /* gmFS.app */,
 				086EF7AA27BAB0F40089A108 /* gmFSTests.xctest */,
 				086EF7B427BAB0F40089A108 /* gmFSUITests.xctest */,
+				2BCD31AB27BD23D900E9B2B3 /* GmTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,11 +172,7 @@
 		086EF7AD27BAB0F40089A108 /* gmFSTests */ = {
 			isa = PBXGroup;
 			children = (
-				2BD243AE27BCB804004D8955 /* e_os.h */,
-				08FC223427BC871D000A0500 /* GmSSLTest */,
 				086EF7AE27BAB0F40089A108 /* gmFSTests.swift */,
-				2BF365B627BCC3DB00D8EAEB /* gmFSTests-Bridging-Header.h */,
-				2BF365B727BCC3DB00D8EAEB /* gmFSTests-Bridging-Header.m */,
 			);
 			path = gmFSTests;
 			sourceTree = "<group>";
@@ -190,17 +212,28 @@
 			path = GmSSL;
 			sourceTree = "<group>";
 		};
-		08FC223427BC871D000A0500 /* GmSSLTest */ = {
+		2BCD316F27BD13BB00E9B2B3 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				2BD243A627BCB7DE004D8955 /* sm2test.c */,
+				2BCD316927BD102100E9B2B3 /* crypto */,
+				2BD243AE27BCB804004D8955 /* e_os.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		2BCD31AC27BD23D900E9B2B3 /* GmTests */ = {
+			isa = PBXGroup;
+			children = (
 				2BD243A827BCB7DF004D8955 /* sm3test.c */,
+				2BD243A627BCB7DE004D8955 /* sm2test.c */,
 				2BD243A727BCB7DF004D8955 /* sm9test.c */,
 				2BD243A927BCB7DF004D8955 /* zuctest.c */,
-				2BD243AF27BCB834004D8955 /* gmssltest.h */,
-				2BF365B427BCC24D00D8EAEB /* GmSSLTests.m */,
+				2BCD316F27BD13BB00E9B2B3 /* include */,
+				2BCD31A127BD1FCD00E9B2B3 /* gmtest.h */,
+				2BCD31AD27BD23D900E9B2B3 /* GmTests.m */,
+				2B9393D327BD285E00DBD1F4 /* GmTest.swift */,
 			);
-			path = GmSSLTest;
+			path = GmTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +292,24 @@
 			productReference = 086EF7B427BAB0F40089A108 /* gmFSUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		2BCD31AA27BD23D900E9B2B3 /* GmTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BCD31B127BD23D900E9B2B3 /* Build configuration list for PBXNativeTarget "GmTests" */;
+			buildPhases = (
+				2BCD31A727BD23D900E9B2B3 /* Sources */,
+				2BCD31A827BD23D900E9B2B3 /* Frameworks */,
+				2BCD31A927BD23D900E9B2B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BCD31B027BD23D900E9B2B3 /* PBXTargetDependency */,
+			);
+			name = GmTests;
+			productName = GmTests;
+			productReference = 2BCD31AB27BD23D900E9B2B3 /* GmTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -282,6 +333,11 @@
 						CreatedOnToolsVersion = 13.2.1;
 						TestTargetID = 086EF79927BAB0F20089A108;
 					};
+					2BCD31AA27BD23D900E9B2B3 = {
+						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1320;
+						TestTargetID = 086EF79927BAB0F20089A108;
+					};
 				};
 			};
 			buildConfigurationList = 086EF79527BAB0F20089A108 /* Build configuration list for PBXProject "gmFS" */;
@@ -300,6 +356,7 @@
 				086EF79927BAB0F20089A108 /* gmFS */,
 				086EF7A927BAB0F40089A108 /* gmFSTests */,
 				086EF7B327BAB0F40089A108 /* gmFSUITests */,
+				2BCD31AA27BD23D900E9B2B3 /* GmTests */,
 			);
 		};
 /* End PBXProject section */
@@ -319,10 +376,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BCD316A27BD102100E9B2B3 /* crypto in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		086EF7B227BAB0F40089A108 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BCD31A927BD23D900E9B2B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -346,13 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BD243AC27BCB7DF004D8955 /* sm3test.c in Sources */,
-				2BD243AA27BCB7DF004D8955 /* sm2test.c in Sources */,
 				086EF7AF27BAB0F40089A108 /* gmFSTests.swift in Sources */,
-				2BD243AD27BCB7DF004D8955 /* zuctest.c in Sources */,
-				2BD243AB27BCB7DF004D8955 /* sm9test.c in Sources */,
-				2BF365B527BCC24D00D8EAEB /* GmSSLTests.m in Sources */,
-				2BF365B827BCC3DB00D8EAEB /* gmFSTests-Bridging-Header.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +421,19 @@
 			files = (
 				086EF7B927BAB0F40089A108 /* gmFSUITests.swift in Sources */,
 				086EF7BB27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BCD31A727BD23D900E9B2B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BCD31B727BD23E700E9B2B3 /* sm2test.c in Sources */,
+				2BCD31B827BD23E700E9B2B3 /* sm3test.c in Sources */,
+				2BCD31B427BD23E700E9B2B3 /* zuctest.c in Sources */,
+				2BCD31AE27BD23D900E9B2B3 /* GmTests.m in Sources */,
+				2BCD31B627BD23E700E9B2B3 /* sm9test.c in Sources */,
+				2B9393D427BD285E00DBD1F4 /* GmTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +449,11 @@
 			isa = PBXTargetDependency;
 			target = 086EF79927BAB0F20089A108 /* gmFS */;
 			targetProxy = 086EF7B527BAB0F40089A108 /* PBXContainerItemProxy */;
+		};
+		2BCD31B027BD23D900E9B2B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 086EF79927BAB0F20089A108 /* gmFS */;
+			targetProxy = 2BCD31AF27BD23D900E9B2B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -590,17 +667,27 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 659H9V99MR;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(PROJECT_DIR)/gmFS/GmSSL/include",
+					"$(PROJECT_DIR)/gmFSTests/GmSSLTest/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/gmFS/GmSSL",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(PROJECT_DIR)/gmFS/GmSSL/";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jincai.gmFSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "gmFSTests/gmFSTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -618,17 +705,27 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 659H9V99MR;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(PROJECT_DIR)/gmFS/GmSSL/include",
+					"$(PROJECT_DIR)/gmFSTests/GmSSLTest/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/gmFS/GmSSL",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(PROJECT_DIR)/gmFS/GmSSL/";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jincai.gmFSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "gmFSTests/gmFSTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gmFS.app/gmFS";
@@ -671,6 +768,75 @@
 			};
 			name = Release;
 		};
+		2BCD31B227BD23D900E9B2B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 659H9V99MR;
+				GENERATE_INFOPLIST_FILE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"\"$(SRCROOT)/GmTests/include\"",
+					"\"$(SRCROOT)/gmFS/GmSSL/include\"",
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/gmFS/GmSSL",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "\"$(SRCROOT)/gmFS/GmSSL\"";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jincaitian.GmTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gmFS.app/gmFS";
+			};
+			name = Debug;
+		};
+		2BCD31B327BD23D900E9B2B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 659H9V99MR;
+				GENERATE_INFOPLIST_FILE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"\"$(SRCROOT)/GmTests/include\"",
+					"\"$(SRCROOT)/gmFS/GmSSL/include\"",
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/gmFS/GmSSL",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "\"$(SRCROOT)/gmFS/GmSSL\"";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jincaitian.GmTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gmFS.app/gmFS";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -706,6 +872,15 @@
 			buildConfigurations = (
 				086EF7C527BAB0F40089A108 /* Debug */,
 				086EF7C627BAB0F40089A108 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BCD31B127BD23D900E9B2B3 /* Build configuration list for PBXNativeTarget "GmTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BCD31B227BD23D900E9B2B3 /* Debug */,
+				2BCD31B327BD23D900E9B2B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

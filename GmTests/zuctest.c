@@ -47,11 +47,11 @@
  * ====================================================================
  */
 
-#include "gmssltest.h"
+#include "gmtest.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../e_os.h"
+#include "e_os.h"
 
 #ifdef OPENSSL_NO_ZUC
 int main(int argc, char **argv)
@@ -520,7 +520,7 @@ int zuc256_mac_test(void)
 	return err;
 }
 
-int testzuc(void)
+int zuctest(void)
 {
 	int err = 0;
 	err += zuc_test();

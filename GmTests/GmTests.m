@@ -1,17 +1,18 @@
 //
-//  GmSSLTests.m
-//  gmFSTests
+//  GmTests.m
+//  GmTests
 //
 //  Created by bytedance on 2022/2/16.
 //
 
+#import "gmtest.h"
 #import <XCTest/XCTest.h>
-#include "gmssltest.h"
-@interface GmSSLTests : XCTestCase
+
+@interface GmTests : XCTestCase
 
 @end
 
-@implementation GmSSLTests
+@implementation GmTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -24,10 +25,10 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    testsm2();
-    testsm3();
-    testsm9();
-    testzuc();
+    sm2test();
+    sm3test();
+    sm9test();
+    zuctest();
 }
 
 - (void)testPerformanceExample {

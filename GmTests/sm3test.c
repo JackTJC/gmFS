@@ -46,12 +46,13 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  * ====================================================================
  */
-#include "gmssltest.h"
+
+#include "gmtest.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-#include "../e_os.h"
+#include "e_os.h"
 
 #ifdef OPENSSL_NO_SM3
 int main(int argc, char **argv)
@@ -195,7 +196,7 @@ static char *pt(unsigned char *md)
 	return (buf);
 }
 
-int testsm3()
+int sm3test()
 {
 	int err = 0;
 	char *p;
