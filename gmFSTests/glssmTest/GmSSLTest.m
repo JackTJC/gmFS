@@ -1,18 +1,18 @@
 //
-//  gmTest.m
+//  GmSSLTest.m
 //  gmFSTests
 //
 //  Created by jincaitian on 2022/2/16.
 //
 
 #import <XCTest/XCTest.h>
-#import "../gmFS/gm/sm2test.h"
+#import "sm2test.h"
 
-@interface gmTest : XCTestCase
+@interface GmSSLTest : XCTestCase
 
 @end
 
-@implementation gmTest
+@implementation GmSSLTest
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
