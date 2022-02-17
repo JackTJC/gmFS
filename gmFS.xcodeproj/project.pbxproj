@@ -19,6 +19,9 @@
 		0878259227BC0257008BD120 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259027BC0257008BD120 /* libssl.a */; };
 		0878259327BC0257008BD120 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259127BC0257008BD120 /* libcrypto.a */; };
 		0878259627BC0448008BD120 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 0878259527BC0448008BD120 /* include */; };
+		08FC223D27BD3C61000A0500 /* sms4test.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FC223A27BD3C61000A0500 /* sms4test.c */; };
+		08FC223E27BD3C61000A0500 /* sm2test.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FC223B27BD3C61000A0500 /* sm2test.c */; };
+		08FC223F27BD3C61000A0500 /* sm9test.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FC223C27BD3C61000A0500 /* sm9test.c */; };
 		2B9393D127BD272900DBD1F4 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259127BC0257008BD120 /* libcrypto.a */; };
 		2B9393D227BD272900DBD1F4 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259027BC0257008BD120 /* libssl.a */; };
 		2B9393D427BD285E00DBD1F4 /* GmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9393D327BD285E00DBD1F4 /* GmTest.swift */; };
@@ -27,8 +30,6 @@
 		2BCD316C27BD132A00E9B2B3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259027BC0257008BD120 /* libssl.a */; };
 		2BCD31AE27BD23D900E9B2B3 /* GmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCD31AD27BD23D900E9B2B3 /* GmTests.m */; };
 		2BCD31B427BD23E700E9B2B3 /* zuctest.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A927BCB7DF004D8955 /* zuctest.c */; };
-		2BCD31B627BD23E700E9B2B3 /* sm9test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A727BCB7DF004D8955 /* sm9test.c */; };
-		2BCD31B727BD23E700E9B2B3 /* sm2test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A627BCB7DE004D8955 /* sm2test.c */; };
 		2BCD31B827BD23E700E9B2B3 /* sm3test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD243A827BCB7DF004D8955 /* sm3test.c */; };
 /* End PBXBuildFile section */
 
@@ -73,13 +74,14 @@
 		0878259027BC0257008BD120 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		0878259127BC0257008BD120 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		0878259527BC0448008BD120 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
+		08FC223A27BD3C61000A0500 /* sms4test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sms4test.c; sourceTree = "<group>"; };
+		08FC223B27BD3C61000A0500 /* sm2test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sm2test.c; sourceTree = "<group>"; };
+		08FC223C27BD3C61000A0500 /* sm9test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sm9test.c; sourceTree = "<group>"; };
 		2B9393D327BD285E00DBD1F4 /* GmTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmTest.swift; sourceTree = "<group>"; };
 		2BCD316927BD102100E9B2B3 /* crypto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = crypto; sourceTree = "<group>"; };
 		2BCD31A127BD1FCD00E9B2B3 /* gmtest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmtest.h; sourceTree = "<group>"; };
 		2BCD31AB27BD23D900E9B2B3 /* GmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BCD31AD27BD23D900E9B2B3 /* GmTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GmTests.m; sourceTree = "<group>"; };
-		2BD243A627BCB7DE004D8955 /* sm2test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sm2test.c; sourceTree = "<group>"; };
-		2BD243A727BCB7DF004D8955 /* sm9test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sm9test.c; sourceTree = "<group>"; };
 		2BD243A827BCB7DF004D8955 /* sm3test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sm3test.c; sourceTree = "<group>"; };
 		2BD243A927BCB7DF004D8955 /* zuctest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zuctest.c; sourceTree = "<group>"; };
 		2BD243AE27BCB804004D8955 /* e_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e_os.h; sourceTree = "<group>"; };
@@ -212,6 +214,21 @@
 			path = GmSSL;
 			sourceTree = "<group>";
 		};
+		08FC224027BD3E91000A0500 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2BCD31A127BD1FCD00E9B2B3 /* gmtest.h */,
+				2BCD31AD27BD23D900E9B2B3 /* GmTests.m */,
+				2B9393D327BD285E00DBD1F4 /* GmTest.swift */,
+				08FC223B27BD3C61000A0500 /* sm2test.c */,
+				08FC223C27BD3C61000A0500 /* sm9test.c */,
+				08FC223A27BD3C61000A0500 /* sms4test.c */,
+				2BD243A827BCB7DF004D8955 /* sm3test.c */,
+				2BD243A927BCB7DF004D8955 /* zuctest.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		2BCD316F27BD13BB00E9B2B3 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,14 +241,8 @@
 		2BCD31AC27BD23D900E9B2B3 /* GmTests */ = {
 			isa = PBXGroup;
 			children = (
-				2BD243A827BCB7DF004D8955 /* sm3test.c */,
-				2BD243A627BCB7DE004D8955 /* sm2test.c */,
-				2BD243A727BCB7DF004D8955 /* sm9test.c */,
-				2BD243A927BCB7DF004D8955 /* zuctest.c */,
+				08FC224027BD3E91000A0500 /* src */,
 				2BCD316F27BD13BB00E9B2B3 /* include */,
-				2BCD31A127BD1FCD00E9B2B3 /* gmtest.h */,
-				2BCD31AD27BD23D900E9B2B3 /* GmTests.m */,
-				2B9393D327BD285E00DBD1F4 /* GmTest.swift */,
 			);
 			path = GmTests;
 			sourceTree = "<group>";
@@ -428,11 +439,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BCD31B727BD23E700E9B2B3 /* sm2test.c in Sources */,
 				2BCD31B827BD23E700E9B2B3 /* sm3test.c in Sources */,
 				2BCD31B427BD23E700E9B2B3 /* zuctest.c in Sources */,
+				08FC223F27BD3C61000A0500 /* sm9test.c in Sources */,
 				2BCD31AE27BD23D900E9B2B3 /* GmTests.m in Sources */,
-				2BCD31B627BD23E700E9B2B3 /* sm9test.c in Sources */,
+				08FC223D27BD3C61000A0500 /* sms4test.c in Sources */,
+				08FC223E27BD3C61000A0500 /* sm2test.c in Sources */,
 				2B9393D427BD285E00DBD1F4 /* GmTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

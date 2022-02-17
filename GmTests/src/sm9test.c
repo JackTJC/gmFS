@@ -46,6 +46,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  * ====================================================================
  */
+
 #include "gmtest.h"
 #include <stdio.h>
 #include <string.h>
@@ -64,6 +65,63 @@ int main(int argc, char **argv)
 # include <openssl/sm9.h>
 # include <openssl/rand.h>
 # include "crypto/sm9/sm9_lcl.h"
+
+RAND_METHOD sm9_fake_rand;
+const RAND_METHOD *sm9_old_rand = NULL;
+
+static const char rnd_seed[] =
+	"string to make the random number generator think it has entropy";
+static const char *rnd_number = NULL;
+
+static int fbytes(unsigned char *buf, int num)
+{
+	int ret = 0;
+	BIGNUM *bn = NULL;
+
+	if (!BN_hex2bn(&bn, rnd_number)) {
+		goto end;
+	}
+	if (BN_num_bytes(bn) > num) {
+		goto end;
+	}
+	memset(buf, 0, num);
+	if (!BN_bn2bin(bn, buf + num - BN_num_bytes(bn))) {
+		goto end;
+	}
+	ret = 1;
+end:
+	BN_free(bn);
+	return ret;
+}
+
+static int change_rand(const char *hex)
+{
+	if (!(sm9_old_rand = RAND_get_rand_method())) {
+		return 0;
+	}
+
+	sm9_fake_rand.seed		= sm9_old_rand->seed;
+	sm9_fake_rand.cleanup	= sm9_old_rand->cleanup;
+	sm9_fake_rand.add		= sm9_old_rand->add;
+	sm9_fake_rand.status	= sm9_old_rand->status;
+	sm9_fake_rand.bytes		= fbytes;
+	sm9_fake_rand.pseudorand	= sm9_old_rand->bytes;
+
+	if (!RAND_set_rand_method(&sm9_fake_rand)) {
+		return 0;
+	}
+
+	rnd_number = hex;
+	return 1;
+}
+
+static int restore_rand(void)
+{
+	rnd_number = NULL;
+	if (!RAND_set_rand_method(sm9_old_rand))
+		return 0;
+	else	return 1;
+}
 
 static int hexequbin(const char *hex, const unsigned char *bin, size_t binlen)
 {
@@ -391,7 +449,7 @@ int sm9test()
 	} else
 		printf("sm9 encrypt tests passed\n");
 
-	if (old_rand)
+	if (sm9_old_rand)
 		restore_rand();
 	return err;
 }

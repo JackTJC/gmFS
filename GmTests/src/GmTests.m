@@ -29,6 +29,7 @@
     sm3test();
     sm9test();
     zuctest();
+    sms4test();
 }
 
 - (void)testPerformanceExample {

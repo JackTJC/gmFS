@@ -237,6 +237,7 @@ int sm3test()
 
 	OPENSSL_free(testbuf);
 	OPENSSL_free(dgstbuf);
-	EXIT(err);
+    return err;
+//	EXIT(err);
 }
 #endif

@@ -46,6 +46,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  * ====================================================================
  */
+
 #include "gmtest.h"
 #include <stdio.h>
 #include <string.h>
@@ -68,6 +69,63 @@ int main(int argc, char **argv)
 # include "crypto/sm2/sm2_lcl.h"
 
 # define VERBOSE 1
+
+RAND_METHOD sm2_fake_rand;
+const RAND_METHOD *sm2_old_rand;
+
+static const char rnd_seed[] =
+	"string to make the random number generator think it has entropy";
+static const char *rnd_number = NULL;
+
+static int sm2_fbytes(unsigned char *buf, int num)
+{
+	int ret = 0;
+	BIGNUM *bn = NULL;
+
+	if (!BN_hex2bn(&bn, rnd_number)) {
+		goto end;
+	}
+	if (BN_num_bytes(bn) > num) {
+		goto end;
+	}
+	memset(buf, 0, num);
+	if (!BN_bn2bin(bn, buf + num - BN_num_bytes(bn))) {
+		goto end;
+	}
+	ret = 1;
+end:
+	BN_free(bn);
+	return ret;
+}
+
+static int sm2_change_rand(const char *hex)
+{
+	if (!(sm2_old_rand = RAND_get_rand_method())) {
+		return 0;
+	}
+
+	sm2_fake_rand.seed		= sm2_old_rand->seed;
+	sm2_fake_rand.cleanup	= sm2_old_rand->cleanup;
+	sm2_fake_rand.add		= sm2_old_rand->add;
+	sm2_fake_rand.status	= sm2_old_rand->status;
+	sm2_fake_rand.bytes		= sm2_fbytes;
+	sm2_fake_rand.pseudorand	= sm2_old_rand->bytes;
+
+	if (!RAND_set_rand_method(&sm2_fake_rand)) {
+		return 0;
+	}
+
+	rnd_number = hex;
+	return 1;
+}
+
+static int sm2_restore_rand(void)
+{
+	rnd_number = NULL;
+	if (!RAND_set_rand_method(sm2_old_rand))
+		return 0;
+	else	return 1;
+}
 
 static int hexequbin(const char *hex, const unsigned char *bin, size_t binlen)
 {
@@ -255,7 +313,7 @@ static int test_sm2_sign(const EC_GROUP *group,
 	const BIGNUM *sig_r;
 	const BIGNUM *sig_s;
 
-	change_rand(k);
+	sm2_change_rand(k);
 
 	if (!(ec_key = new_ec_key(group, sk, xP, yP))) {
 		fprintf(stderr, "error: %s %d\n", __FUNCTION__, __LINE__);
@@ -340,7 +398,7 @@ static int test_sm2_sign(const EC_GROUP *group,
 
 	ret = 1;
 err:
-	restore_rand();
+	sm2_restore_rand();
 	if (ec_key) EC_KEY_free(ec_key);
 	if (pubkey) EC_KEY_free(pubkey);
 	if (sm2sig) ECDSA_SIG_free(sm2sig);
@@ -369,7 +427,7 @@ static int test_sm2_enc(const EC_GROUP *group, const EVP_MD *md,
 		goto end;
 	}
 
-	change_rand(k);
+	sm2_change_rand(k);
 	if (!(cv = SM2_do_encrypt(md, (unsigned char *)M, strlen(M), pub_key))) {
 		goto end;
 	}
@@ -405,7 +463,7 @@ static int test_sm2_enc(const EC_GROUP *group, const EVP_MD *md,
 
 end:
 	ERR_print_errors_fp(stderr);
-	restore_rand();
+	sm2_restore_rand();
 	EC_KEY_free(pub_key);
 	EC_KEY_free(pri_key);
 	SM2CiphertextValue_free(cv);
@@ -458,19 +516,19 @@ static int test_sm2_kap(const EC_GROUP *group,
 		goto end;
 	}
 
-	change_rand(rA);
+	sm2_change_rand(rA);
 	if (!SM2_KAP_prepare(&ctxA, RA, &RAlen)) {
 		fprintf(stderr, "error: %s %d\n", __FILE__, __LINE__);
 		goto end;
 	}
-	restore_rand();
+	sm2_restore_rand();
 
-	change_rand(rB);
+	sm2_change_rand(rB);
 	if (!SM2_KAP_prepare(&ctxB, RB, &RBlen)) {
 		fprintf(stderr, "error: %s %d\n", __FILE__, __LINE__);
 		goto end;
 	}
-	restore_rand();
+	sm2_restore_rand();
 
 	if (!SM2_KAP_compute_key(&ctxA, RB, RBlen, kab, kablen, s1, &s1len)) {
 		fprintf(stderr, "error: %s %d\n", __FILE__, __LINE__);
@@ -678,6 +736,7 @@ end:
 	EC_GROUP_free(sm2p256test);
 	EC_GROUP_free(sm2b193test);
 	EC_GROUP_free(sm2b257test);
-	EXIT(err);
+    return err;
+//	EXIT(err);
 }
 #endif
