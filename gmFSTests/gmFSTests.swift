@@ -34,8 +34,6 @@ class gmFSTests: XCTestCase {
     }
     
     func testWifiConnector()throws{
-        let connector = WifiConnector("ziroom-303", "4001001112")
-        connector.Connect()
     }
 
 }
