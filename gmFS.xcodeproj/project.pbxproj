@@ -34,6 +34,7 @@
 		2BC337E927C2417000C01067 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC337E827C2417000C01067 /* MeView.swift */; };
 		2BC337EB27C2476700C01067 /* ConnectionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC337EA27C2476700C01067 /* ConnectionSheetView.swift */; };
 		2BC337EE27C24FCE00C01067 /* InputDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC337ED27C24FCE00C01067 /* InputDocument.swift */; };
+		2BC337F227C2544000C01067 /* SM9.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC337F127C2544000C01067 /* SM9.m */; };
 		2BCD316A27BD102100E9B2B3 /* crypto in Resources */ = {isa = PBXBuildFile; fileRef = 2BCD316927BD102100E9B2B3 /* crypto */; };
 		2BCD316B27BD132A00E9B2B3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259127BC0257008BD120 /* libcrypto.a */; };
 		2BCD316C27BD132A00E9B2B3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259027BC0257008BD120 /* libssl.a */; };
@@ -85,6 +86,9 @@
 		2BC337E827C2417000C01067 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		2BC337EA27C2476700C01067 /* ConnectionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionSheetView.swift; sourceTree = "<group>"; };
 		2BC337ED27C24FCE00C01067 /* InputDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDocument.swift; sourceTree = "<group>"; };
+		2BC337F027C2544000C01067 /* gmFS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gmFS-Bridging-Header.h"; sourceTree = "<group>"; };
+		2BC337F127C2544000C01067 /* SM9.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SM9.m; sourceTree = "<group>"; };
+		2BC337F327C2549A00C01067 /* SM9.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SM9.h; sourceTree = "<group>"; };
 		2BCD316927BD102100E9B2B3 /* crypto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = crypto; sourceTree = "<group>"; };
 		2BCD31A127BD1FCD00E9B2B3 /* gmtest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmtest.h; sourceTree = "<group>"; };
 		2BCD31AD27BD23D900E9B2B3 /* GmTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GmTests.m; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 		086EF79C27BAB0F20089A108 /* gmFS */ = {
 			isa = PBXGroup;
 			children = (
+				2BC337EF27C2542900C01067 /* Encrypt */,
 				2BC337EC27C24FB000C01067 /* File */,
 				082D285827C12F770008A0BB /* Libs */,
 				082D285727C12E840008A0BB /* Service */,
@@ -258,6 +263,16 @@
 				2BC337ED27C24FCE00C01067 /* InputDocument.swift */,
 			);
 			path = File;
+			sourceTree = "<group>";
+		};
+		2BC337EF27C2542900C01067 /* Encrypt */ = {
+			isa = PBXGroup;
+			children = (
+				2BC337F127C2544000C01067 /* SM9.m */,
+				2BC337F027C2544000C01067 /* gmFS-Bridging-Header.h */,
+				2BC337F327C2549A00C01067 /* SM9.h */,
+			);
+			path = Encrypt;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BC337F227C2544000C01067 /* SM9.m in Sources */,
 				086EF7A027BAB0F20089A108 /* ContentView.swift in Sources */,
 				086EF79E27BAB0F20089A108 /* gmFSApp.swift in Sources */,
 				086EF7C927BAB1E30089A108 /* WiFiService.swift in Sources */,
@@ -602,7 +618,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "gmFS/Encrypt/gmFS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
@@ -641,7 +657,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "gmFS/Encrypt/gmFS-Bridging-Header.h";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
