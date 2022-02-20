@@ -73,3 +73,10 @@ extension ColorSwitchViewController : ColorServiceDelegate {
         }
     }
 }
+
+struct ColorSwitchViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        ColorSwitchViewController(connectionsLabel: "111", backgroundColor: .red)
+    }
+}
+
