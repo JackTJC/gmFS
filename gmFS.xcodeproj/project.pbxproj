@@ -21,7 +21,6 @@
 		086EF7C927BAB1E30089A108 /* WiFiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7C827BAB1E30089A108 /* WiFiService.swift */; };
 		086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */; };
 		08D5257727C1473700C5009B /* GmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCD31AD27BD23D900E9B2B3 /* GmTests.m */; };
-		08D5257827C1473C00C5009B /* GmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9393D327BD285E00DBD1F4 /* GmTest.swift */; };
 		08D5257927C1475000C5009B /* sm2test.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FC223B27BD3C61000A0500 /* sm2test.c */; };
 		08D5257A27C1475300C5009B /* sm9test.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FC223C27BD3C61000A0500 /* sm9test.c */; };
 		08D5257B27C1475600C5009B /* sms4test.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FC223A27BD3C61000A0500 /* sms4test.c */; };
@@ -192,7 +191,6 @@
 		2B1CDF7C27CB511900136DAA /* lhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lhash.h; sourceTree = "<group>"; };
 		2B1CDF7F27CB796800136DAA /* typeConvert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typeConvert.h; sourceTree = "<group>"; };
 		2B1CDF8027CB79BD00136DAA /* typeConvert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = typeConvert.m; sourceTree = "<group>"; };
-		2B9393D327BD285E00DBD1F4 /* GmTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmTest.swift; sourceTree = "<group>"; };
 		2BC337E627C2410A00C01067 /* FileShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileShareView.swift; sourceTree = "<group>"; };
 		2BC337E827C2417000C01067 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		2BC337EA27C2476700C01067 /* ConnectionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionSheetView.swift; sourceTree = "<group>"; };
@@ -359,7 +357,6 @@
 				2BD243AE27BCB804004D8955 /* e_os.h */,
 				2BCD31A127BD1FCD00E9B2B3 /* gmtest.h */,
 				2BCD31AD27BD23D900E9B2B3 /* GmTests.m */,
-				2B9393D327BD285E00DBD1F4 /* GmTest.swift */,
 				08FC223B27BD3C61000A0500 /* sm2test.c */,
 				08FC223C27BD3C61000A0500 /* sm9test.c */,
 				08FC223A27BD3C61000A0500 /* sms4test.c */,
@@ -694,7 +691,6 @@
 				08D5257E27C1475E00C5009B /* zuctest.c in Sources */,
 				086EF7AF27BAB0F40089A108 /* gmFSTests.swift in Sources */,
 				08D5257727C1473700C5009B /* GmTests.m in Sources */,
-				08D5257827C1473C00C5009B /* GmTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

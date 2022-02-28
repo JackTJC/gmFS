@@ -8,6 +8,7 @@
 #ifndef SM9_h
 #define SM9_h
 #include <openssl/sm9.h>
+#import <Foundation/Foundation.h>
 
 @interface SM9Encryption : NSObject
 @property SM9PublicParameters *mpk;
@@ -18,7 +19,7 @@
 - (id)init:(NSString *)identification;
 - (NSData *)encrypt:(NSData *)data;
 - (NSData *)decrypt:(NSData *)data;
-
+- (void)dealloc;
 @end
 
 #endif /* SM9_h */

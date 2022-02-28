@@ -41,7 +41,20 @@
 }
 
 - (NSData *)decrypt:(NSData *)data{
-  return nil
+    unsigned char *cbuf = [Util nsDataToCharArr:data];
+    unsigned char mout[1024];
+    size_t mlen;
+    if(!(SM9_decrypt(NID_sm9encrypt_with_sm3_xor, cbuf, data.length, mout, &mlen, _sk))){
+        ERR_print_errors_fp(stderr);
+        return nil;
+    }
+    return [Util charArrToNSData:mout len:mlen];
+}
+
+-(void)dealloc{
+    SM9PublicParameters_free(_mpk);
+    SM9MasterSecret_free(_msk);
+    SM9PrivateKey_free(_sk);
 }
 
 @end
