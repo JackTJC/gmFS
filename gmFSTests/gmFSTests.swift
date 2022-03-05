@@ -27,14 +27,16 @@ class gmFSTests: XCTestCase {
         
         try testOCSM9Enc();
     }
-    func testOCSM9Enc()throws{
+    
+    func testOCSM9Enc() throws {
         let sm9Enc=SM9Encryption("tianjincai");
 //        let mData = NSData(base64Encoded: "this is a sentenct");
-        let mData = NSData(bytes: "12345678", length: 8)
-        let encData = sm9Enc?.encrypt(mData);
-        let decData = sm9Enc?.decrypt(encData);
-        print(mData);
-        print(decData);
+        let mData = Data(base64Encoded: "12345678")
+        let encData = sm9Enc?.encrypt(mData)
+        let decData = sm9Enc?.decrypt(encData)
+        let mStr = mData?.base64EncodedString()
+        let decStr = decData?.base64EncodedString()
+        XCTAssertTrue(mStr!==decStr!)
     }
 
     func testPerformanceExample() throws {
