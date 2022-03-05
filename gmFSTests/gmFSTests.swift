@@ -24,6 +24,19 @@ class gmFSTests: XCTestCase {
         // Any test you write for XCTest can be annotated as throws and async.
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+        
+        try testOCSM9Enc();
+    }
+    
+    func testOCSM9Enc() throws {
+        let sm9Enc=SM9Encryption("tianjincai");
+//        let mData = NSData(base64Encoded: "this is a sentenct");
+        let mData = Data(base64Encoded: "12345678")
+        let encData = sm9Enc?.encrypt(mData)
+        let decData = sm9Enc?.decrypt(encData)
+        let mStr = mData?.base64EncodedString()
+        let decStr = decData?.base64EncodedString()
+        XCTAssertTrue(mStr!==decStr!)
     }
 
     func testPerformanceExample() throws {
@@ -34,6 +47,9 @@ class gmFSTests: XCTestCase {
     }
     
     func testWifiConnector()throws{
+        
     }
+    
+
 
 }
