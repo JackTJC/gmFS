@@ -30,6 +30,7 @@
 		08DDDAFF27C13DBC000E7C08 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0878259027BC0257008BD120 /* libssl.a */; };
 		2B1CDF7D27CB511900136DAA /* opensslconf.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 2B1CDF5427CB511900136DAA /* opensslconf.h.in */; };
 		2B1CDF8127CB79BD00136DAA /* typeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1CDF8027CB79BD00136DAA /* typeConvert.m */; };
+		2BA1077827D3572300568DC2 /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA1077727D3572300568DC2 /* ShareService.swift */; };
 		2BC337E727C2410A00C01067 /* FileShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC337E627C2410A00C01067 /* FileShareView.swift */; };
 		2BC337E927C2417000C01067 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC337E827C2417000C01067 /* MeView.swift */; };
 		2BC337EB27C2476700C01067 /* ConnectionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC337EA27C2476700C01067 /* ConnectionSheetView.swift */; };
@@ -191,6 +192,7 @@
 		2B1CDF7C27CB511900136DAA /* lhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lhash.h; sourceTree = "<group>"; };
 		2B1CDF7F27CB796800136DAA /* typeConvert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typeConvert.h; sourceTree = "<group>"; };
 		2B1CDF8027CB79BD00136DAA /* typeConvert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = typeConvert.m; sourceTree = "<group>"; };
+		2BA1077727D3572300568DC2 /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
 		2BC337E627C2410A00C01067 /* FileShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileShareView.swift; sourceTree = "<group>"; };
 		2BC337E827C2417000C01067 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		2BC337EA27C2476700C01067 /* ConnectionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionSheetView.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			children = (
 				082D285427C12A980008A0BB /* ColorService.swift */,
 				086EF7C827BAB1E30089A108 /* WiFiService.swift */,
+				2BA1077727D3572300568DC2 /* ShareService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				082D285327C12A110008A0BB /* ColorSwitchView.swift in Sources */,
 				2BC337EB27C2476700C01067 /* ConnectionSheetView.swift in Sources */,
 				2BC337E927C2417000C01067 /* MeView.swift in Sources */,
+				2BA1077827D3572300568DC2 /* ShareService.swift in Sources */,
 				2BC337EE27C24FCE00C01067 /* InputDocument.swift in Sources */,
 				082D284727C0F2400008A0BB /* QRCodeScannerView.swift in Sources */,
 				082D285527C12A980008A0BB /* ColorService.swift in Sources */,
