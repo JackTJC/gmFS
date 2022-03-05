@@ -42,27 +42,33 @@ class ShareService:NSObject{
 
 extension ShareService:MCSessionDelegate{
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        <#code#>
+        NSLog("%@", "receive data:\(data) from \(peerID)")
     }
     
-    
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        <#code#>
+        NSLog("%@", "revice stream: \(stream) with stream name: \(streamName) from \(peerID)")
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        <#code#>
+        NSLog("%@", "receive resource with name:\(resourceName), progress:\(progress) from peerID:\(peerID)")
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        <#code#>
+        NSLog("%@", "receive resource with name:\(resourceName) from \(peerID), local url: \(localURL), error: \(error)")
     }
     
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        NSLog("%@", "from \(peerID), didChange: \(state)")
+    }
+    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
+        NSLog("%@", "receive certificate from \(peerID), certificate:\(certificate)")
+    }
 }
 
 extension ShareService:MCNearbyServiceAdvertiserDelegate{
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        <#code#>
+        NSLog("%@","receive invite from: \(peerID)")
+        invitationHandler(true,self.session)
     }
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
         NSLog("%@", "didNotStartAdvertisingPeer error:\(error)")
@@ -72,10 +78,16 @@ extension ShareService:MCNearbyServiceAdvertiserDelegate{
 
 extension ShareService:MCNearbyServiceBrowserDelegate{
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        <#code#>
+        NSLog("%@", "found peer id:\(peerID)")
+        NSLog("%@", "invite peer id:\(peerID)")
+        browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        NSLog("%@", "lostPeer:\(peerID.displayName)")
+        NSLog("%@", "lostPeer:\(peerID)")
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+        NSLog("%@", "disNotStartBrowsingForPeers error\(error)")
     }
 }
