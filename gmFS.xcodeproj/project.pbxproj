@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		082D284427C0EF290008A0BB /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 082D284327C0EF290008A0BB /* CodeScanner */; };
-		082D284727C0F2400008A0BB /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D284627C0F2400008A0BB /* QRCodeScannerView.swift */; };
 		082D285327C12A110008A0BB /* ColorSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D285227C12A110008A0BB /* ColorSwitchView.swift */; };
 		082D285527C12A980008A0BB /* ColorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D285427C12A980008A0BB /* ColorService.swift */; };
 		086EF79E27BAB0F20089A108 /* gmFSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF79D27BAB0F20089A108 /* gmFSApp.swift */; };
@@ -59,7 +57,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		082D284627C0F2400008A0BB /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		082D285227C12A110008A0BB /* ColorSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwitchView.swift; sourceTree = "<group>"; };
 		082D285427C12A980008A0BB /* ColorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorService.swift; sourceTree = "<group>"; };
 		082D285627C12DEA0008A0BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -215,7 +212,6 @@
 			files = (
 				08DDDAFE27C13DBC000E7C08 /* libcrypto.a in Frameworks */,
 				08DDDAFF27C13DBC000E7C08 /* libssl.a in Frameworks */,
-				082D284427C0EF290008A0BB /* CodeScanner in Frameworks */,
 				086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,7 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				086EF79F27BAB0F20089A108 /* ContentView.swift */,
-				082D284627C0F2400008A0BB /* QRCodeScannerView.swift */,
 				082D285227C12A110008A0BB /* ColorSwitchView.swift */,
 				2BC337E627C2410A00C01067 /* FileShareView.swift */,
 				2BC337E827C2417000C01067 /* MeView.swift */,
@@ -545,7 +540,6 @@
 			);
 			name = gmFS;
 			packageProductDependencies = (
-				082D284327C0EF290008A0BB /* CodeScanner */,
 			);
 			productName = gmFS;
 			productReference = 086EF79A27BAB0F20089A108 /* gmFS.app */;
@@ -622,7 +616,6 @@
 			);
 			mainGroup = 086EF79127BAB0F20089A108;
 			packageReferences = (
-				082D284227C0EF290008A0BB /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 086EF79B27BAB0F20089A108 /* Products */;
 			projectDirPath = "";
@@ -678,7 +671,6 @@
 				2BC337E927C2417000C01067 /* MeView.swift in Sources */,
 				2BA1077827D3572300568DC2 /* ShareService.swift in Sources */,
 				2BC337EE27C24FCE00C01067 /* InputDocument.swift in Sources */,
-				082D284727C0F2400008A0BB /* QRCodeScannerView.swift in Sources */,
 				082D285527C12A980008A0BB /* ColorService.swift in Sources */,
 				2B1CDF8127CB79BD00136DAA /* typeConvert.m in Sources */,
 			);
@@ -761,6 +753,7 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -778,7 +771,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -834,6 +827,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1059,25 +1053,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		082D284227C0EF290008A0BB /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/twostraws/CodeScanner";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		082D284327C0EF290008A0BB /* CodeScanner */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 082D284227C0EF290008A0BB /* XCRemoteSwiftPackageReference "CodeScanner" */;
-			productName = CodeScanner;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 086EF79227BAB0F20089A108 /* Project object */;
 }
