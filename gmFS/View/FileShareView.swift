@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FileShareView: View {
+    @EnvironmentObject var shareService:ShareService
     @State private var showingConnection = false
     @State private var isImporting = false
     @State private var document: InputDoument = InputDoument(input: "")
@@ -61,6 +62,6 @@ struct FileShareView: View {
 
 struct FileShareView_Previews: PreviewProvider {
     static var previews: some View {
-        FileShareView()
+        FileShareView().environmentObject(ShareService())
     }
 }

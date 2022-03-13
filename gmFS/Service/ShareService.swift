@@ -7,14 +7,15 @@
 
 import Foundation
 import MultipeerConnectivity
+import UIKit
 
 protocol ShareServiceDelegate{
     
 }
 
 
-class ShareService:NSObject{
-   private let serviceType = "gmFS-ftf"
+class ShareService:NSObject,ObservableObject{
+    private let serviceType = "gmFS-ftf"
     private let  myPeerId = MCPeerID(displayName: UIDevice.current.name)
     private let serviceAdvertiser:MCNearbyServiceAdvertiser
     private let serviceBrowser:MCNearbyServiceBrowser
