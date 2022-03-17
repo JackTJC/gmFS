@@ -8,6 +8,12 @@
 import XCTest
 @testable import gmFS
 
+struct User:Decodable{
+    let name:String
+    let age:Int
+}
+
+
 class gmFSTests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -24,20 +30,8 @@ class gmFSTests: XCTestCase {
         // Any test you write for XCTest can be annotated as throws and async.
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-        
-        try testOCSM9Enc();
     }
     
-    func testOCSM9Enc() throws {
-        let sm9Enc=SM9Encryption("tianjincai");
-//        let mData = NSData(base64Encoded: "this is a sentenct");
-        let mData = Data(base64Encoded: "12345678")
-        let encData = sm9Enc?.encrypt(mData)
-        let decData = sm9Enc?.decrypt(encData)
-        let mStr = mData?.base64EncodedString()
-        let decStr = decData?.base64EncodedString()
-        XCTAssertTrue(mStr!==decStr!)
-    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
@@ -50,6 +44,15 @@ class gmFSTests: XCTestCase {
         
     }
     
+    func testJsonDecode()throws{
+        let s = "{name:\"田进财\",age:22}"
+        let data = Data(base64Encoded: s)
+        if let user = try?JSONDecoder().decode(User.self, from: data!){
+            print(user)
+        }else{
+            print("invalid")
+        }
+    }
 
 
 }

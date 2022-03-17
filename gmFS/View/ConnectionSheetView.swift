@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ConnectionSheetView: View {
+    @EnvironmentObject var shareService:ShareService
     var body: some View {
         VStack{
+            Spacer()
             Text("Available Device").font(.title)
             List{
                 Text("Device 1")
@@ -22,6 +24,6 @@ struct ConnectionSheetView: View {
 
 struct ConnectionSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        ConnectionSheetView()
+        ConnectionSheetView().environmentObject(ShareService())
     }
 }
