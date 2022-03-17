@@ -12,7 +12,7 @@ import UIKit
 class HTTPAPI{
     // 域名/IP:PORT的形式
     let host:String
-    // 协议类似
+    // 协议类型
     var protocolType:ProtocolType
     // 资源定位目录
     var uri:String

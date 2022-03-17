@@ -31,9 +31,9 @@ class HTTPAPITests: XCTestCase {
     }
     
     func testHTTPAPI()throws{
-        HTTPAPI("127.0.0.1:80")
-            .withProtocol(.HTTP)
-            .withUri("/user/login")
+        HTTPAPI("baidu.com")
+            .withProtocol(.HTTPS)
+            .withUri("/")
             .withMethod(.POST)
             .doRequest()
     }
