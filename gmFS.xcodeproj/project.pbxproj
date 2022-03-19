@@ -18,6 +18,7 @@
 		086EF7BB27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7BA27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift */; };
 		086EF7C927BAB1E30089A108 /* WiFiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7C827BAB1E30089A108 /* WiFiService.swift */; };
 		086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */; };
+		2B04E2B127E5F32D00BF732A /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04E2B027E5F32D00BF732A /* Login.swift */; };
 		2B5D280327E2EFC700D06FE0 /* HTTPAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D280227E2EFC700D06FE0 /* HTTPAPI.swift */; };
 		2B5D280527E2F55400D06FE0 /* HTTPAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D280427E2F55400D06FE0 /* HTTPAPITests.swift */; };
 		2BA1077827D3572300568DC2 /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA1077727D3572300568DC2 /* ShareService.swift */; };
@@ -61,6 +62,7 @@
 		086EF7C827BAB1E30089A108 /* WiFiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiService.swift; sourceTree = "<group>"; };
 		086EF7CA27BAB4C60089A108 /* gmFS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = gmFS.entitlements; sourceTree = "<group>"; };
 		086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		2B04E2B027E5F32D00BF732A /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		2B5D280227E2EFC700D06FE0 /* HTTPAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAPI.swift; sourceTree = "<group>"; };
 		2B5D280427E2F55400D06FE0 /* HTTPAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAPITests.swift; sourceTree = "<group>"; };
 		2BA1077727D3572300568DC2 /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				2BC337E627C2410A00C01067 /* FileShareView.swift */,
 				2BC337E827C2417000C01067 /* MeView.swift */,
 				2BC337EA27C2476700C01067 /* ConnectionSheetView.swift */,
+				2B04E2B027E5F32D00BF732A /* Login.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			files = (
 				086EF7A027BAB0F20089A108 /* ContentView.swift in Sources */,
 				086EF79E27BAB0F20089A108 /* gmFSApp.swift in Sources */,
+				2B04E2B127E5F32D00BF732A /* Login.swift in Sources */,
 				2B5D280327E2EFC700D06FE0 /* HTTPAPI.swift in Sources */,
 				086EF7C927BAB1E30089A108 /* WiFiService.swift in Sources */,
 				2BC337E727C2410A00C01067 /* FileShareView.swift in Sources */,

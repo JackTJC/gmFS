@@ -26,7 +26,7 @@ struct FileShareView: View {
                     } label: {
                         Label("add file",systemImage: "plus")
                     }
-                    Spacer()
+                    Divider()
                     Button{
                         self.showingConnection.toggle()
                     }label: {
