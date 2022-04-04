@@ -15,13 +15,13 @@ struct ContentView: View {
     }
     var body: some View {
         TabView(selection: self.$tab){
-            FileShareView()
+            NetDisk()
                 .tabItem{
-                    Label("文件分享",systemImage: "shareplay")
+                    Label("Disk",image: "disk")
                 }.tag(Tab.fileShare)
-            MeView()
+            MineTab(avatar: Image("default_avatar"))
                 .tabItem{
-                    Label("我",systemImage: "person")
+                    Label("Mine",image: "mine")
                 }.tag(Tab.mine)
         }
     }

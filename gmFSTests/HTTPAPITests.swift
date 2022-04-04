@@ -31,13 +31,20 @@ class HTTPAPITests: XCTestCase {
     }
     
     func testHTTPAPI()throws{
-        HTTPAPI("baidu.com")
-            .withProtocol(.HTTPS)
-            .withUri("/")
+        var req = PingRequest()
+        req.name="田进财"
+        let reqData = try req.jsonUTF8Data()
+        HTTPAPI()
+            .withBody(reqData)
+            .withUri("/ping")
             .withMethod(.POST)
             .doRequest()
+        sleep(3)
     }
     
+    func testWithRemote()throws{
+        
+    }
 
 
 }

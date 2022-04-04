@@ -1,15 +1,14 @@
 //
-//  gmFSTests.swift
+//  ProtoTest.swift
 //  gmFSTests
 //
-//  Created by jincaitian on 2022/2/14.
+//  Created by bytedance on 2022/3/27.
 //
 
 import XCTest
 @testable import gmFS
 
-
-class gmFSTests: XCTestCase {
+class ProtoTest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -25,8 +24,23 @@ class gmFSTests: XCTestCase {
         // Any test you write for XCTest can be annotated as throws and async.
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+        
     }
     
+    func testJson()throws{
+        var req = CreateDirRequest()
+        req.dirName="test"
+        req.parentID=1
+        let data = try req.jsonUTF8Data()
+        print(String(data: data, encoding: .utf8))
+    }
+    
+    func testEnum() throws {
+        var node = Node()
+        node.nodeType=NodeType.dir
+        let data = try node.jsonString()
+        print(data)
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
@@ -34,8 +48,5 @@ class gmFSTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
-    func testWifiConnector()throws{
-        
-    }
+
 }
