@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct NetDisk: View {
+struct NetDiskView: View {
     @State var searchQuery = ""
     var body: some View {
         VStack {
-            FileTree()
+            FileTreeView()
         }
     }
 }
 
 struct NetDisk_Previews: PreviewProvider {
     static var previews: some View {
-        NetDisk()
+        NetDiskView()
     }
 }

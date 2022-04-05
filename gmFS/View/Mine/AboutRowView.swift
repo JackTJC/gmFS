@@ -1,5 +1,5 @@
 //
-//  ChgPasswdRow.swift
+//  ProfileRow.swift
 //  gmFS
 //
 //  Created by bytedance on 2022/3/27.
@@ -7,19 +7,20 @@
 
 import SwiftUI
 
-struct ChgPasswdRow: View {
+struct AboutRowView: View {
     var body: some View {
         HStack {
-            Image("key")
-            Text("Change Password")
+            Image("puzzle")
+            Text("About")
             Spacer()
             Image(systemName: "chevron.forward")
         }
+        .frame(width: 300, height: 50)
     }
 }
 
-struct ChgPasswdRow_Previews: PreviewProvider {
+struct ProfileRow_Previews: PreviewProvider {
     static var previews: some View {
-        ChgPasswdRow()
+        AboutRowView()
     }
 }

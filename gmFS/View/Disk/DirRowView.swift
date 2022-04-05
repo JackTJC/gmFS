@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DirRow: View {
+struct DirRowView: View {
     var dirName:String
     var createTimeStamp:UnixTimestamp
     
@@ -26,7 +26,7 @@ struct DirRow: View {
 
 struct DirRow_Previews: PreviewProvider {
     static var previews: some View {
-        DirRow(dirName: "First Firectory",createTimeStamp: Date.now.unixTimestamp)
+        DirRowView(dirName: "First Firectory",createTimeStamp: Date.now.unixTimestamp)
     }
 }
 

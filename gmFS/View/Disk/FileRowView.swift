@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FileRow: View {
+struct FileRowView: View {
     var fileName:String
     var createTimeStamp:UnixTimestamp
     var body: some View {
@@ -25,6 +25,6 @@ struct FileRow: View {
 
 struct FileRow_Previews: PreviewProvider {
     static var previews: some View {
-        FileRow(fileName: "file",createTimeStamp: Date.now.unixTimestamp)
+        FileRowView(fileName: "file",createTimeStamp: Date.now.unixTimestamp)
     }
 }

@@ -37,7 +37,7 @@ struct FileShareView: View {
                 }
                 
             }.sheet(isPresented: self.$showingConnection, onDismiss: {self.showingConnection=false}){
-                ConnectionSheetView()
+                Text("Test")
             }
             .fileImporter(isPresented: self.$isImporting, allowedContentTypes: [.plainText], allowsMultipleSelection: true){result in
                 do {

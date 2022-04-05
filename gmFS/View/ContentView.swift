@@ -15,11 +15,11 @@ struct ContentView: View {
     }
     var body: some View {
         TabView(selection: self.$tab){
-            NetDisk()
+            NetDiskView()
                 .tabItem{
                     Label("Disk",image: "disk")
                 }.tag(Tab.fileShare)
-            MineTab(avatar: Image("default_avatar"))
+            MineTabView(avatar: Image("default_avatar"))
                 .tabItem{
                     Label("Mine",image: "mine")
                 }.tag(Tab.mine)
