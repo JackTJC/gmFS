@@ -29,15 +29,28 @@ struct DownloadFileRequest {
   /// 节点id
   var nodeID: Int64 = 0
 
+  var baseReq: BaseReq {
+    get {return _baseReq ?? BaseReq()}
+    set {_baseReq = newValue}
+  }
+  /// Returns true if `baseReq` has been explicitly set.
+  var hasBaseReq: Bool {return self._baseReq != nil}
+  /// Clears the value of `baseReq`. Subsequent reads from it will return its default value.
+  mutating func clearBaseReq() {self._baseReq = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+
+  fileprivate var _baseReq: BaseReq? = nil
 }
 
 struct DownloadFileResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  var content: Data = Data()
 
   var baseResp: BaseResp {
     get {return _baseResp ?? BaseResp()}
@@ -66,6 +79,7 @@ extension DownloadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   static let protoMessageName: String = "DownloadFileRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "nodeId"),
+    255: .same(proto: "baseReq"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -75,20 +89,29 @@ extension DownloadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.nodeID) }()
+      case 255: try { try decoder.decodeSingularMessageField(value: &self._baseReq) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if self.nodeID != 0 {
       try visitor.visitSingularInt64Field(value: self.nodeID, fieldNumber: 1)
     }
+    try { if let v = self._baseReq {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: DownloadFileRequest, rhs: DownloadFileRequest) -> Bool {
     if lhs.nodeID != rhs.nodeID {return false}
+    if lhs._baseReq != rhs._baseReq {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -97,6 +120,7 @@ extension DownloadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 extension DownloadFileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = "DownloadFileResponse"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "content"),
     255: .same(proto: "baseResp"),
   ]
 
@@ -106,6 +130,7 @@ extension DownloadFileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.content) }()
       case 255: try { try decoder.decodeSingularMessageField(value: &self._baseResp) }()
       default: break
       }
@@ -117,6 +142,9 @@ extension DownloadFileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.content.isEmpty {
+      try visitor.visitSingularBytesField(value: self.content, fieldNumber: 1)
+    }
     try { if let v = self._baseResp {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
     } }()
@@ -124,6 +152,7 @@ extension DownloadFileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 
   static func ==(lhs: DownloadFileResponse, rhs: DownloadFileResponse) -> Bool {
+    if lhs.content != rhs.content {return false}
     if lhs._baseResp != rhs._baseResp {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

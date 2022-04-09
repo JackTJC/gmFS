@@ -92,7 +92,7 @@ struct Node {
 }
 
 /// 定义了公共请求参数
-struct BaseRequest {
+struct BaseReq {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -125,7 +125,7 @@ struct BaseResp {
 #if swift(>=5.5) && canImport(_Concurrency)
 extension NodeType: @unchecked Sendable {}
 extension Node: @unchecked Sendable {}
-extension BaseRequest: @unchecked Sendable {}
+extension BaseReq: @unchecked Sendable {}
 extension BaseResp: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
@@ -189,8 +189,8 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
   }
 }
 
-extension BaseRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = "BaseRequest"
+extension BaseReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "BaseReq"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
   ]
@@ -214,7 +214,7 @@ extension BaseRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: BaseRequest, rhs: BaseRequest) -> Bool {
+  static func ==(lhs: BaseReq, rhs: BaseReq) -> Bool {
     if lhs.token != rhs.token {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

@@ -35,9 +35,23 @@ struct UploadFileRequest {
   /// 文件的关键词列表，用于后续可加密搜索
   var indexList: [String] = []
 
+  /// 文件内容
+  var content: Data = Data()
+
+  var baseReq: BaseReq {
+    get {return _baseReq ?? BaseReq()}
+    set {_baseReq = newValue}
+  }
+  /// Returns true if `baseReq` has been explicitly set.
+  var hasBaseReq: Bool {return self._baseReq != nil}
+  /// Clears the value of `baseReq`. Subsequent reads from it will return its default value.
+  mutating func clearBaseReq() {self._baseReq = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+
+  fileprivate var _baseReq: BaseReq? = nil
 }
 
 struct UploadFileReponse {
@@ -74,6 +88,8 @@ extension UploadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     1: .same(proto: "fileName"),
     2: .same(proto: "parentId"),
     3: .same(proto: "indexList"),
+    4: .same(proto: "content"),
+    255: .same(proto: "baseReq"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -85,12 +101,18 @@ extension UploadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
       case 1: try { try decoder.decodeSingularStringField(value: &self.fileName) }()
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.parentID) }()
       case 3: try { try decoder.decodeRepeatedStringField(value: &self.indexList) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.content) }()
+      case 255: try { try decoder.decodeSingularMessageField(value: &self._baseReq) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.fileName.isEmpty {
       try visitor.visitSingularStringField(value: self.fileName, fieldNumber: 1)
     }
@@ -100,6 +122,12 @@ extension UploadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     if !self.indexList.isEmpty {
       try visitor.visitRepeatedStringField(value: self.indexList, fieldNumber: 3)
     }
+    if !self.content.isEmpty {
+      try visitor.visitSingularBytesField(value: self.content, fieldNumber: 4)
+    }
+    try { if let v = self._baseReq {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -107,6 +135,8 @@ extension UploadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     if lhs.fileName != rhs.fileName {return false}
     if lhs.parentID != rhs.parentID {return false}
     if lhs.indexList != rhs.indexList {return false}
+    if lhs.content != rhs.content {return false}
+    if lhs._baseReq != rhs._baseReq {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
