@@ -29,6 +29,8 @@ struct UserRegisterRequest {
 
   var password: String = String()
 
+  var email: String = String()
+
   var baseReq: BaseReq {
     get {return _baseReq ?? BaseReq()}
     set {_baseReq = newValue}
@@ -78,6 +80,7 @@ extension UserRegisterRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "userName"),
     2: .same(proto: "password"),
+    3: .same(proto: "email"),
     255: .same(proto: "baseReq"),
   ]
 
@@ -89,6 +92,7 @@ extension UserRegisterRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.userName) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.password) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.email) }()
       case 255: try { try decoder.decodeSingularMessageField(value: &self._baseReq) }()
       default: break
       }
@@ -106,6 +110,9 @@ extension UserRegisterRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if !self.password.isEmpty {
       try visitor.visitSingularStringField(value: self.password, fieldNumber: 2)
     }
+    if !self.email.isEmpty {
+      try visitor.visitSingularStringField(value: self.email, fieldNumber: 3)
+    }
     try { if let v = self._baseReq {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
     } }()
@@ -115,6 +122,7 @@ extension UserRegisterRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   static func ==(lhs: UserRegisterRequest, rhs: UserRegisterRequest) -> Bool {
     if lhs.userName != rhs.userName {return false}
     if lhs.password != rhs.password {return false}
+    if lhs.email != rhs.email {return false}
     if lhs._baseReq != rhs._baseReq {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

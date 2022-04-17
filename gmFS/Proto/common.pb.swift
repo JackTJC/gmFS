@@ -20,6 +20,66 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+enum StatusCode: SwiftProtobuf.Enum {
+  typealias RawValue = Int
+  case success // = 0
+
+  /// 登录相关
+  case userNotFound // = 1
+
+  /// 密码错误
+  case wrongPasswd // = 2
+
+  /// 注册相关
+  case userExist // = 100
+
+  /// 通用错误
+  case commonErr // = 1000
+  case UNRECOGNIZED(Int)
+
+  init() {
+    self = .success
+  }
+
+  init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .success
+    case 1: self = .userNotFound
+    case 2: self = .wrongPasswd
+    case 100: self = .userExist
+    case 1000: self = .commonErr
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  var rawValue: Int {
+    switch self {
+    case .success: return 0
+    case .userNotFound: return 1
+    case .wrongPasswd: return 2
+    case .userExist: return 100
+    case .commonErr: return 1000
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension StatusCode: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [StatusCode] = [
+    .success,
+    .userNotFound,
+    .wrongPasswd,
+    .userExist,
+    .commonErr,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 /// 节点类型
 enum NodeType: SwiftProtobuf.Enum {
   typealias RawValue = Int
@@ -86,6 +146,9 @@ struct Node {
   /// 节点创建时间
   var createTime: Int64 = 0
 
+  /// 节点更新时间
+  var updateTime: Int64 = 0
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -112,7 +175,7 @@ struct BaseResp {
   // methods supported on all messages.
 
   /// 错误码，一般认为0是成功
-  var statusCode: Int32 = 0
+  var statusCode: StatusCode = .success
 
   /// 错误提示
   var message: String = String()
@@ -123,6 +186,7 @@ struct BaseResp {
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
+extension StatusCode: @unchecked Sendable {}
 extension NodeType: @unchecked Sendable {}
 extension Node: @unchecked Sendable {}
 extension BaseReq: @unchecked Sendable {}
@@ -130,6 +194,16 @@ extension BaseResp: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
+
+extension StatusCode: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "Success"),
+    1: .same(proto: "UserNotFound"),
+    2: .same(proto: "WrongPasswd"),
+    100: .same(proto: "UserExist"),
+    1000: .same(proto: "CommonErr"),
+  ]
+}
 
 extension NodeType: SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -146,6 +220,7 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     2: .same(proto: "nodeId"),
     3: .same(proto: "nodeName"),
     4: .same(proto: "createTime"),
+    5: .same(proto: "updateTime"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -158,6 +233,7 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.nodeID) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.nodeName) }()
       case 4: try { try decoder.decodeSingularInt64Field(value: &self.createTime) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.updateTime) }()
       default: break
       }
     }
@@ -176,6 +252,9 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     if self.createTime != 0 {
       try visitor.visitSingularInt64Field(value: self.createTime, fieldNumber: 4)
     }
+    if self.updateTime != 0 {
+      try visitor.visitSingularInt64Field(value: self.updateTime, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -184,6 +263,7 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     if lhs.nodeID != rhs.nodeID {return false}
     if lhs.nodeName != rhs.nodeName {return false}
     if lhs.createTime != rhs.createTime {return false}
+    if lhs.updateTime != rhs.updateTime {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -234,7 +314,7 @@ extension BaseResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularInt32Field(value: &self.statusCode) }()
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.statusCode) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.message) }()
       default: break
       }
@@ -242,8 +322,8 @@ extension BaseResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.statusCode != 0 {
-      try visitor.visitSingularInt32Field(value: self.statusCode, fieldNumber: 1)
+    if self.statusCode != .success {
+      try visitor.visitSingularEnumField(value: self.statusCode, fieldNumber: 1)
     }
     if !self.message.isEmpty {
       try visitor.visitSingularStringField(value: self.message, fieldNumber: 2)

@@ -50,6 +50,8 @@ struct DownloadFileResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  var fileName: String = String()
+
   var content: Data = Data()
 
   var baseResp: BaseResp {
@@ -120,7 +122,8 @@ extension DownloadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 extension DownloadFileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = "DownloadFileResponse"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "content"),
+    1: .same(proto: "fileName"),
+    2: .same(proto: "content"),
     255: .same(proto: "baseResp"),
   ]
 
@@ -130,7 +133,8 @@ extension DownloadFileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularBytesField(value: &self.content) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self.fileName) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.content) }()
       case 255: try { try decoder.decodeSingularMessageField(value: &self._baseResp) }()
       default: break
       }
@@ -142,8 +146,11 @@ extension DownloadFileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.fileName.isEmpty {
+      try visitor.visitSingularStringField(value: self.fileName, fieldNumber: 1)
+    }
     if !self.content.isEmpty {
-      try visitor.visitSingularBytesField(value: self.content, fieldNumber: 1)
+      try visitor.visitSingularBytesField(value: self.content, fieldNumber: 2)
     }
     try { if let v = self._baseResp {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
@@ -152,6 +159,7 @@ extension DownloadFileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 
   static func ==(lhs: DownloadFileResponse, rhs: DownloadFileResponse) -> Bool {
+    if lhs.fileName != rhs.fileName {return false}
     if lhs.content != rhs.content {return false}
     if lhs._baseResp != rhs._baseResp {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

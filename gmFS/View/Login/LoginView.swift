@@ -14,6 +14,15 @@ struct LoginView: View {
     @State private var wrongPasswd = 0
     @State private var showingLoginScreen = false
     @State private var showingRegister = false
+    // alert相关
+    @State private var loginAlert = false
+    @State private var alertText = ""
+    
+    func alertWith(_ text:String){
+        loginAlert=true
+        alertText=text
+    }
+    
     
     var body: some View {
         NavigationView{
@@ -22,7 +31,7 @@ struct LoginView: View {
                 Circle().scale(1.7).foregroundColor(.white.opacity(0.15))
                 Circle().scale(1.35).foregroundColor(.white)
                 VStack{
-                    Text("Login").font(.largeTitle).bold().padding()
+                    Text("Login").font(.largeTitle).bold().padding().foregroundColor(.black)
                     TextField("Username",text: $userName)
                         .padding()
                         .frame(width: 300, height: 50)
@@ -37,19 +46,49 @@ struct LoginView: View {
                         .border(.red, width: CGFloat(wrongPasswd))
                     Button("Login"){
                         // Login logic
-                        showingLoginScreen=true
+                        if userName.count==0{
+                            alertWith("Empty UserName")
+                            return
+                        }
+                        if passwd.count==0{
+                            alertWith("Empty Passwd")
+                            return
+                        }
+                        BackendService().UserLogin(name: userName, passwd: passwd){resp in
+                            if resp.hasBaseResp{
+                                switch resp.baseResp.statusCode{
+                                case .success:
+                                    showingLoginScreen=true
+                                case .userNotFound:
+                                    wrongUserName=2
+                                    loginAlert=true
+                                    alertText="User Doesn't Exist"
+                                case .wrongPasswd:
+                                    wrongPasswd=2
+                                    loginAlert=true
+                                    alertText="Wrong Passwd"
+                                default:
+                                    break
+                                }
+                            }
+                        }failure: { error in
+                            // TODO error handle
+                        }
                     }
                     .foregroundColor(.white)
                     .frame(width: 300, height: 50)
                     .background(Color.blue)
                     .cornerRadius(10)
+                    .alert(alertText, isPresented: $loginAlert){
+                        Button("OK"){}
+                    }
                     Button("Register"){
                         showingRegister=true
                     }.frame(width: 300, height: 10, alignment: .trailing)
-                    NavigationLink(destination: Text("Logined"),isActive: $showingLoginScreen){
+                    NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true),isActive: $showingLoginScreen){
                         EmptyView()
                     }
-                    NavigationLink(destination: RegisterView(), isActive: $showingRegister){
+                    NavigationLink(destination: RegisterView().navigationBarBackButtonHidden(true), isActive: $showingRegister){
                         EmptyView()
                     }
                 }

@@ -59,6 +59,9 @@ struct GetNodeResponse {
   /// Clears the value of `node`. Subsequent reads from it will return its default value.
   mutating func clearNode() {self._node = nil}
 
+  /// 子节点
+  var subNodes: [Node] = []
+
   var baseResp: BaseResp {
     get {return _baseResp ?? BaseResp()}
     set {_baseResp = newValue}
@@ -129,6 +132,7 @@ extension GetNodeResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   static let protoMessageName: String = "GetNodeResponse"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "node"),
+    2: .same(proto: "subNodes"),
     255: .same(proto: "baseResp"),
   ]
 
@@ -139,6 +143,7 @@ extension GetNodeResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._node) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.subNodes) }()
       case 255: try { try decoder.decodeSingularMessageField(value: &self._baseResp) }()
       default: break
       }
@@ -153,6 +158,9 @@ extension GetNodeResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     try { if let v = self._node {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     } }()
+    if !self.subNodes.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.subNodes, fieldNumber: 2)
+    }
     try { if let v = self._baseResp {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
     } }()
@@ -161,6 +169,7 @@ extension GetNodeResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
 
   static func ==(lhs: GetNodeResponse, rhs: GetNodeResponse) -> Bool {
     if lhs._node != rhs._node {return false}
+    if lhs.subNodes != rhs.subNodes {return false}
     if lhs._baseResp != rhs._baseResp {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

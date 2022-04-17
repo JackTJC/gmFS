@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FileTreeView: View {
+    var nodeList:[Node] = []
     var body: some View {
         VStack{
             Text("JincaiTian's Disk")
