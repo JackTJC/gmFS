@@ -81,12 +81,9 @@ struct RegisterView: View {
                     .alert(alerText, isPresented: $showingAlert){
                         Button("OK"){}
                     }
-                    .alert("Register Success!", isPresented: $registerSuccess){
-                        LoginView()
+                    NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true),isActive: $registerSuccess){
+                        EmptyView()
                     }
-//                    NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true),isActive: $registerSuccess){
-//                        EmptyView()
-//                    }
                 }
             }
             .navigationBarHidden(true)

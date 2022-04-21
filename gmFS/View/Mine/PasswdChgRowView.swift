@@ -10,7 +10,9 @@ import SwiftUI
 struct PasswdChgRowView: View {
     var body: some View {
         HStack {
-            Image("key")
+            Image(systemName: "key")
+                .resizable()
+                .frame(width: 30, height: 40)
             Text("Change Password")
             Spacer()
             Image(systemName: "chevron.forward")

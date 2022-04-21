@@ -68,11 +68,6 @@ struct CreateDirResponse {
   fileprivate var _baseResp: BaseResp? = nil
 }
 
-#if swift(>=5.5) && canImport(_Concurrency)
-extension CreateDirRequest: @unchecked Sendable {}
-extension CreateDirResponse: @unchecked Sendable {}
-#endif  // swift(>=5.5) && canImport(_Concurrency)
-
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension CreateDirRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {

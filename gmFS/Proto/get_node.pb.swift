@@ -79,11 +79,6 @@ struct GetNodeResponse {
   fileprivate var _baseResp: BaseResp? = nil
 }
 
-#if swift(>=5.5) && canImport(_Concurrency)
-extension GetNodeRequest: @unchecked Sendable {}
-extension GetNodeResponse: @unchecked Sendable {}
-#endif  // swift(>=5.5) && canImport(_Concurrency)
-
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension GetNodeRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {

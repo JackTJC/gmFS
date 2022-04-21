@@ -12,9 +12,9 @@ struct MineTabView: View {
     var body: some View {
         NavigationView{
             ZStack {
-                Color.blue.ignoresSafeArea()
-                Circle().scale(1.7).foregroundColor(.white.opacity(0.15))
-                Circle().scale(1.35).foregroundColor(.white)
+//                Color.blue.ignoresSafeArea()
+//                Circle().scale(1.7).foregroundColor(.white.opacity(0.15))
+//                Circle().scale(1.35).foregroundColor(.white)
                 VStack{
                     avatar
                         .resizable()

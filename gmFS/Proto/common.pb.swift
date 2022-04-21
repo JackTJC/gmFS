@@ -143,6 +143,8 @@ struct Node {
 
   var nodeName: String = String()
 
+  var nodeContent: Data = Data()
+
   /// 节点创建时间
   var createTime: Int64 = 0
 
@@ -185,14 +187,6 @@ struct BaseResp {
   init() {}
 }
 
-#if swift(>=5.5) && canImport(_Concurrency)
-extension StatusCode: @unchecked Sendable {}
-extension NodeType: @unchecked Sendable {}
-extension Node: @unchecked Sendable {}
-extension BaseReq: @unchecked Sendable {}
-extension BaseResp: @unchecked Sendable {}
-#endif  // swift(>=5.5) && canImport(_Concurrency)
-
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension StatusCode: SwiftProtobuf._ProtoNameProviding {
@@ -219,8 +213,9 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     1: .same(proto: "nodeType"),
     2: .same(proto: "nodeId"),
     3: .same(proto: "nodeName"),
-    4: .same(proto: "createTime"),
-    5: .same(proto: "updateTime"),
+    4: .same(proto: "nodeContent"),
+    5: .same(proto: "createTime"),
+    6: .same(proto: "updateTime"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -232,8 +227,9 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
       case 1: try { try decoder.decodeSingularEnumField(value: &self.nodeType) }()
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.nodeID) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.nodeName) }()
-      case 4: try { try decoder.decodeSingularInt64Field(value: &self.createTime) }()
-      case 5: try { try decoder.decodeSingularInt64Field(value: &self.updateTime) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.nodeContent) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.createTime) }()
+      case 6: try { try decoder.decodeSingularInt64Field(value: &self.updateTime) }()
       default: break
       }
     }
@@ -249,11 +245,14 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     if !self.nodeName.isEmpty {
       try visitor.visitSingularStringField(value: self.nodeName, fieldNumber: 3)
     }
+    if !self.nodeContent.isEmpty {
+      try visitor.visitSingularBytesField(value: self.nodeContent, fieldNumber: 4)
+    }
     if self.createTime != 0 {
-      try visitor.visitSingularInt64Field(value: self.createTime, fieldNumber: 4)
+      try visitor.visitSingularInt64Field(value: self.createTime, fieldNumber: 5)
     }
     if self.updateTime != 0 {
-      try visitor.visitSingularInt64Field(value: self.updateTime, fieldNumber: 5)
+      try visitor.visitSingularInt64Field(value: self.updateTime, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -262,6 +261,7 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     if lhs.nodeType != rhs.nodeType {return false}
     if lhs.nodeID != rhs.nodeID {return false}
     if lhs.nodeName != rhs.nodeName {return false}
+    if lhs.nodeContent != rhs.nodeContent {return false}
     if lhs.createTime != rhs.createTime {return false}
     if lhs.updateTime != rhs.updateTime {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

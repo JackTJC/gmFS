@@ -17,11 +17,11 @@ struct HomeView: View {
         TabView(selection: self.$tab){
             NetDiskView()
                 .tabItem{
-                    Label("Disk",image: "disk")
+                    Label("Disk",systemImage: "folder")
                 }.tag(Tab.fileShare)
             MineTabView(avatar: Image("default_avatar"))
                 .tabItem{
-                    Label("Mine",image: "mine")
+                    Label("Mine",systemImage: "person")
                 }.tag(Tab.mine)
         }
     }

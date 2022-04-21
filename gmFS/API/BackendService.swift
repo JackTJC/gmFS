@@ -17,6 +17,7 @@ class BackendService{
         static var userRegister  = "/user/register"
         static var fileUplaod = "/file/upload"
         static var fileDownload = "/file/download"
+        static var getNode = "/node/get"
     }
     func UserLogin(name:String,passwd:String,
                    success:@escaping (UserLoginResponse)->Void,
@@ -80,4 +81,23 @@ class BackendService{
         }
     }
     
+    func GetNode(nodeID:Int64,
+                 success:@escaping (GetNodeResponse) -> Void,
+                 failure:@escaping(Error)->Void){
+        var req = GetNodeRequest()
+        req.nodeID = nodeID
+        let data = try! req.jsonUTF8Data()
+        NetworkService().request(uri: BackendUri.getNode, body: data){ respData in
+            do {
+                let resp = try GetNodeResponse.init(jsonUTF8Data: respData)
+                success(resp)
+            }catch is JSONDecodingError{
+                AppManager.logger.error("get node json decode error")
+            }catch{
+                AppManager.logger.error("get node get unknown error")
+            }
+        }failure: { Error in
+            failure(Error)
+        }
+    }
 }

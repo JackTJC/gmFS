@@ -10,7 +10,9 @@ import SwiftUI
 struct AboutRowView: View {
     var body: some View {
         HStack {
-            Image("puzzle")
+            Image(systemName: "person.3")
+                .resizable()
+                .frame(width: 60, height: 30)
             Text("About")
             Spacer()
             Image(systemName: "chevron.forward")
