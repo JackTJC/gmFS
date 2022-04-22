@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MultipeerConnectivity
 
 struct MCShareView: View {
     var body: some View {

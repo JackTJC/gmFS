@@ -12,14 +12,14 @@ typealias UnixTimestamp = Int64
 extension Date {
     /// Date to Unix timestamp.
     var unixTimestamp: UnixTimestamp {
-        return UnixTimestamp(self.timeIntervalSince1970 * 1_000) // millisecond precision
+        return UnixTimestamp(self.timeIntervalSince1970 ) // millisecond precision
     }
 }
 
 extension UnixTimestamp {
     /// Unix timestamp to date.
     var date: Date {
-        return Date(timeIntervalSince1970: TimeInterval(self / 1_000)) // must take a millisecond-precise Unix timestamp
+        return Date(timeIntervalSince1970: TimeInterval(self )) // must take a millisecond-precise Unix timestamp
     }
 }
 

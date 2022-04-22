@@ -9,14 +9,14 @@ import SwiftUI
 
 struct DirRowView: View {
     var dirName:String
-    var createTimeStamp:UnixTimestamp
+    var updateTimeStamp:UnixTimestamp
     
     var body: some View {
         HStack{
             Image("folder")
                 .resizable()
                 .frame(width: 60, height: 60, alignment: .center)
-            NodeAttrView(nodeName: dirName, nodeCreateTimeStamp: createTimeStamp)
+            NodeAttrView(nodeName: dirName, nodeCreateTimeStamp: updateTimeStamp)
             Spacer()
         }
         .frame(height: 70)
@@ -26,7 +26,7 @@ struct DirRowView: View {
 
 struct DirRow_Previews: PreviewProvider {
     static var previews: some View {
-        DirRowView(dirName: "First Firectory",createTimeStamp: Date.now.unixTimestamp)
+        DirRowView(dirName: "First Firectory",updateTimeStamp: Date.now.unixTimestamp)
     }
 }
 

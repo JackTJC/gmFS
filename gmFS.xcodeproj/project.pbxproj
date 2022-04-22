@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0855B4AC280FDBAD0052D724 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855B4AB280FDBAD0052D724 /* SearchBarView.swift */; };
 		0855B4B0280FE3EF0052D724 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855B4AF280FE3EF0052D724 /* ShareView.swift */; };
 		0855B4B3280FE96E0052D724 /* MCShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855B4B2280FE96E0052D724 /* MCShareView.swift */; };
 		086EF79E27BAB0F20089A108 /* gmFSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF79D27BAB0F20089A108 /* gmFSApp.swift */; };
@@ -19,6 +18,10 @@
 		086EF7BB27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7BA27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift */; };
 		086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */; };
 		086F276528086C46009D4F81 /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086F276428086C46009D4F81 /* StringUtil.swift */; };
+		08956A792812437B002F7803 /* FileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A782812437B002F7803 /* FileListView.swift */; };
+		08956A7E28124579002F7803 /* NodeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7D28124579002F7803 /* NodeUtil.swift */; };
+		08956A8028125CEB002F7803 /* NodeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7F28125CEA002F7803 /* NodeLabelView.swift */; };
+		08956A8228126132002F7803 /* NodeDstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A8128126132002F7803 /* NodeDstView.swift */; };
 		08ECA05A28113615006BB60D /* get_user_info.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA04F28113614006BB60D /* get_user_info.pb.swift */; };
 		08ECA05B28113615006BB60D /* service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA05028113614006BB60D /* service.pb.swift */; };
 		08ECA05C28113615006BB60D /* upload_file.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA05128113614006BB60D /* upload_file.pb.swift */; };
@@ -30,6 +33,8 @@
 		08ECA06228113615006BB60D /* search_file.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA05728113615006BB60D /* search_file.pb.swift */; };
 		08ECA06328113615006BB60D /* ping.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA05828113615006BB60D /* ping.pb.swift */; };
 		08ECA06428113615006BB60D /* create_dir.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA05928113615006BB60D /* create_dir.pb.swift */; };
+		08F482122812716300BA2F06 /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F482112812716300BA2F06 /* ShareService.swift */; };
+		08F4821428127AF600BA2F06 /* AlertInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4821328127AF600BA2F06 /* AlertInputView.swift */; };
 		2B1F8AFF2807C85E004C4659 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F8AFE2807C85E004C4659 /* AppManager.swift */; };
 		2B1F8B012807CAE3004C4659 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F8B002807CAE3004C4659 /* HomeView.swift */; };
 		2B1FAF2427F04EF6001B9979 /* PasswdChgRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1FAF2327F04EF6001B9979 /* PasswdChgRowView.swift */; };
@@ -73,7 +78,6 @@
 
 /* Begin PBXFileReference section */
 		082D285627C12DEA0008A0BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		0855B4AB280FDBAD0052D724 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		0855B4AF280FE3EF0052D724 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		0855B4B2280FE96E0052D724 /* MCShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCShareView.swift; sourceTree = "<group>"; };
 		086EF79A27BAB0F20089A108 /* gmFS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gmFS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +93,10 @@
 		086EF7CA27BAB4C60089A108 /* gmFS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = gmFS.entitlements; sourceTree = "<group>"; };
 		086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		086F276428086C46009D4F81 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
+		08956A782812437B002F7803 /* FileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListView.swift; sourceTree = "<group>"; };
+		08956A7D28124579002F7803 /* NodeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeUtil.swift; sourceTree = "<group>"; };
+		08956A7F28125CEA002F7803 /* NodeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeLabelView.swift; sourceTree = "<group>"; };
+		08956A8128126132002F7803 /* NodeDstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeDstView.swift; sourceTree = "<group>"; };
 		08ECA04F28113614006BB60D /* get_user_info.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = get_user_info.pb.swift; sourceTree = "<group>"; };
 		08ECA05028113614006BB60D /* service.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = service.pb.swift; sourceTree = "<group>"; };
 		08ECA05128113614006BB60D /* upload_file.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = upload_file.pb.swift; sourceTree = "<group>"; };
@@ -100,6 +108,8 @@
 		08ECA05728113615006BB60D /* search_file.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = search_file.pb.swift; sourceTree = "<group>"; };
 		08ECA05828113615006BB60D /* ping.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ping.pb.swift; sourceTree = "<group>"; };
 		08ECA05928113615006BB60D /* create_dir.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = create_dir.pb.swift; sourceTree = "<group>"; };
+		08F482112812716300BA2F06 /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
+		08F4821328127AF600BA2F06 /* AlertInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInputView.swift; sourceTree = "<group>"; };
 		2B1F8AFE2807C85E004C4659 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		2B1F8B002807CAE3004C4659 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2B1FAF2327F04EF6001B9979 /* PasswdChgRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswdChgRowView.swift; sourceTree = "<group>"; };
@@ -148,7 +158,6 @@
 		2B579377280143F200A80175 /* sm3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sm3.h; sourceTree = "<group>"; };
 		2B579378280143F200A80175 /* pkcs8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkcs8.h; sourceTree = "<group>"; };
 		2B579379280143F200A80175 /* ec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ec.h; sourceTree = "<group>"; };
-		2B57937A2801445500A80175 /* gmFSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gmFSTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		2B57937B2801445500A80175 /* GmSSLTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GmSSLTests.m; sourceTree = "<group>"; };
 		2B5D280427E2F55400D06FE0 /* APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
 		2BB0BF3727E72D9100822EFE /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -240,6 +249,7 @@
 		086EF79C27BAB0F20089A108 /* gmFS */ = {
 			isa = PBXGroup;
 			children = (
+				08F482102812714900BA2F06 /* Service */,
 				2B57934C2801435A00A80175 /* GmSSL */,
 				2BAE22EE27F3584900934909 /* API */,
 				2B1FAF2727F0751E001B9979 /* Proto */,
@@ -269,7 +279,6 @@
 				086EF7AE27BAB0F40089A108 /* gmFSTests.swift */,
 				2B5D280427E2F55400D06FE0 /* APITests.swift */,
 				2B57937B2801445500A80175 /* GmSSLTests.m */,
-				2B57937A2801445500A80175 /* gmFSTests-Bridging-Header.h */,
 			);
 			path = gmFSTests;
 			sourceTree = "<group>";
@@ -291,11 +300,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		08F482102812714900BA2F06 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				08F482112812716300BA2F06 /* ShareService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		2B1CDF7E27CB794D00136DAA /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				2BD0822727F041C400963D28 /* TimeUtil.swift */,
 				086F276428086C46009D4F81 /* StringUtil.swift */,
+				08956A7D28124579002F7803 /* NodeUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -419,7 +437,10 @@
 				2BB0BF3E27E734A600822EFE /* FileRowView.swift */,
 				2BB0BF4027E735C100822EFE /* FileTreeView.swift */,
 				2BB0BF4227E7377200822EFE /* NetDiskView.swift */,
-				0855B4AB280FDBAD0052D724 /* SearchBarView.swift */,
+				08956A782812437B002F7803 /* FileListView.swift */,
+				08956A7F28125CEA002F7803 /* NodeLabelView.swift */,
+				08956A8128126132002F7803 /* NodeDstView.swift */,
+				08F4821328127AF600BA2F06 /* AlertInputView.swift */,
 			);
 			path = Disk;
 			sourceTree = "<group>";
@@ -571,6 +592,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08956A792812437B002F7803 /* FileListView.swift in Sources */,
 				0855B4B3280FE96E0052D724 /* MCShareView.swift in Sources */,
 				08ECA05E28113615006BB60D /* get_node.pb.swift in Sources */,
 				2BE67B9B27FACECF008466AE /* RegisterView.swift in Sources */,
@@ -578,6 +600,7 @@
 				08ECA06228113615006BB60D /* search_file.pb.swift in Sources */,
 				086EF7A027BAB0F20089A108 /* ContentView.swift in Sources */,
 				2BB0BF4127E735C100822EFE /* FileTreeView.swift in Sources */,
+				08F482122812716300BA2F06 /* ShareService.swift in Sources */,
 				08ECA05D28113615006BB60D /* common.pb.swift in Sources */,
 				2BB0BF3827E72D9100822EFE /* AboutView.swift in Sources */,
 				2BB0BF3F27E734A600822EFE /* FileRowView.swift in Sources */,
@@ -585,16 +608,20 @@
 				086F276528086C46009D4F81 /* StringUtil.swift in Sources */,
 				08ECA06128113615006BB60D /* download_file.pb.swift in Sources */,
 				08ECA06328113615006BB60D /* ping.pb.swift in Sources */,
+				08956A8228126132002F7803 /* NodeDstView.swift in Sources */,
 				08ECA06428113615006BB60D /* create_dir.pb.swift in Sources */,
 				0855B4B0280FE3EF0052D724 /* ShareView.swift in Sources */,
 				2B1F8B012807CAE3004C4659 /* HomeView.swift in Sources */,
 				08ECA05C28113615006BB60D /* upload_file.pb.swift in Sources */,
+				08F4821428127AF600BA2F06 /* AlertInputView.swift in Sources */,
 				086EF79E27BAB0F20089A108 /* gmFSApp.swift in Sources */,
+				08956A7E28124579002F7803 /* NodeUtil.swift in Sources */,
 				2BD0822B27F04AC600963D28 /* NetDiskView.swift in Sources */,
 				2B1F8AFF2807C85E004C4659 /* AppManager.swift in Sources */,
 				2BB0BF3A27E7312000822EFE /* PasswdChgView.swift in Sources */,
 				2B1FAF2427F04EF6001B9979 /* PasswdChgRowView.swift in Sources */,
 				2BC337E927C2417000C01067 /* MineTabView.swift in Sources */,
+				08956A8028125CEB002F7803 /* NodeLabelView.swift in Sources */,
 				2BB1AB7627FC316200B79F5E /* FileContentView.swift in Sources */,
 				2B1FAF2627F04FB3001B9979 /* AboutRowView.swift in Sources */,
 				2BB0BF3D27E732D500822EFE /* DirRowView.swift in Sources */,
@@ -602,7 +629,6 @@
 				2BD0822827F041C400963D28 /* TimeUtil.swift in Sources */,
 				2B20FA1E28017E0400F95415 /* BackendService.swift in Sources */,
 				08ECA06028113615006BB60D /* user_register.pb.swift in Sources */,
-				0855B4AC280FDBAD0052D724 /* SearchBarView.swift in Sources */,
 				2BE67B9927FAC63D008466AE /* LoginView.swift in Sources */,
 				2B52BA912801746700B7E393 /* NetWorkService.swift in Sources */,
 			);
@@ -871,7 +897,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jincai.gmFSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "gmFSTests/gmFSTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -901,7 +927,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jincai.gmFSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "gmFSTests/gmFSTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gmFS.app/gmFS";
