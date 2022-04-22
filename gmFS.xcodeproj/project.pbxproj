@@ -17,9 +17,8 @@
 		086EF7B927BAB0F40089A108 /* gmFSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7B827BAB0F40089A108 /* gmFSUITests.swift */; };
 		086EF7BB27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF7BA27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift */; };
 		086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */; };
-		086F276528086C46009D4F81 /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086F276428086C46009D4F81 /* StringUtil.swift */; };
-		08956A792812437B002F7803 /* FileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A782812437B002F7803 /* FileListView.swift */; };
-		08956A7E28124579002F7803 /* NodeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7D28124579002F7803 /* NodeUtil.swift */; };
+		086F276528086C46009D4F81 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086F276428086C46009D4F81 /* String.swift */; };
+		08956A7E28124579002F7803 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7D28124579002F7803 /* Node.swift */; };
 		08956A8028125CEB002F7803 /* NodeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7F28125CEA002F7803 /* NodeLabelView.swift */; };
 		08956A8228126132002F7803 /* NodeDstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A8128126132002F7803 /* NodeDstView.swift */; };
 		08ECA05A28113615006BB60D /* get_user_info.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA04F28113614006BB60D /* get_user_info.pb.swift */; };
@@ -53,8 +52,7 @@
 		2BB0BF4127E735C100822EFE /* FileTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0BF4027E735C100822EFE /* FileTreeView.swift */; };
 		2BB1AB7627FC316200B79F5E /* FileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB1AB7527FC316200B79F5E /* FileContentView.swift */; };
 		2BC337E927C2417000C01067 /* MineTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC337E827C2417000C01067 /* MineTabView.swift */; };
-		2BD0822827F041C400963D28 /* TimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0822727F041C400963D28 /* TimeUtil.swift */; };
-		2BD0822B27F04AC600963D28 /* NetDiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0BF4227E7377200822EFE /* NetDiskView.swift */; };
+		2BD0822827F041C400963D28 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0822727F041C400963D28 /* Time.swift */; };
 		2BE67B9927FAC63D008466AE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE67B9827FAC63D008466AE /* LoginView.swift */; };
 		2BE67B9B27FACECF008466AE /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE67B9A27FACECF008466AE /* RegisterView.swift */; };
 /* End PBXBuildFile section */
@@ -92,9 +90,8 @@
 		086EF7BA27BAB0F40089A108 /* gmFSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gmFSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		086EF7CA27BAB4C60089A108 /* gmFS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = gmFS.entitlements; sourceTree = "<group>"; };
 		086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		086F276428086C46009D4F81 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
-		08956A782812437B002F7803 /* FileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListView.swift; sourceTree = "<group>"; };
-		08956A7D28124579002F7803 /* NodeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeUtil.swift; sourceTree = "<group>"; };
+		086F276428086C46009D4F81 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		08956A7D28124579002F7803 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		08956A7F28125CEA002F7803 /* NodeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeLabelView.swift; sourceTree = "<group>"; };
 		08956A8128126132002F7803 /* NodeDstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeDstView.swift; sourceTree = "<group>"; };
 		08ECA04F28113614006BB60D /* get_user_info.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = get_user_info.pb.swift; sourceTree = "<group>"; };
@@ -165,10 +162,9 @@
 		2BB0BF3C27E732D500822EFE /* DirRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirRowView.swift; sourceTree = "<group>"; };
 		2BB0BF3E27E734A600822EFE /* FileRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRowView.swift; sourceTree = "<group>"; };
 		2BB0BF4027E735C100822EFE /* FileTreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTreeView.swift; sourceTree = "<group>"; };
-		2BB0BF4227E7377200822EFE /* NetDiskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskView.swift; sourceTree = "<group>"; };
 		2BB1AB7527FC316200B79F5E /* FileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileContentView.swift; sourceTree = "<group>"; };
 		2BC337E827C2417000C01067 /* MineTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineTabView.swift; sourceTree = "<group>"; };
-		2BD0822727F041C400963D28 /* TimeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtil.swift; sourceTree = "<group>"; };
+		2BD0822727F041C400963D28 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		2BE67B9827FAC63D008466AE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2BE67B9A27FACECF008466AE /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -311,9 +307,9 @@
 		2B1CDF7E27CB794D00136DAA /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				2BD0822727F041C400963D28 /* TimeUtil.swift */,
-				086F276428086C46009D4F81 /* StringUtil.swift */,
-				08956A7D28124579002F7803 /* NodeUtil.swift */,
+				2BD0822727F041C400963D28 /* Time.swift */,
+				086F276428086C46009D4F81 /* String.swift */,
+				08956A7D28124579002F7803 /* Node.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -436,8 +432,6 @@
 				2BB0BF3C27E732D500822EFE /* DirRowView.swift */,
 				2BB0BF3E27E734A600822EFE /* FileRowView.swift */,
 				2BB0BF4027E735C100822EFE /* FileTreeView.swift */,
-				2BB0BF4227E7377200822EFE /* NetDiskView.swift */,
-				08956A782812437B002F7803 /* FileListView.swift */,
 				08956A7F28125CEA002F7803 /* NodeLabelView.swift */,
 				08956A8128126132002F7803 /* NodeDstView.swift */,
 				08F4821328127AF600BA2F06 /* AlertInputView.swift */,
@@ -592,7 +586,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08956A792812437B002F7803 /* FileListView.swift in Sources */,
 				0855B4B3280FE96E0052D724 /* MCShareView.swift in Sources */,
 				08ECA05E28113615006BB60D /* get_node.pb.swift in Sources */,
 				2BE67B9B27FACECF008466AE /* RegisterView.swift in Sources */,
@@ -605,7 +598,7 @@
 				2BB0BF3827E72D9100822EFE /* AboutView.swift in Sources */,
 				2BB0BF3F27E734A600822EFE /* FileRowView.swift in Sources */,
 				08ECA05B28113615006BB60D /* service.pb.swift in Sources */,
-				086F276528086C46009D4F81 /* StringUtil.swift in Sources */,
+				086F276528086C46009D4F81 /* String.swift in Sources */,
 				08ECA06128113615006BB60D /* download_file.pb.swift in Sources */,
 				08ECA06328113615006BB60D /* ping.pb.swift in Sources */,
 				08956A8228126132002F7803 /* NodeDstView.swift in Sources */,
@@ -615,8 +608,7 @@
 				08ECA05C28113615006BB60D /* upload_file.pb.swift in Sources */,
 				08F4821428127AF600BA2F06 /* AlertInputView.swift in Sources */,
 				086EF79E27BAB0F20089A108 /* gmFSApp.swift in Sources */,
-				08956A7E28124579002F7803 /* NodeUtil.swift in Sources */,
-				2BD0822B27F04AC600963D28 /* NetDiskView.swift in Sources */,
+				08956A7E28124579002F7803 /* Node.swift in Sources */,
 				2B1F8AFF2807C85E004C4659 /* AppManager.swift in Sources */,
 				2BB0BF3A27E7312000822EFE /* PasswdChgView.swift in Sources */,
 				2B1FAF2427F04EF6001B9979 /* PasswdChgRowView.swift in Sources */,
@@ -626,7 +618,7 @@
 				2B1FAF2627F04FB3001B9979 /* AboutRowView.swift in Sources */,
 				2BB0BF3D27E732D500822EFE /* DirRowView.swift in Sources */,
 				08ECA05F28113615006BB60D /* user_login.pb.swift in Sources */,
-				2BD0822827F041C400963D28 /* TimeUtil.swift in Sources */,
+				2BD0822827F041C400963D28 /* Time.swift in Sources */,
 				2B20FA1E28017E0400F95415 /* BackendService.swift in Sources */,
 				08ECA06028113615006BB60D /* user_register.pb.swift in Sources */,
 				2BE67B9927FAC63D008466AE /* LoginView.swift in Sources */,

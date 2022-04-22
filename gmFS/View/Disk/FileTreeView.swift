@@ -19,10 +19,25 @@ struct FileTreeView: View {
     @State private var subNodes:[Node] = []
     var shareService = ShareService()
     var nodeID:Int64
-    var nodeList:[Node] = []
     private func alertWith(_ text:String){
         showingAlert=true
         alertText=text
+    }
+    private func fetchNode(){
+        BackendService().GetNode(nodeID: nodeID){resp in
+            var copyNodes  = resp.subNodes
+            copyNodes.sort{ n1,n2 in
+                if n1.nodeType==n2.nodeType{
+                    // 节点名字典序
+                    return n1.nodeName<n2.nodeName
+                }
+                // 文件夹在上
+                return n1.nodeType.rawValue>n2.nodeType.rawValue
+            }
+            subNodes=copyNodes
+        }failure: { Error in
+            
+        }
     }
     var body: some View {
         NavigationView{
@@ -57,11 +72,10 @@ struct FileTreeView: View {
             }
         }
         .onAppear{
-            BackendService().GetNode(nodeID: nodeID){resp in
-                subNodes=resp.subNodes
-            }failure: { Error in
-                
-            }
+           fetchNode()
+        }
+        .refreshable {
+            fetchNode()
         }
         .navigationBarHidden(true)
         .fileImporter(isPresented: $showingAddFile, allowedContentTypes: [.plainText],allowsMultipleSelection: false){result in

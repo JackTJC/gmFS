@@ -10,24 +10,31 @@ import SwiftUI
 
 
 struct FileContentView: View {
-    @State private var content:String = ""
-    @State private var name:String = ""
+    @State private var content:String = "default content"
+    @State private var name:String = "default name"
+    
+    
     var fileNodeID:Int64
     var body: some View {
-        VStack(alignment: .leading){
-            Text(name)
-                .font(.title)
-            Text(content)
-        }
-        .onAppear{
-            BackendService().GetNode(nodeID: fileNodeID){ resp in
-                content = String(data: resp.node.nodeContent, encoding: .utf8)!
-                name = resp.node.nodeName
-            }failure: { Error in
-                
+        NavigationView{
+            VStack(alignment: .leading){
+                Text(content)
+            }
+            .onAppear{
+                BackendService().GetNode(nodeID: fileNodeID){ resp in
+                    content = String(data: resp.node.nodeContent, encoding: .utf8)!
+                    name = resp.node.nodeName
+                }failure: { Error in
+                    
+                }
+            }
+            .toolbar{
+                ToolbarItem(placement: .principal){
+                    Text(name)
+                        .font(.title)
+                }
             }
         }
-        
     }
 }
 
