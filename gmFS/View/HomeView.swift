@@ -15,7 +15,7 @@ struct HomeView: View {
     }
     var body: some View {
         TabView(selection: self.$tab){
-            NetDiskView()
+            FileTreeView(nodeID: 1517026803300962304)
                 .tabItem{
                     Label("Disk",systemImage: "folder")
                 }.tag(Tab.fileShare)
