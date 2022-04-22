@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SwiftProtobuf
 import OSLog
+import SwiftUI
 
 
 class BackendService{
@@ -18,6 +19,7 @@ class BackendService{
         static var fileUplaod = "/file/upload"
         static var fileDownload = "/file/download"
         static var getNode = "/node/get"
+        static var createDir = "/dir/create"
     }
     func UserLogin(name:String,passwd:String,
                    success:@escaping (UserLoginResponse)->Void,
@@ -60,12 +62,13 @@ class BackendService{
         }
     }
     
-    func UploadFile(fileName:String,content:Data,
+    func UploadFile(fileName:String,content:Data,parentID:Int64,
                     success:@escaping (UploadFileReponse)->Void,
                     failure:@escaping (Error)->Void){
         var req = UploadFileRequest()
         req.fileName=fileName
         req.content=content
+        req.parentID=parentID
         let data = try! req.jsonUTF8Data()
         NetworkService().request(uri: BackendUri.fileUplaod, body: data){data in
             do {
@@ -99,5 +102,27 @@ class BackendService{
         }failure: { Error in
             failure(Error)
         }
+    }
+    
+    func CreateDir(dirName:String,parentID:Int64,
+                   success:@escaping (CreateDirResponse) -> Void,
+                   failure:@escaping (Error) -> Void){
+        var req = CreateDirRequest()
+        req.dirName=dirName
+        req.parentID=parentID
+        let data = try! req.jsonUTF8Data()
+        NetworkService().request(uri: BackendUri.createDir, body: data){respData in
+            do {
+                let resp = try CreateDirResponse.init(jsonUTF8Data: respData)
+                success(resp)
+            }catch is JSONDecodingError{
+                AppManager.logger.error("create dir json decode error")
+            }catch{
+                AppManager.logger.error("crewate dir get unknown error")
+            }
+        }failure: { Error in
+            failure(Error)
+        }
+        
     }
 }

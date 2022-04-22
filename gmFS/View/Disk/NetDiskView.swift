@@ -11,7 +11,7 @@ struct NetDiskView: View {
     @State var searchQuery = ""
     var body: some View {
         VStack {
-            FileTreeView()
+            FileTreeView(nodeID: 1)
         }
     }
 }

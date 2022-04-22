@@ -9,13 +9,13 @@ import SwiftUI
 
 struct FileRowView: View {
     var fileName:String
-    var createTimeStamp:UnixTimestamp
+    var updateTimeStamp:UnixTimestamp
     var body: some View {
         HStack{
             Image("document")
                 .resizable()
                 .frame(width: 60, height: 60, alignment: .center)
-            NodeAttrView(nodeName: fileName, nodeCreateTimeStamp: createTimeStamp)
+            NodeAttrView(nodeName: fileName, nodeCreateTimeStamp: updateTimeStamp)
             Spacer()
         }
         .frame( height: 70)
@@ -25,6 +25,6 @@ struct FileRowView: View {
 
 struct FileRow_Previews: PreviewProvider {
     static var previews: some View {
-        FileRowView(fileName: "file",createTimeStamp: Date.now.unixTimestamp)
+        FileRowView(fileName: "file",updateTimeStamp: Date.now.unixTimestamp)
     }
 }
