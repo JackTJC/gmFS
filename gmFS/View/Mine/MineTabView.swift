@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MineTabView: View {
     var avatar:Image
+    @State private var userInfo:UserInfoModel = AppManager.getUserCache()
     var body: some View {
             VStack{
                 avatar
@@ -16,9 +17,9 @@ struct MineTabView: View {
                     .clipShape(Circle())
                     .shadow(radius: 7)
                     .frame(width: 150, height: 150)
-                Text("UserName")
+                Text(userInfo.name)
                     .font(.title)
-                Text("tianjincai@hotmail.com")
+                Text(userInfo.email)
                 List{
                     HStack{
                         Image("key")
@@ -28,9 +29,15 @@ struct MineTabView: View {
                         Image("mine")
                         Text("About")
                     }.background(NavigationLink("",destination: AboutView()))
+                    HStack{
+                        Image("setting")
+                        Text("Settings")
+                    }.background(NavigationLink("",destination: SettingView()))
                 }
             }
-            .navigationBarHidden(true)
+            .onAppear{
+                userInfo = AppManager.getUserCache()
+            }
         
     }
 }
