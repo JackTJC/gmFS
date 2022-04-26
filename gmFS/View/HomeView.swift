@@ -21,10 +21,12 @@ struct HomeView: View {
             .tabItem{
                 Label("Disk",systemImage: "folder")
             }.tag(Tab.fileShare)
-            MineTabView(avatar: Image("default_avatar"))
-                .tabItem{
-                    Label("Mine",systemImage: "person")
-                }.tag(Tab.mine)
+            NavigationView{
+                MineTabView(avatar: Image("default_avatar"))
+            }
+            .tabItem{
+                Label("Mine",systemImage: "person")
+            }.tag(Tab.mine)
         }
     }
 }

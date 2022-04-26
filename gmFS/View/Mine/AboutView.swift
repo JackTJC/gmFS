@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct AboutView: View {
-    var avatar:Image
-    var telephone:String
-    var email:String
-    var userName:String
     var body: some View {
         VStack{
-            avatar
+            Image("profile_default_avatar")
                 .resizable()
                 .clipShape(Circle())
                 .frame(width: 200, height: 200)
@@ -27,7 +23,7 @@ struct AboutView: View {
 
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        AboutView(avatar: Image("profile_default_avatar"),telephone: "1234567",email: "12345@qq.com",userName: "JincaiTian")
+        AboutView()
     }
 }
 
