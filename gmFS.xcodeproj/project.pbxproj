@@ -36,8 +36,6 @@
 		08F4821428127AF600BA2F06 /* AlertInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4821328127AF600BA2F06 /* AlertInputView.swift */; };
 		2B1F8AFF2807C85E004C4659 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F8AFE2807C85E004C4659 /* AppManager.swift */; };
 		2B1F8B012807CAE3004C4659 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F8B002807CAE3004C4659 /* HomeView.swift */; };
-		2B1FAF2427F04EF6001B9979 /* PasswdChgRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1FAF2327F04EF6001B9979 /* PasswdChgRowView.swift */; };
-		2B1FAF2627F04FB3001B9979 /* AboutRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1FAF2527F04FB3001B9979 /* AboutRowView.swift */; };
 		2B1FAF3A27F07711001B9979 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 2B1FAF3927F07711001B9979 /* SwiftProtobuf */; };
 		2B20FA1E28017E0400F95415 /* BackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20FA1D28017E0400F95415 /* BackendService.swift */; };
 		2B52BA7A280160F700B7E393 /* libgmssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B52BA79280160F700B7E393 /* libgmssl.a */; };
@@ -109,8 +107,6 @@
 		08F4821328127AF600BA2F06 /* AlertInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInputView.swift; sourceTree = "<group>"; };
 		2B1F8AFE2807C85E004C4659 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		2B1F8B002807CAE3004C4659 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		2B1FAF2327F04EF6001B9979 /* PasswdChgRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswdChgRowView.swift; sourceTree = "<group>"; };
-		2B1FAF2527F04FB3001B9979 /* AboutRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutRowView.swift; sourceTree = "<group>"; };
 		2B20FA1D28017E0400F95415 /* BackendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendService.swift; sourceTree = "<group>"; };
 		2B52BA79280160F700B7E393 /* libgmssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgmssl.a; sourceTree = "<group>"; };
 		2B52BA902801746700B7E393 /* NetWorkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkService.swift; sourceTree = "<group>"; };
@@ -410,8 +406,6 @@
 				2BC337E827C2417000C01067 /* MineTabView.swift */,
 				2BB0BF3727E72D9100822EFE /* AboutView.swift */,
 				2BB0BF3927E7312000822EFE /* PasswdChgView.swift */,
-				2B1FAF2327F04EF6001B9979 /* PasswdChgRowView.swift */,
-				2B1FAF2527F04FB3001B9979 /* AboutRowView.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -602,12 +596,10 @@
 				08956A7E28124579002F7803 /* Node.swift in Sources */,
 				2B1F8AFF2807C85E004C4659 /* AppManager.swift in Sources */,
 				2BB0BF3A27E7312000822EFE /* PasswdChgView.swift in Sources */,
-				2B1FAF2427F04EF6001B9979 /* PasswdChgRowView.swift in Sources */,
 				08BC98172816AAC300FAD780 /* FileListView.swift in Sources */,
 				2BC337E927C2417000C01067 /* MineTabView.swift in Sources */,
 				08956A8028125CEB002F7803 /* NodeView.swift in Sources */,
 				2BB1AB7627FC316200B79F5E /* FileContentView.swift in Sources */,
-				2B1FAF2627F04FB3001B9979 /* AboutRowView.swift in Sources */,
 				2BB0BF3D27E732D500822EFE /* DirRowView.swift in Sources */,
 				08ECA05F28113615006BB60D /* user_login.pb.swift in Sources */,
 				2BD0822827F041C400963D28 /* Time.swift in Sources */,

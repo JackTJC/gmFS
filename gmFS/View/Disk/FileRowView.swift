@@ -28,8 +28,6 @@ struct FileRowView: View {
                 Label("", systemImage: "ellipsis")
             }
         }
-        .frame( height: 70)
-        .scaledToFit()
     }
 }
 

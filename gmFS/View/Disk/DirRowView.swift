@@ -15,13 +15,10 @@ struct DirRowView: View {
         HStack{
             Image("folder")
                 .resizable()
-                .frame(width: 60, height: 60, alignment: .center)
+                .frame(width: 60, height: 60, alignment: .leading)
             NodeAttrView(nodeName: dirName, nodeCreateTimeStamp: updateTimeStamp)
             Spacer()
             Menu{
-                //                Button(action: {}){
-                //                    Label("Share", image: "share")
-                //                }
                 Button(action: {}){
                     Label("Delete",image: "close")
                 }
@@ -29,8 +26,6 @@ struct DirRowView: View {
                 Label("", systemImage: "ellipsis")
             }
         }
-        .frame(height: 70)
-        .scaledToFit()
     }
 }
 
