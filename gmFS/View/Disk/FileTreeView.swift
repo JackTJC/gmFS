@@ -19,10 +19,12 @@ struct FileTreeView: View {
     @State private var subNodes:[Node] = []
     var shareService = ShareService()
     var nodeID:Int64
+    
     private func alertWith(_ text:String){
         showingAlert=true
         alertText=text
     }
+    
     private func fetchNode(){
         BackendService().GetNode(nodeID: nodeID){resp in
             var copyNodes  = resp.subNodes
@@ -39,29 +41,13 @@ struct FileTreeView: View {
             
         }
     }
+    
     var body: some View {
         List{
             ForEach(subNodes){node in
                 NodeView(node: node)
             }
         }
-        .toolbar{
-            ToolbarItemGroup(placement:.navigationBarTrailing){
-                Menu{
-                    Button("File", action: {showingAddFile=true})
-                    Button("Directory",action: {showingInputDirName=true})
-                }label: {
-                    Label("AddFile", systemImage: "plus")
-                }
-                Menu{
-                    Button("Join Session", action: {showingMCBrowser=true})
-                    Button("Host Session",action: {shareService.startHost()})
-                }label: {
-                    Label("Session", systemImage: "antenna.radiowaves.left.and.right.circle")
-                }
-            }
-        }
-        .searchable(text: $searchText,prompt: "Search File")
         .sheet(isPresented: $showingMCBrowser){
             ShareView()
         }
@@ -101,6 +87,23 @@ struct FileTreeView: View {
                 // do nothing
             }
         })
+        .toolbar{
+            ToolbarItemGroup(placement:.navigationBarTrailing){
+                Menu{
+                    Button("File", action: {showingAddFile=true})
+                    Button("Directory",action: {showingInputDirName=true})
+                }label: {
+                    Label("AddFile", systemImage: "plus")
+                }
+                Menu{
+                    Button("Join Session", action: {showingMCBrowser=true})
+                    Button("Host Session",action: {shareService.startHost()})
+                }label: {
+                    Label("Session", systemImage: "antenna.radiowaves.left.and.right.circle")
+                }
+            }
+        }
+        .searchable(text: $searchText,prompt: "Search File")
     }
 }
 

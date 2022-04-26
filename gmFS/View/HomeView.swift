@@ -18,14 +18,12 @@ struct HomeView: View {
         TabView(selection: self.$tab){
             NavigationView{
                 FileTreeView(nodeID: rootNodeId)
-                    .navigationBarHidden(true)
             }
             .tabItem{
                 Label("Disk",systemImage: "folder")
             }.tag(Tab.fileShare)
             NavigationView{
                 MineTabView(avatar: Image("default_avatar"))
-                    .navigationBarHidden(true)
             }
             .tabItem{
                 Label("Mine",systemImage: "person")
