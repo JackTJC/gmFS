@@ -17,6 +17,16 @@ struct FileRowView: View {
                 .frame(width: 60, height: 60, alignment: .center)
             NodeAttrView(nodeName: fileName, nodeCreateTimeStamp: updateTimeStamp)
             Spacer()
+            Menu{
+                Button(action: {}){
+                    Label("Share", image: "share")
+                }
+                Button(action: {}){
+                    Label("Delete",image: "close")
+                }
+            }label: {
+                Label("", systemImage: "ellipsis")
+            }
         }
         .frame( height: 70)
         .scaledToFit()

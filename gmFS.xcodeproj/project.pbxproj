@@ -19,8 +19,8 @@
 		086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */; };
 		086F276528086C46009D4F81 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086F276428086C46009D4F81 /* String.swift */; };
 		08956A7E28124579002F7803 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7D28124579002F7803 /* Node.swift */; };
-		08956A8028125CEB002F7803 /* NodeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7F28125CEA002F7803 /* NodeLabelView.swift */; };
-		08956A8228126132002F7803 /* NodeDstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A8128126132002F7803 /* NodeDstView.swift */; };
+		08956A8028125CEB002F7803 /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7F28125CEA002F7803 /* NodeView.swift */; };
+		08BC98172816AAC300FAD780 /* FileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC98162816AAC300FAD780 /* FileListView.swift */; };
 		08ECA05A28113615006BB60D /* get_user_info.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA04F28113614006BB60D /* get_user_info.pb.swift */; };
 		08ECA05B28113615006BB60D /* service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA05028113614006BB60D /* service.pb.swift */; };
 		08ECA05C28113615006BB60D /* upload_file.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECA05128113614006BB60D /* upload_file.pb.swift */; };
@@ -92,8 +92,8 @@
 		086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		086F276428086C46009D4F81 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		08956A7D28124579002F7803 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
-		08956A7F28125CEA002F7803 /* NodeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeLabelView.swift; sourceTree = "<group>"; };
-		08956A8128126132002F7803 /* NodeDstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeDstView.swift; sourceTree = "<group>"; };
+		08956A7F28125CEA002F7803 /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
+		08BC98162816AAC300FAD780 /* FileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListView.swift; sourceTree = "<group>"; };
 		08ECA04F28113614006BB60D /* get_user_info.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = get_user_info.pb.swift; sourceTree = "<group>"; };
 		08ECA05028113614006BB60D /* service.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = service.pb.swift; sourceTree = "<group>"; };
 		08ECA05128113614006BB60D /* upload_file.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = upload_file.pb.swift; sourceTree = "<group>"; };
@@ -201,8 +201,6 @@
 		082D285127C129F00008A0BB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0855B4B1280FE95C0052D724 /* Share */,
-				2BB1AB7427FC314700B79F5E /* File */,
 				2BE67B9C27FAD215008466AE /* Login */,
 				2BD0822927F0498000963D28 /* Disk */,
 				2BB0BF3B27E7315200822EFE /* Mine */,
@@ -210,15 +208,6 @@
 				2B1F8B002807CAE3004C4659 /* HomeView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		0855B4B1280FE95C0052D724 /* Share */ = {
-			isa = PBXGroup;
-			children = (
-				0855B4AF280FE3EF0052D724 /* ShareView.swift */,
-				0855B4B2280FE96E0052D724 /* MCShareView.swift */,
-			);
-			path = Share;
 			sourceTree = "<group>";
 		};
 		086EF79127BAB0F20089A108 = {
@@ -294,6 +283,15 @@
 				086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08BC981528169D9500FAD780 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				0855B4AF280FE3EF0052D724 /* ShareView.swift */,
+				0855B4B2280FE96E0052D724 /* MCShareView.swift */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 		08F482102812714900BA2F06 /* Service */ = {
@@ -418,23 +416,17 @@
 			path = Mine;
 			sourceTree = "<group>";
 		};
-		2BB1AB7427FC314700B79F5E /* File */ = {
-			isa = PBXGroup;
-			children = (
-				2BB1AB7527FC316200B79F5E /* FileContentView.swift */,
-			);
-			path = File;
-			sourceTree = "<group>";
-		};
 		2BD0822927F0498000963D28 /* Disk */ = {
 			isa = PBXGroup;
 			children = (
+				08BC981528169D9500FAD780 /* Share */,
+				2BB1AB7527FC316200B79F5E /* FileContentView.swift */,
 				2BB0BF3C27E732D500822EFE /* DirRowView.swift */,
 				2BB0BF3E27E734A600822EFE /* FileRowView.swift */,
 				2BB0BF4027E735C100822EFE /* FileTreeView.swift */,
-				08956A7F28125CEA002F7803 /* NodeLabelView.swift */,
-				08956A8128126132002F7803 /* NodeDstView.swift */,
+				08956A7F28125CEA002F7803 /* NodeView.swift */,
 				08F4821328127AF600BA2F06 /* AlertInputView.swift */,
+				08BC98162816AAC300FAD780 /* FileListView.swift */,
 			);
 			path = Disk;
 			sourceTree = "<group>";
@@ -601,7 +593,6 @@
 				086F276528086C46009D4F81 /* String.swift in Sources */,
 				08ECA06128113615006BB60D /* download_file.pb.swift in Sources */,
 				08ECA06328113615006BB60D /* ping.pb.swift in Sources */,
-				08956A8228126132002F7803 /* NodeDstView.swift in Sources */,
 				08ECA06428113615006BB60D /* create_dir.pb.swift in Sources */,
 				0855B4B0280FE3EF0052D724 /* ShareView.swift in Sources */,
 				2B1F8B012807CAE3004C4659 /* HomeView.swift in Sources */,
@@ -612,8 +603,9 @@
 				2B1F8AFF2807C85E004C4659 /* AppManager.swift in Sources */,
 				2BB0BF3A27E7312000822EFE /* PasswdChgView.swift in Sources */,
 				2B1FAF2427F04EF6001B9979 /* PasswdChgRowView.swift in Sources */,
+				08BC98172816AAC300FAD780 /* FileListView.swift in Sources */,
 				2BC337E927C2417000C01067 /* MineTabView.swift in Sources */,
-				08956A8028125CEB002F7803 /* NodeLabelView.swift in Sources */,
+				08956A8028125CEB002F7803 /* NodeView.swift in Sources */,
 				2BB1AB7627FC316200B79F5E /* FileContentView.swift in Sources */,
 				2B1FAF2627F04FB3001B9979 /* AboutRowView.swift in Sources */,
 				2BB0BF3D27E732D500822EFE /* DirRowView.swift in Sources */,
