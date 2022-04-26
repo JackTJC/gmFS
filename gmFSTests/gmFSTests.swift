@@ -32,13 +32,13 @@ class gmFSTests: XCTestCase {
     
     func testSet()throws{
         let userDefault = UserDefaults.standard
-        userDefault.set("123", forKey: "token")
-        userDefault.removeObject(forKey: "token")
+//        userDefault.set("123", forKey: "token")
+        userDefault.removeObject(forKey: "user_cache")
         userDefault.synchronize()
     }
     
     func testGet()throws{
-        let token = UserDefaults.standard.object(forKey: "token")
+        let token = UserDefaults.standard.object(forKey: "user_cache")
         print(token)
     }
 

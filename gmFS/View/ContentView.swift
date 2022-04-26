@@ -11,10 +11,15 @@ struct ContentView: View {
     @State var isLogined = AppManager.isLogined()
     
     var body: some View {
-        if isLogined{
-            HomeView()
-        }else{
-            LoginView()
+        Group{
+            if isLogined{
+                HomeView()
+            }else{
+                NavigationView{
+                    LoginView()
+                        .navigationBarHidden(true)
+                }
+            }
         }
     }
 }

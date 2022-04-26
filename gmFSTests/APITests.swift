@@ -30,15 +30,4 @@ class HTTPAPITests: XCTestCase {
         
     }
     
-    func testUploadFile()throws{
-        let data = "123456".data(using: .utf8)
-        try BackendService().UploadFile(fileName: "123", content: data!){resp in
-            print(resp)
-        }failure: { Error in
-            print(Error)
-        }
-        sleep(3)
-    }
-
-
 }

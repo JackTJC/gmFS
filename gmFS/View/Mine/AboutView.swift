@@ -10,10 +10,9 @@ import SwiftUI
 struct AboutView: View {
     var body: some View {
         VStack{
-            Image("profile_default_avatar")
+            Image("about")
                 .resizable()
-                .clipShape(Circle())
-                .frame(width: 200, height: 200)
+                .frame(width: 144, height: 144)
             aboutSubLineView(header: "Designed By", content: "JincaiTian")
             aboutSubLineView(header: "Guided By", content: "WeiWang")
             aboutSubLineView(header: "Version", content: "1.0.0")

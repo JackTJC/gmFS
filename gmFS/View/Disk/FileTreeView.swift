@@ -16,7 +16,6 @@ struct FileTreeView: View {
     @State private var showingAddFile = false
     @State private var showingInputDirName = false
     @State private var directoryName = ""
-    @State private var title = ""
     @State private var subNodes:[Node] = []
     var shareService = ShareService()
     var nodeID:Int64
@@ -36,7 +35,6 @@ struct FileTreeView: View {
                 return n1.nodeType.rawValue>n2.nodeType.rawValue
             }
             subNodes=copyNodes
-            title = resp.node.nodeName
         }failure: { Error in
             
         }
@@ -63,7 +61,6 @@ struct FileTreeView: View {
                 }
             }
         }
-        .navigationTitle(title)
         .searchable(text: $searchText,prompt: "Search File")
         .sheet(isPresented: $showingMCBrowser){
             ShareView()

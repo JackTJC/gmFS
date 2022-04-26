@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var tab:Tab = .fileShare
+    @State private var rootNodeId =  AppManager.getUserCache().rootNode
     enum Tab{
         case fileShare
         case mine
@@ -16,17 +17,21 @@ struct HomeView: View {
     var body: some View {
         TabView(selection: self.$tab){
             NavigationView{
-                FileTreeView(nodeID: 1517026803300962304)
+                FileTreeView(nodeID: rootNodeId)
+                    .navigationBarHidden(true)
             }
             .tabItem{
                 Label("Disk",systemImage: "folder")
             }.tag(Tab.fileShare)
             NavigationView{
                 MineTabView(avatar: Image("default_avatar"))
+                    .navigationBarHidden(true)
             }
             .tabItem{
                 Label("Mine",systemImage: "person")
             }.tag(Tab.mine)
+        }.onAppear{
+            rootNodeId = AppManager.getUserCache().rootNode
         }
     }
 }
