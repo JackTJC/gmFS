@@ -15,10 +15,12 @@ struct HomeView: View {
     }
     var body: some View {
         TabView(selection: self.$tab){
-            FileTreeView(nodeID: 1517026803300962304)
-                .tabItem{
-                    Label("Disk",systemImage: "folder")
-                }.tag(Tab.fileShare)
+            NavigationView{
+                FileTreeView(nodeID: 1517026803300962304)
+            }
+            .tabItem{
+                Label("Disk",systemImage: "folder")
+            }.tag(Tab.fileShare)
             MineTabView(avatar: Image("default_avatar"))
                 .tabItem{
                     Label("Mine",systemImage: "person")

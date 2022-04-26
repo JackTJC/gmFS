@@ -16,6 +16,7 @@ struct FileTreeView: View {
     @State private var showingAddFile = false
     @State private var showingInputDirName = false
     @State private var directoryName = ""
+    @State private var title = ""
     @State private var subNodes:[Node] = []
     var shareService = ShareService()
     var nodeID:Int64
@@ -35,49 +36,44 @@ struct FileTreeView: View {
                 return n1.nodeType.rawValue>n2.nodeType.rawValue
             }
             subNodes=copyNodes
+            title = resp.node.nodeName
         }failure: { Error in
             
         }
     }
     var body: some View {
-        NavigationView{
-            List{
-                ForEach(subNodes){node in
-                    NavigationLink{
-                        NodeDstView(node: node)
-                    }label: {
-                        NodeLabelView(node: node)
-                    }
-                }
-            }
-            .searchable(text: $searchText,prompt: "Search File")
-            .toolbar{
-                ToolbarItemGroup(placement:.navigationBarTrailing){
-                    Menu{
-                        Button("File", action: {showingAddFile=true})
-                        Button("Directory",action: {showingInputDirName=true})
-                    }label: {
-                        Label("AddFile", systemImage: "plus")
-                    }
-                    Menu{
-                        Button("Join Session", action: {showingMCBrowser=true})
-                        Button("Host Session",action: {shareService.startHost()})
-                    }label: {
-                        Label("Session", systemImage: "antenna.radiowaves.left.and.right.circle")
-                    }
-                }
-            }
-            .sheet(isPresented: $showingMCBrowser){
-                ShareView()
+        List{
+            ForEach(subNodes){node in
+                NodeView(node: node)
             }
         }
+        .toolbar{
+            ToolbarItemGroup(placement:.navigationBarTrailing){
+                Menu{
+                    Button("File", action: {showingAddFile=true})
+                    Button("Directory",action: {showingInputDirName=true})
+                }label: {
+                    Label("AddFile", systemImage: "plus")
+                }
+                Menu{
+                    Button("Join Session", action: {showingMCBrowser=true})
+                    Button("Host Session",action: {shareService.startHost()})
+                }label: {
+                    Label("Session", systemImage: "antenna.radiowaves.left.and.right.circle")
+                }
+            }
+        }
+        .navigationTitle(title)
+        .searchable(text: $searchText,prompt: "Search File")
+        .sheet(isPresented: $showingMCBrowser){
+            ShareView()
+        }
         .onAppear{
-           fetchNode()
+            fetchNode()
         }
         .refreshable {
             fetchNode()
         }
-        .navigationBarHidden(true)
         .fileImporter(isPresented: $showingAddFile, allowedContentTypes: [.plainText],allowsMultipleSelection: false){result in
             do {
                 guard let selectedFile: URL = try result.get().first else { return }
