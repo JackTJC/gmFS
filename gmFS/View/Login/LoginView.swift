@@ -88,21 +88,24 @@ struct LoginView: View {
                 // to homepage
                 NavigationLink(isActive: $showingLoginScreen){
                     HomeView()
+                        .navigationTitle("")
                         .navigationBarHidden(true)
                         .navigationBarBackButtonHidden(true)
                 }label: {
                     EmptyView()
-                }
+                }.isDetailLink(false)
                 // to register
                 NavigationLink(isActive:$showingRegister){
                     RegisterView()
-                        .navigationBarHidden(true)
-                        .navigationBarBackButtonHidden(true)
                 }label: {
                     EmptyView()
                 }
+                .isDetailLink(false)
             }
         }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .navigationTitle("")
     }
 }
 

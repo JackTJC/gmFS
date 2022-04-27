@@ -18,6 +18,9 @@ struct HomeView: View {
         TabView(selection: self.$tab){
             NavigationView{
                 FileTreeView(nodeID: rootNodeId)
+                    .navigationBarHidden(true)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationTitle("")
             }
             .tabItem{
                 Label("Disk",systemImage: "folder")
