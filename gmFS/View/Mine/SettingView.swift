@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct SettingView: View {
+    @State private var logoutClick = false
     var body: some View {
         List{
             Button{
                 AppManager.delUserCache()
+                logoutClick = true
             }label:{
                 Label("Logout", systemImage: "pip.exit")
+            }.background{
+                NavigationLink(""){
+                    LoginView().navigationBarBackButtonHidden(true)
+                }.opacity(0)
             }
         }
-      
     }
 }
 

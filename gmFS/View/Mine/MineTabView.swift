@@ -24,15 +24,15 @@ struct MineTabView: View {
                     HStack{
                         Image("key")
                         Text("ChangePassword")
-                    }.background(NavigationLink("",destination: PasswdChgView()))
+                    }.background(NavigationLink("",destination: PasswdChgView()).opacity(0))
                     HStack{
                         Image("mine")
                         Text("About")
-                    }.background(NavigationLink("",destination: AboutView()))
+                    }.background(NavigationLink("",destination: AboutView()).opacity(0))
                     HStack{
                         Image("setting")
                         Text("Settings")
-                    }.background(NavigationLink("",destination: SettingView()))
+                    }.background(NavigationLink("",destination: SettingView()).opacity(0))
                 }
             }
             .onAppear{

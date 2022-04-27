@@ -15,7 +15,7 @@ final class ShareService:NSObject{
     var mcAdvAsst:MCAdvertiserAssistant? = nil
     
     override init(){
-        mcSession=MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession=MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         super.init()
         mcSession.delegate=self
     }
