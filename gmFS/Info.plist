@@ -4,7 +4,8 @@
 <dict>
 	<key>NSBonjourServices</key>
 	<array>
-		<string>_gmFS-ftf._tcp</string>
+		<string>_service._udp</string>
+		<string>_service._tcp</string>
 	</array>
 </dict>
 </plist>

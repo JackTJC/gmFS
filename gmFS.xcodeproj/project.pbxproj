@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083A4045281A67BC00F7991F /* MultiPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A4044281A67BC00F7991F /* MultiPeer.swift */; };
+		083A4047281A737300F7991F /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083A4046281A737300F7991F /* AuthenticationServices.framework */; };
 		0855B4B0280FE3EF0052D724 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855B4AF280FE3EF0052D724 /* ShareView.swift */; };
 		0855B4B3280FE96E0052D724 /* MCShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855B4B2280FE96E0052D724 /* MCShareView.swift */; };
 		086EF79E27BAB0F20089A108 /* gmFSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF79D27BAB0F20089A108 /* gmFSApp.swift */; };
@@ -74,7 +76,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		082D285627C12DEA0008A0BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		083A4044281A67BC00F7991F /* MultiPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeer.swift; sourceTree = "<group>"; };
+		083A4046281A737300F7991F /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		0855B4AF280FE3EF0052D724 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		0855B4B2280FE96E0052D724 /* MCShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCShareView.swift; sourceTree = "<group>"; };
 		086EF79A27BAB0F20089A108 /* gmFS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gmFS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				083A4047281A737300F7991F /* AuthenticationServices.framework in Frameworks */,
 				086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */,
 				2B52BA7A280160F700B7E393 /* libgmssl.a in Frameworks */,
 				2B1FAF3A27F07711001B9979 /* SwiftProtobuf in Frameworks */,
@@ -238,7 +242,6 @@
 				2BAE22EE27F3584900934909 /* API */,
 				2B1FAF2727F0751E001B9979 /* Proto */,
 				2B1CDF7E27CB794D00136DAA /* Util */,
-				082D285627C12DEA0008A0BB /* Info.plist */,
 				082D285127C129F00008A0BB /* View */,
 				086EF7CA27BAB4C60089A108 /* gmFS.entitlements */,
 				086EF79D27BAB0F20089A108 /* gmFSApp.swift */,
@@ -279,6 +282,7 @@
 		086EF7CB27BAB4C60089A108 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				083A4046281A737300F7991F /* AuthenticationServices.framework */,
 				086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
@@ -315,6 +319,7 @@
 				2BD0822727F041C400963D28 /* Time.swift */,
 				086F276428086C46009D4F81 /* String.swift */,
 				08956A7D28124579002F7803 /* Node.swift */,
+				083A4044281A67BC00F7991F /* MultiPeer.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -591,6 +596,7 @@
 				08F482122812716300BA2F06 /* ShareService.swift in Sources */,
 				2BB0BF3827E72D9100822EFE /* AboutView.swift in Sources */,
 				2BB0BF3F27E734A600822EFE /* FileRowView.swift in Sources */,
+				083A4045281A67BC00F7991F /* MultiPeer.swift in Sources */,
 				086F276528086C46009D4F81 /* String.swift in Sources */,
 				08FA27042817C95400DA8849 /* search_file.pb.swift in Sources */,
 				0855B4B0280FE3EF0052D724 /* ShareView.swift in Sources */,
@@ -799,6 +805,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/gmFS/GmSSL/Include\"";
 				INFOPLIST_FILE = gmFS/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "gmFS想要使用相机";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "gmFS want to use your network";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -840,6 +847,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/gmFS/GmSSL/Include\"";
 				INFOPLIST_FILE = gmFS/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "gmFS想要使用相机";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "gmFS want to use your network";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

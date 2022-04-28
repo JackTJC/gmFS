@@ -12,13 +12,13 @@ struct NodeView: View {
     var body: some View {
         switch node.nodeType{
         case NodeType.file:
-            FileRowView(fileName: node.nodeName, updateTimeStamp: node.updateTime)
+            FileRowView(fileName: node.nodeName, updateTimeStamp: node.updateTime,nodeID: node.nodeID)
                 .background(NavigationLink("",destination: FileContentView(fileNodeID: node.nodeID)).opacity(0))
         case NodeType.dir:
             DirRowView(dirName: node.nodeName, updateTimeStamp: node.updateTime)
                 .background(NavigationLink("",destination: FileTreeView(nodeID: node.nodeID)).opacity(0))
         default:
-            FileRowView(fileName: "default file", updateTimeStamp: Date.now.unixTimestamp)
+            FileRowView(fileName: "default file", updateTimeStamp: Date.now.unixTimestamp,nodeID:node.nodeID)
         }
     }
 }

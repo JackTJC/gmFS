@@ -9,6 +9,7 @@ import SwiftUI
 import MultipeerConnectivity
 
 struct FileTreeView: View {
+    @EnvironmentObject var shareService:ShareService
     @State private var searchText = ""
     @State private var showingAlert = false
     @State private var alertText = ""
@@ -17,7 +18,6 @@ struct FileTreeView: View {
     @State private var showingInputDirName = false
     @State private var directoryName = ""
     @State private var subNodes:[Node] = []
-    var shareService = ShareService()
     var nodeID:Int64
     
     private func alertWith(_ text:String){
@@ -49,7 +49,7 @@ struct FileTreeView: View {
             }
         }
         .sheet(isPresented: $showingMCBrowser){
-            ShareView()
+            ShareView(didFinish: self.$showingMCBrowser, wasCanceled: self.$showingMCBrowser,shareService: self.shareService)
         }
         .onAppear{
             fetchNode()
@@ -97,7 +97,7 @@ struct FileTreeView: View {
                 }
                 Menu{
                     Button("Join Session", action: {showingMCBrowser=true})
-                    Button("Host Session",action: {shareService.startHost()})
+                    Button("Host Session",action: {shareService.startHostNeayBy()})
                 }label: {
                     Label("Session", systemImage: "antenna.radiowaves.left.and.right.circle")
                 }
