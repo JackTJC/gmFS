@@ -38,7 +38,12 @@ struct FileRowView: View {
             Text("Sharing")
                 List{
                     ForEach(shareService.mcSession.connectedPeers){peer in
-                        Button(action: {}){
+                        Button{
+                            let nodeIDStr = String(nodeID)
+                            AppManager.logger.info("send \(nodeIDStr) to \(peer.displayName)")
+                            let data = nodeIDStr.data(using: .utf8)
+                            try! shareService.mcSession.send(data!, toPeers: [peer], with: .reliable)
+                        }label: {
                             Label(peer.displayName, systemImage: "iphone")
                         }
                     }

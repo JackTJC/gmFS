@@ -76,7 +76,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		082D285627C12DEA0008A0BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		083A4044281A67BC00F7991F /* MultiPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeer.swift; sourceTree = "<group>"; };
 		083A4046281A737300F7991F /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		0855B4AF280FE3EF0052D724 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
@@ -243,7 +242,6 @@
 				2BAE22EE27F3584900934909 /* API */,
 				2B1FAF2727F0751E001B9979 /* Proto */,
 				2B1CDF7E27CB794D00136DAA /* Util */,
-				082D285627C12DEA0008A0BB /* Info.plist */,
 				082D285127C129F00008A0BB /* View */,
 				086EF7CA27BAB4C60089A108 /* gmFS.entitlements */,
 				086EF79D27BAB0F20089A108 /* gmFSApp.swift */,
@@ -807,6 +805,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/gmFS/GmSSL/Include\"";
 				INFOPLIST_FILE = gmFS/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "gmFS想要使用相机";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "gmFS want to use your network";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -848,6 +847,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/gmFS/GmSSL/Include\"";
 				INFOPLIST_FILE = gmFS/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "gmFS想要使用相机";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "gmFS want to use your network";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

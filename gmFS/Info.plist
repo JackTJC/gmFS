@@ -2,11 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>gmFS want to use your network</string>
 	<key>NSBonjourServices</key>
 	<array>
-		<string>_gmFS-ftf._tcp</string>
+		<string>_service._udp</string>
+		<string>_service._tcp</string>
 	</array>
 </dict>
 </plist>

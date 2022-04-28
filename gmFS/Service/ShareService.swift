@@ -9,13 +9,15 @@ import Foundation
 import MultipeerConnectivity
 
 final class ShareService:NSObject,ObservableObject{
-    static var serviceType = "gmFS-ftf"
-    let peerID = MCPeerID(displayName: UIDevice.current.name)
-    var mcSession:MCSession
-    var mcAdvAsst:MCAdvertiserAssistant? = nil
-    var mcNearByAdv:MCNearbyServiceAdvertiser? = nil
+    static var serviceType = "service"
+    var peerID:MCPeerID!
+    var mcSession:MCSession!
+    var mcAdvAsst:MCAdvertiserAssistant!
+    var mcNearByAdv:MCNearbyServiceAdvertiser!
+    var shareFileIDList:[Int64] = []
     
     override init(){
+        peerID=MCPeerID(displayName: UIDevice.current.name)
         mcSession=MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         super.init()
         mcSession.delegate=self
@@ -23,12 +25,13 @@ final class ShareService:NSObject,ObservableObject{
     
     func startHost() {
         mcAdvAsst = MCAdvertiserAssistant(serviceType: ShareService.serviceType, discoveryInfo: nil, session: mcSession)
-        mcAdvAsst?.start()
+        mcAdvAsst.start()
     }
     
     func startHostNeayBy(){
         mcNearByAdv = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: ShareService.serviceType)
-        mcNearByAdv?.startAdvertisingPeer()
+        mcNearByAdv.delegate=self
+        mcNearByAdv.startAdvertisingPeer()
     }
 }
 
@@ -48,6 +51,10 @@ extension ShareService:MCSessionDelegate{
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         AppManager.logger.info("revice data:\(data) from \(peerID.displayName)")
+        let nodeIDStr = String(data: data, encoding: .utf8)
+        let nodeID = Int64(nodeIDStr!)
+        shareFileIDList.append(nodeID!)
+        AppManager.logger.info("get \(nodeIDStr!)")
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -61,10 +68,11 @@ extension ShareService:MCSessionDelegate{
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         AppManager.logger.info("finish receive from \(peerID.displayName)")
     }
-    
-    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
-        print(certificate)
-        AppManager.logger.info("receive certificate from \(peerID.displayName)")
-        certificateHandler(true)
+}
+
+extension ShareService:MCNearbyServiceAdvertiserDelegate{
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        AppManager.logger.info("receive invitation from \(peerID.displayName)")
+        invitationHandler(true,mcSession)
     }
 }

@@ -97,7 +97,7 @@ struct FileTreeView: View {
                 }
                 Menu{
                     Button("Join Session", action: {showingMCBrowser=true})
-                    Button("Host Session",action: {shareService.startHost()})
+                    Button("Host Session",action: {shareService.startHostNeayBy()})
                 }label: {
                     Label("Session", systemImage: "antenna.radiowaves.left.and.right.circle")
                 }

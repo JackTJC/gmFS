@@ -31,7 +31,6 @@ extension ShareView:MCBrowserViewControllerDelegate{
 
 extension ShareView:UIViewControllerRepresentable{
     func makeUIViewController(context: Context) -> MCBrowserViewController {
-        //let shareService = ShareService()
         let controler = MCBrowserViewController(serviceType: ShareService.serviceType, session: shareService.mcSession)
         controler.delegate=self
         return controler
