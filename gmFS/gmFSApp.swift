@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct gmFSApp: App {
+    @StateObject private var shareService = ShareService()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(shareService)
         }
     }
 }

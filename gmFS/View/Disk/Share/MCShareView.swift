@@ -9,8 +9,10 @@ import SwiftUI
 import MultipeerConnectivity
 
 struct MCShareView: View {
+    @State private var didFinish = false
+    @State private var wasCancel = false
     var body: some View {
-        ShareView()
+        ShareView(didFinish: self.$didFinish, wasCanceled: self.$wasCancel,shareService: ShareService())
     }
 }
 
