@@ -13,6 +13,15 @@ struct FileRowView: View {
     var fileName:String
     var updateTimeStamp:UnixTimestamp
     var nodeID:Int64
+    @State private var shareFailed = false
+    @State private var showAlert=false
+    @State private var alertText=""
+    
+    func alertWith(text:String){
+        showAlert = true
+        alertText=text
+    }
+    
     var body: some View {
         HStack{
             Image("document")
@@ -33,16 +42,24 @@ struct FileRowView: View {
                 Label("", systemImage: "ellipsis")
             }
         }
-        .popover(isPresented: self.$shareClick){
+        .alert(alertText, isPresented: self.$showAlert){
+            Button("OK", action: {})
+        }
+        .sheet(isPresented: self.$shareClick){
             VStack{
-            Text("Sharing")
+                Text("Sharing")
                 List{
                     ForEach(shareService.mcSession.connectedPeers){peer in
                         Button{
                             let nodeIDStr = String(nodeID)
-                            AppManager.logger.info("send \(nodeIDStr) to \(peer.displayName)")
                             let data = nodeIDStr.data(using: .utf8)
-                            try! shareService.mcSession.send(data!, toPeers: [peer], with: .reliable)
+                            do{
+                                try shareService.mcSession.send(data!, toPeers: [peer], with: .reliable)
+                                alertWith(text: "Share Success")
+                                AppManager.logger.info("send \(nodeIDStr) to \(peer.displayName)")
+                            }catch{
+                                alertWith(text: "Share Failed")
+                            }
                         }label: {
                             Label(peer.displayName, systemImage: "iphone")
                         }

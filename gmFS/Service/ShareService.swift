@@ -50,11 +50,10 @@ extension ShareService:MCSessionDelegate{
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        AppManager.logger.info("revice data:\(data) from \(peerID.displayName)")
+        AppManager.logger.info("revice data from \(peerID.displayName)")
         let nodeIDStr = String(data: data, encoding: .utf8)
         let nodeID = Int64(nodeIDStr!)
         shareFileIDList.append(nodeID!)
-        AppManager.logger.info("get \(nodeIDStr!)")
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
