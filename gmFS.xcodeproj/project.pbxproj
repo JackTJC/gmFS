@@ -11,6 +11,7 @@
 		083A4047281A737300F7991F /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083A4046281A737300F7991F /* AuthenticationServices.framework */; };
 		0855B4B0280FE3EF0052D724 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855B4AF280FE3EF0052D724 /* ShareView.swift */; };
 		0855B4B3280FE96E0052D724 /* MCShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855B4B2280FE96E0052D724 /* MCShareView.swift */; };
+		086B89C7281CE38900660099 /* ca.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 086B89C6281CE38900660099 /* ca.p12 */; };
 		086EF79E27BAB0F20089A108 /* gmFSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF79D27BAB0F20089A108 /* gmFSApp.swift */; };
 		086EF7A027BAB0F20089A108 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086EF79F27BAB0F20089A108 /* ContentView.swift */; };
 		086EF7A227BAB0F40089A108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 086EF7A127BAB0F40089A108 /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		083A4046281A737300F7991F /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		0855B4AF280FE3EF0052D724 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		0855B4B2280FE96E0052D724 /* MCShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCShareView.swift; sourceTree = "<group>"; };
+		086B89C6281CE38900660099 /* ca.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ca.p12; sourceTree = "<group>"; };
 		086EF79A27BAB0F20089A108 /* gmFS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gmFS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		086EF79D27BAB0F20089A108 /* gmFSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gmFSApp.swift; sourceTree = "<group>"; };
 		086EF79F27BAB0F20089A108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 		2BAE22EE27F3584900934909 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				086B89C6281CE38900660099 /* ca.p12 */,
 				2B52BA902801746700B7E393 /* NetWorkService.swift */,
 				2B20FA1D28017E0400F95415 /* BackendService.swift */,
 			);
@@ -562,6 +565,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				086B89C7281CE38900660099 /* ca.p12 in Resources */,
 				086EF7A527BAB0F40089A108 /* Preview Assets.xcassets in Resources */,
 				086EF7A227BAB0F40089A108 /* Assets.xcassets in Resources */,
 			);

@@ -14,12 +14,32 @@ import SwiftUI
 
 class BackendService{
     private class BackendUri{
+        static var ping = "/ping"
         static var userLogin = "/user/login"
         static var userRegister  = "/user/register"
         static var fileUplaod = "/file/upload"
         static var fileDownload = "/file/download"
         static var getNode = "/node/get"
         static var createDir = "/dir/create"
+    }
+    func Ping(name:String,
+              success:@escaping (PingResponse)->Void,
+              failure:@escaping(Error)->Void){
+        var req = PingRequest()
+        req.name=name
+        let data = try! req.jsonUTF8Data()
+        NetworkService().request(uri: BackendUri.ping, body: data){data in
+            do{
+                let resp = try PingResponse.init(jsonUTF8Data: data)
+                success(resp)
+            }catch is JSONDecodingError{
+                AppManager.logger.error("ping json decode error")
+            }catch{
+                AppManager.logger.error("ping unknown error")
+            }
+        }failure: { err in
+            failure(err)
+        }
     }
     func UserLogin(name:String,passwd:String,
                    success:@escaping (UserLoginResponse)->Void,
