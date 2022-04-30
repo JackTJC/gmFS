@@ -27,7 +27,16 @@ class HTTPAPITests: XCTestCase {
     }
     
     func testWifiConnector()throws{
-        
+       
+    }
+    
+    func testPing() throws{
+        BackendService().Ping(name: "tianjincai"){resp in
+            print(resp)
+        }failure: { err in
+            print(err)
+        }
+        sleep(3000)
     }
     
 }
