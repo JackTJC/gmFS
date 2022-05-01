@@ -16,9 +16,9 @@ struct FileTreeView: View {
     @State private var showingMCBrowser  = false
     @State private var showingAddFile = false
     @State private var showingInputDirName = false
-    @State private var directoryName = ""
     @State private var showingRecv = false
     @State private var subNodes:[Node] = []
+    @State private var showingLoading = true
     var nodeID:Int64
     
     // 弹出提醒
@@ -46,75 +46,78 @@ struct FileTreeView: View {
     }
     
     var body: some View {
-        List{
-            ForEach(subNodes){node in
-                NodeView(node: node)
+        ZStack {
+//            LoadingView(show: self.$showingLoading)
+            List{
+                ForEach(subNodes){node in
+                    NodeView(node: node)
+                }
             }
-        }
-        .sheet(isPresented: $showingMCBrowser){
-            BrowserViewControllerRepresent(didFinish: self.$showingMCBrowser, wasCanceled: self.$showingMCBrowser,shareService: self.shareService)
-        }
-        .sheet(isPresented: $showingRecv){
-            SharedFileView(sharedFiles: shareService.sharedFileList)
-        }
-        .onAppear{
-            fetchNode()
-        }
-        .refreshable {
-            fetchNode()
-        }
-        .fileImporter(isPresented: $showingAddFile, allowedContentTypes: [.plainText],allowsMultipleSelection: false){result in
-            do {
-                guard let selectedFile: URL = try result.get().first else { return }
-                if selectedFile.startAccessingSecurityScopedResource(){
-                    defer {selectedFile.stopAccessingSecurityScopedResource()}
-                    let fileData = try! Data(contentsOf: selectedFile)
-                    BackendService().UploadFile(fileName: selectedFile.lastPathComponent, content: fileData,parentID: nodeID){resp in
-                        // TODO response handle
+            .sheet(isPresented: $showingMCBrowser){
+                BrowserViewControllerRepresent(didFinish: self.$showingMCBrowser, wasCanceled: self.$showingMCBrowser,shareService: self.shareService)
+            }
+            .sheet(isPresented: $showingRecv){
+                SharedFileView(sharedFiles: shareService.sharedFileList)
+            }
+            .onAppear{
+                fetchNode()
+            }
+            .refreshable {
+                fetchNode()
+            }
+            .fileImporter(isPresented: $showingAddFile, allowedContentTypes: [.plainText],allowsMultipleSelection: false){result in
+                do {
+                    guard let selectedFile: URL = try result.get().first else { return }
+                    if selectedFile.startAccessingSecurityScopedResource(){
+                        defer {selectedFile.stopAccessingSecurityScopedResource()}
+                        let fileData = try! Data(contentsOf: selectedFile)
+                        BackendService().UploadFile(fileName: selectedFile.lastPathComponent, content: fileData,parentID: nodeID){resp in
+                            // TODO response handle
+                        }failure: { err in
+                            // TODO err handle
+                        }
+                    }else{
+                        alertWith("No Permission")
+                    }
+                } catch {
+                    alertWith("Unable to read file contents")
+                }
+            }
+            .alert(alertText, isPresented: $showingAlert, actions: {Button("OK"){}})
+            .alert(isPresented: $showingInputDirName, AlertConfig(title: "Input Directory Name", placeholder: "DirectoryName", accept: "OK", cancel: "Cancel"){input in
+                if let dirName = input{
+                    BackendService().CreateDir(dirName: dirName, parentID: nodeID){resp in
+                        // TODO resp handle
                     }failure: { err in
                         // TODO err handle
                     }
                 }else{
-                    alertWith("No Permission")
+                    // do nothing
                 }
-            } catch {
-                alertWith("Unable to read file contents")
-            }
-        }
-        .alert(alertText, isPresented: $showingAlert, actions: {Button("OK"){}})
-        .alert(isPresented: $showingInputDirName, AlertConfig(title: "Input Directory Name", placeholder: "DirectoryName", accept: "OK", cancel: "Cancel"){input in
-            if let dirName = input{
-                BackendService().CreateDir(dirName: dirName, parentID: nodeID){resp in
-                    // TODO resp handle
-                }failure: { err in
-                    // TODO err handle
+            })
+            .toolbar{
+                ToolbarItemGroup(placement: .navigationBarLeading){
+                    Menu{
+                        Button("File", action: {showingAddFile.toggle()})
+                        Button("Directory",action: {showingInputDirName.toggle()})
+                    }label: {
+                        Label("AddFile", systemImage: "plus")
+                    }
                 }
-            }else{
-                // do nothing
-            }
-        })
-        .toolbar{
-            ToolbarItemGroup(placement: .navigationBarLeading){
-                Menu{
-                    Button("File", action: {showingAddFile.toggle()})
-                    Button("Directory",action: {showingInputDirName.toggle()})
-                }label: {
-                    Label("AddFile", systemImage: "plus")
+                ToolbarItemGroup(placement: .navigationBarTrailing){
+                    Button(action: {showingRecv.toggle()}){
+                        Label("", systemImage: "arrow.left.arrow.right")
+                    }
+                    Menu{
+                        Button("Join Session", action: {showingMCBrowser.toggle()})
+                        Button("Host Session",action: {shareService.startHostNeayBy()})
+                    }label: {
+                        Label("Session", systemImage: "antenna.radiowaves.left.and.right.circle")
+                    }
                 }
             }
-            ToolbarItemGroup(placement: .navigationBarTrailing){
-                Button(action: {showingRecv.toggle()}){
-                    Label("", systemImage: "arrow.left.arrow.right")
-                }
-                Menu{
-                    Button("Join Session", action: {showingMCBrowser.toggle()})
-                    Button("Host Session",action: {shareService.startHostNeayBy()})
-                }label: {
-                    Label("Session", systemImage: "antenna.radiowaves.left.and.right.circle")
-                }
-            }
-        }
         .searchable(text: $searchText,prompt: "Search File")
+        }
     }
 }
 
