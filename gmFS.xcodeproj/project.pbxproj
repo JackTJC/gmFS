@@ -13,6 +13,7 @@
 		086849BF281D2E28001FDB74 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 086849BE281D2E28001FDB74 /* ActivityIndicatorView */; };
 		086849C2281D2FF1001FDB74 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = 086849C1281D2FF1001FDB74 /* SimpleToast */; };
 		086849C9281E3AC5001FDB74 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086849C8281E3AC5001FDB74 /* LoadingView.swift */; };
+		086849D7281E6011001FDB74 /* GmSSLService.m in Sources */ = {isa = PBXBuildFile; fileRef = 086849D6281E6011001FDB74 /* GmSSLService.m */; };
 		086B89C7281CE38900660099 /* ca.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 086B89C6281CE38900660099 /* ca.p12 */; };
 		086B89C9281D0D5400660099 /* SharedFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B89C8281D0D5400660099 /* SharedFileModel.swift */; };
 		086B89CB281D0D9300660099 /* SharedFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B89CA281D0D9300660099 /* SharedFileView.swift */; };
@@ -41,6 +42,8 @@
 		086F276528086C46009D4F81 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086F276428086C46009D4F81 /* String.swift */; };
 		08956A7E28124579002F7803 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7D28124579002F7803 /* Node.swift */; };
 		08956A8028125CEB002F7803 /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08956A7F28125CEA002F7803 /* NodeView.swift */; };
+		08B521F2281E7B71009B7EC4 /* libgmssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 086849F4281E775D001FDB74 /* libgmssl.a */; };
+		08B521F3281E7B74009B7EC4 /* libgmssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 086849F6281E79F5001FDB74 /* libgmssl.a */; };
 		08F482122812716300BA2F06 /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F482112812716300BA2F06 /* ShareService.swift */; };
 		08F4821428127AF600BA2F06 /* AlertInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4821328127AF600BA2F06 /* AlertInputView.swift */; };
 		08FA26EF2817C4A100DA8849 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA26EE2817C4A100DA8849 /* SettingView.swift */; };
@@ -49,8 +52,6 @@
 		2B1F8B012807CAE3004C4659 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F8B002807CAE3004C4659 /* HomeView.swift */; };
 		2B1FAF3A27F07711001B9979 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 2B1FAF3927F07711001B9979 /* SwiftProtobuf */; };
 		2B20FA1E28017E0400F95415 /* BackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20FA1D28017E0400F95415 /* BackendService.swift */; };
-		2B52BA7A280160F700B7E393 /* libgmssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B52BA79280160F700B7E393 /* libgmssl.a */; };
-		2B52BA7B2801611500B7E393 /* libgmssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B52BA79280160F700B7E393 /* libgmssl.a */; };
 		2B52BA912801746700B7E393 /* NetWorkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52BA902801746700B7E393 /* NetWorkService.swift */; };
 		2B57937C2801445500A80175 /* GmSSLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B57937B2801445500A80175 /* GmSSLTests.m */; };
 		2B5D280527E2F55400D06FE0 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D280427E2F55400D06FE0 /* APITests.swift */; };
@@ -88,6 +89,11 @@
 		083A4046281A737300F7991F /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		0855B4B2280FE96E0052D724 /* MCBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCBrowserView.swift; sourceTree = "<group>"; };
 		086849C8281E3AC5001FDB74 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		086849D6281E6011001FDB74 /* GmSSLService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GmSSLService.m; sourceTree = "<group>"; };
+		086849D8281E602C001FDB74 /* GmSSLService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GmSSLService.h; sourceTree = "<group>"; };
+		086849D9281E6138001FDB74 /* gmFS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gmFS-Bridging-Header.h"; sourceTree = "<group>"; };
+		086849F4281E775D001FDB74 /* libgmssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgmssl.a; sourceTree = "<group>"; };
+		086849F6281E79F5001FDB74 /* libgmssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgmssl.a; sourceTree = "<group>"; };
 		086B89C6281CE38900660099 /* ca.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ca.p12; sourceTree = "<group>"; };
 		086B89C8281D0D5400660099 /* SharedFileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFileModel.swift; sourceTree = "<group>"; };
 		086B89CA281D0D9300660099 /* SharedFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFileView.swift; sourceTree = "<group>"; };
@@ -127,7 +133,6 @@
 		2B1F8AFE2807C85E004C4659 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		2B1F8B002807CAE3004C4659 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2B20FA1D28017E0400F95415 /* BackendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendService.swift; sourceTree = "<group>"; };
-		2B52BA79280160F700B7E393 /* libgmssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgmssl.a; sourceTree = "<group>"; };
 		2B52BA902801746700B7E393 /* NetWorkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkService.swift; sourceTree = "<group>"; };
 		2B579351280143F000A80175 /* oid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oid.h; sourceTree = "<group>"; };
 		2B579352280143F000A80175 /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
@@ -189,10 +194,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B521F3281E7B74009B7EC4 /* libgmssl.a in Frameworks */,
+				08B521F2281E7B71009B7EC4 /* libgmssl.a in Frameworks */,
 				086849BF281D2E28001FDB74 /* ActivityIndicatorView in Frameworks */,
 				083A4047281A737300F7991F /* AuthenticationServices.framework in Frameworks */,
 				086EF7CD27BAB4C60089A108 /* NetworkExtension.framework in Frameworks */,
-				2B52BA7A280160F700B7E393 /* libgmssl.a in Frameworks */,
 				086849C2281D2FF1001FDB74 /* SimpleToast in Frameworks */,
 				2B1FAF3A27F07711001B9979 /* SwiftProtobuf in Frameworks */,
 			);
@@ -202,7 +208,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B52BA7B2801611500B7E393 /* libgmssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +277,7 @@
 		086EF79C27BAB0F20089A108 /* gmFS */ = {
 			isa = PBXGroup;
 			children = (
+				086849D9281E6138001FDB74 /* gmFS-Bridging-Header.h */,
 				08FA27062817D41E00DA8849 /* Model */,
 				08F482102812714900BA2F06 /* Service */,
 				2B57934C2801435A00A80175 /* GmSSL */,
@@ -320,6 +326,22 @@
 				086EF7CC27BAB4C60089A108 /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08B521F0281E7AC1009B7EC4 /* stimulator */ = {
+			isa = PBXGroup;
+			children = (
+				086849F6281E79F5001FDB74 /* libgmssl.a */,
+			);
+			path = stimulator;
+			sourceTree = "<group>";
+		};
+		08B521F1281E7ACA009B7EC4 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				086849F4281E775D001FDB74 /* libgmssl.a */,
+			);
+			path = ios;
 			sourceTree = "<group>";
 		};
 		08BC981528169D9500FAD780 /* Share */ = {
@@ -387,8 +409,10 @@
 		2B57934C2801435A00A80175 /* GmSSL */ = {
 			isa = PBXGroup;
 			children = (
+				086849D8281E602C001FDB74 /* GmSSLService.h */,
 				2B57934E2801437100A80175 /* Lib */,
 				2B57934D2801436600A80175 /* Include */,
+				086849D6281E6011001FDB74 /* GmSSLService.m */,
 			);
 			path = GmSSL;
 			sourceTree = "<group>";
@@ -444,7 +468,8 @@
 		2B57934E2801437100A80175 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				2B52BA79280160F700B7E393 /* libgmssl.a */,
+				08B521F1281E7ACA009B7EC4 /* ios */,
+				08B521F0281E7AC1009B7EC4 /* stimulator */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -553,7 +578,7 @@
 				TargetAttributes = {
 					086EF79927BAB0F20089A108 = {
 						CreatedOnToolsVersion = 13.2.1;
-						LastSwiftMigration = 1320;
+						LastSwiftMigration = 1330;
 					};
 					086EF7A927BAB0F40089A108 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -626,6 +651,7 @@
 				0855B4B3280FE96E0052D724 /* MCBrowserView.swift in Sources */,
 				086B89DE281D20E200660099 /* user_login.pb.swift in Sources */,
 				086B89E0281D20E200660099 /* service.pb.swift in Sources */,
+				086849D7281E6011001FDB74 /* GmSSLService.m in Sources */,
 				2BE67B9B27FACECF008466AE /* RegisterView.swift in Sources */,
 				086B89E4281D20E200660099 /* download_file.pb.swift in Sources */,
 				086EF7A027BAB0F20089A108 /* ContentView.swift in Sources */,
@@ -759,12 +785,13 @@
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LIBRARY_SEARCH_PATHS = "";
-				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "\"$(SRCROOT)/gmFS/GmSSL/Lib/stimulator\"";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jincaitian/Desktop/gmFS/gmFS/gmFS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -817,12 +844,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/gmFS/GmSSL/Lib/ios\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jincaitian/Desktop/gmFS/gmFS/gmFS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -840,7 +868,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"gmFS/Preview Content\"";
 				DEVELOPMENT_TEAM = 659H9V99MR;
+				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
+				EXCLUDED_SOURCE_FILE_NAMES = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/gmFS/GmSSL/Include\"";
 				INFOPLIST_FILE = gmFS/Info.plist;
@@ -855,8 +886,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/gmFS/GmSSL/Lib\"";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/gmFS/GmSSL/Lib/ios",
+					"$(PROJECT_DIR)/gmFS/GmSSL/Lib/stimulator",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "\"$(SRCROOT)/gmFS/GmSSL/Lib/stimulator\"";
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jack.gmFS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -867,6 +903,7 @@
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = NO;
 			};
 			name = Debug;
 		};
@@ -882,6 +919,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"gmFS/Preview Content\"";
 				DEVELOPMENT_TEAM = 659H9V99MR;
+				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/gmFS/GmSSL/Include\"";
@@ -897,7 +935,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/gmFS/GmSSL/Lib\"";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/gmFS/GmSSL/Lib/ios\"",
+					"$(PROJECT_DIR)/gmFS/GmSSL/Lib/ios",
+					"$(PROJECT_DIR)/gmFS/GmSSL/Lib/stimulator",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jack.gmFS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -908,6 +950,7 @@
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = NO;
 			};
 			name = Release;
 		};
@@ -933,7 +976,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jincai.gmFSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jincaitian/Desktop/gmFS/gmFS/gmFS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -963,7 +1006,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jincai.gmFSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jincaitian/Desktop/gmFS/gmFS/gmFS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gmFS.app/gmFS";
@@ -984,6 +1027,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jincai.gmFSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = gmFS;
@@ -1003,6 +1047,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jincai.gmFSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = gmFS;
