@@ -30,18 +30,31 @@ class gmFSTests: XCTestCase {
         
     }
     
+    // local cache test
     func testSet()throws{
         let userDefault = UserDefaults.standard
-//        userDefault.set("123", forKey: "token")
         userDefault.removeObject(forKey: "user_cache")
         userDefault.synchronize()
     }
     
     func testGet()throws{
         let token = UserDefaults.standard.object(forKey: "user_cache")
-        print(token)
+        print(token!)
     }
 
+    // enc test
+    func testSm4Enc()throws{
+        let service = GmService("tianjincai", email: "tianjincai@hotmail.com")
+        let testStr = "this is a test data fo sm4 enc"
+        let data = testStr.data(using: .utf8)!
+        let encData = service?.sm4_enc(data)
+        print(encData?.base64EncodedString())
+        let decData = service?.sm4_dec(encData!)
+        print(String(data: decData!, encoding: .utf8))
+    }
+    
+    
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

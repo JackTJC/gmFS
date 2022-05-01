@@ -58,8 +58,8 @@
     size_t dec_out_len;
     sm4_cbc_padding_decrypt(&dec_key, iv, enc_out, enc_out_len, dec_out,&dec_out_len);
     
-    printf("%s",dec_out);
-    printf("%s",upt8Data);
+    printf("%s\n",dec_out);
+    printf("%s\n",upt8Data);
 }
 
 - (void)testPerformanceExample {
