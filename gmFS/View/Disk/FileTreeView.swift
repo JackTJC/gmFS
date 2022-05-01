@@ -17,14 +17,17 @@ struct FileTreeView: View {
     @State private var showingAddFile = false
     @State private var showingInputDirName = false
     @State private var directoryName = ""
+    @State private var showingRecv = false
     @State private var subNodes:[Node] = []
     var nodeID:Int64
     
+    // 弹出提醒
     private func alertWith(_ text:String){
         showingAlert=true
         alertText=text
     }
     
+    // 根据node id从server拉取node
     private func fetchNode(){
         BackendService().GetNode(nodeID: nodeID){resp in
             var copyNodes  = resp.subNodes
@@ -49,7 +52,10 @@ struct FileTreeView: View {
             }
         }
         .sheet(isPresented: $showingMCBrowser){
-            ShareView(didFinish: self.$showingMCBrowser, wasCanceled: self.$showingMCBrowser,shareService: self.shareService)
+            BrowserViewControllerRepresent(didFinish: self.$showingMCBrowser, wasCanceled: self.$showingMCBrowser,shareService: self.shareService)
+        }
+        .sheet(isPresented: $showingRecv){
+            SharedFileView(sharedFiles: shareService.sharedFileList)
         }
         .onAppear{
             fetchNode()
@@ -88,15 +94,20 @@ struct FileTreeView: View {
             }
         })
         .toolbar{
-            ToolbarItemGroup(placement:.navigationBarTrailing){
+            ToolbarItemGroup(placement: .navigationBarLeading){
                 Menu{
-                    Button("File", action: {showingAddFile=true})
-                    Button("Directory",action: {showingInputDirName=true})
+                    Button("File", action: {showingAddFile.toggle()})
+                    Button("Directory",action: {showingInputDirName.toggle()})
                 }label: {
                     Label("AddFile", systemImage: "plus")
                 }
+            }
+            ToolbarItemGroup(placement: .navigationBarTrailing){
+                Button(action: {showingRecv.toggle()}){
+                    Label("", systemImage: "arrow.left.arrow.right")
+                }
                 Menu{
-                    Button("Join Session", action: {showingMCBrowser=true})
+                    Button("Join Session", action: {showingMCBrowser.toggle()})
                     Button("Host Session",action: {shareService.startHostNeayBy()})
                 }label: {
                     Label("Session", systemImage: "antenna.radiowaves.left.and.right.circle")

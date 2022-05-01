@@ -27,6 +27,9 @@ struct HomeView: View {
             }.tag(Tab.fileShare)
             NavigationView{
                 MineTabView(avatar: Image("default_avatar"))
+                    .navigationBarHidden(true)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationTitle("")
             }
             .tabItem{
                 Label("Mine",systemImage: "person")

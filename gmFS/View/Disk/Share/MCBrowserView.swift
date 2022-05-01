@@ -1,15 +1,17 @@
 //
-//  ShareView.swift
+//  MCShareView.swift
 //  gmFS
 //
 //  Created by jincaitian on 2022/4/20.
 //
 
-import Foundation
+import SwiftUI
+import MultipeerConnectivity
+
 import MultipeerConnectivity
 import SwiftUI
 
-final class ShareView:NSObject{
+final class BrowserViewControllerRepresent:NSObject{
     private var didFinish:Binding<Bool>
     private var wasCanceled:Binding<Bool>
     var shareService:ShareService
@@ -19,7 +21,7 @@ final class ShareView:NSObject{
         self.shareService = shareService
     }
 }
-extension ShareView:MCBrowserViewControllerDelegate{
+extension BrowserViewControllerRepresent:MCBrowserViewControllerDelegate{
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         self.didFinish.wrappedValue.toggle()
     }
@@ -29,7 +31,7 @@ extension ShareView:MCBrowserViewControllerDelegate{
     }
 }
 
-extension ShareView:UIViewControllerRepresentable{
+extension BrowserViewControllerRepresent:UIViewControllerRepresentable{
     func makeUIViewController(context: Context) -> MCBrowserViewController {
         let controler = MCBrowserViewController(serviceType: ShareService.serviceType, session: shareService.mcSession)
         controler.delegate=self
@@ -41,4 +43,18 @@ extension ShareView:UIViewControllerRepresentable{
     
     typealias UIViewControllerType = MCBrowserViewController
     
+}
+
+struct MCBrowserView: View {
+    @State private var didFinish = false
+    @State private var wasCancel = false
+    var body: some View {
+        BrowserViewControllerRepresent(didFinish: self.$didFinish, wasCanceled: self.$wasCancel,shareService: ShareService())
+    }
+}
+
+struct MCShareView_Previews: PreviewProvider {
+    static var previews: some View {
+        MCBrowserView()
+    }
 }

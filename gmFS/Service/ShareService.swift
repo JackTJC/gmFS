@@ -7,25 +7,22 @@
 
 import Foundation
 import MultipeerConnectivity
+import SwiftUI
 
 final class ShareService:NSObject,ObservableObject{
     static var serviceType = "service"
-    var peerID:MCPeerID!
+    private var peerID:MCPeerID!
     var mcSession:MCSession!
-    var mcAdvAsst:MCAdvertiserAssistant!
-    var mcNearByAdv:MCNearbyServiceAdvertiser!
-    var shareFileIDList:[Int64] = []
+    private var mcNearByAdv:MCNearbyServiceAdvertiser!
+    var sharedFileList:[SharedFile] = []
+    var toastMsg = ""
+    @Published var receiveFile = false
     
     override init(){
         peerID=MCPeerID(displayName: UIDevice.current.name)
         mcSession=MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         super.init()
         mcSession.delegate=self
-    }
-    
-    func startHost() {
-        mcAdvAsst = MCAdvertiserAssistant(serviceType: ShareService.serviceType, discoveryInfo: nil, session: mcSession)
-        mcAdvAsst.start()
     }
     
     func startHostNeayBy(){
@@ -51,9 +48,10 @@ extension ShareService:MCSessionDelegate{
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         AppManager.logger.info("revice data from \(peerID.displayName)")
-        let nodeIDStr = String(data: data, encoding: .utf8)
-        let nodeID = Int64(nodeIDStr!)
-        shareFileIDList.append(nodeID!)
+        let sharedFile = try! JSONDecoder().decode(SharedFile.self, from: data)
+        sharedFileList.append(sharedFile)
+        receiveFile.toggle()
+        toastMsg="receive \(sharedFile.fileName) from \(peerID.displayName)"
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

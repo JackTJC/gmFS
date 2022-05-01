@@ -6,26 +6,37 @@
 //
 
 import SwiftUI
+import SimpleToast
 
 struct ContentView: View {
-    @State var isLogined = AppManager.isLogined()
+    private var isLogined = AppManager.isLogined()
+    private let toastOptions = SimpleToastOptions(
+        hideAfter: 3
+    )
+    @EnvironmentObject var shareService:ShareService
     
     var body: some View {
-        Group{
-            if isLogined{
-                HomeView()
-            }else{
-                NavigationView{
-                    LoginView()
-                        .navigationBarHidden(true)
+        if isLogined{
+            HomeView()
+                .simpleToast(isPresented: $shareService.receiveFile, options: toastOptions){// receive file toast
+                    HStack {
+                        Image(systemName: "square.and.arrow.down")
+                        Text(shareService.toastMsg)
+                    }
+                    .padding()
+                    .background(Color.blue.opacity(0.8))
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
                 }
-            }
+        }else{
+            LoginView()
         }
     }
 }
 
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(ShareService())
     }
 }
