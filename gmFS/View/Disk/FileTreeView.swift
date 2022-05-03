@@ -19,6 +19,7 @@ struct FileTreeView: View {
     @State private var showingRecv = false
     @State private var subNodes:[Node] = []
     @State private var showingLoading = true
+    private let userCache = AppManager.getUserCache()
     var nodeID:Int64
     
     // 弹出提醒
@@ -47,7 +48,7 @@ struct FileTreeView: View {
     
     var body: some View {
         ZStack {
-//            LoadingView(show: self.$showingLoading)
+            //            LoadingView(show: self.$showingLoading)
             List{
                 ForEach(subNodes){node in
                     NodeView(node: node)
@@ -71,10 +72,15 @@ struct FileTreeView: View {
                     if selectedFile.startAccessingSecurityScopedResource(){
                         defer {selectedFile.stopAccessingSecurityScopedResource()}
                         let fileData = try! Data(contentsOf: selectedFile)
-                        BackendService().UploadFile(fileName: selectedFile.lastPathComponent, content: fileData,parentID: nodeID){resp in
-                            // TODO response handle
-                        }failure: { err in
-                            // TODO err handle
+                        do{
+                            let encFileData = try EncryptService.aesEncrypt(identity: userCache.name, plainText: fileData)
+                            BackendService().UploadFile(fileName: selectedFile.lastPathComponent, content: encFileData,parentID: nodeID){resp in
+                                // TODO response handle
+                            }failure: { err in
+                                // TODO err handle
+                            }
+                        }catch{
+                            AppManager.logger.error("file content encrypt error")
                         }
                     }else{
                         alertWith("No Permission")
@@ -116,7 +122,7 @@ struct FileTreeView: View {
                     }
                 }
             }
-        .searchable(text: $searchText,prompt: "Search File")
+            .searchable(text: $searchText,prompt: "Search File")
         }
     }
 }

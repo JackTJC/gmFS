@@ -7,8 +7,6 @@
 
 import SwiftUI
 import MultipeerConnectivity
-
-import MultipeerConnectivity
 import SwiftUI
 
 final class BrowserViewControllerRepresent:NSObject{
@@ -33,9 +31,9 @@ extension BrowserViewControllerRepresent:MCBrowserViewControllerDelegate{
 
 extension BrowserViewControllerRepresent:UIViewControllerRepresentable{
     func makeUIViewController(context: Context) -> MCBrowserViewController {
-        let controler = MCBrowserViewController(serviceType: ShareService.serviceType, session: shareService.mcSession)
-        controler.delegate=self
-        return controler
+        let controller = MCBrowserViewController(serviceType: ShareService.serviceType, session: shareService.mcSession)
+        controller.delegate=self
+        return controller
     }
     
     func updateUIViewController(_ uiViewController: MCBrowserViewController, context: Context) {

@@ -67,6 +67,7 @@ class BackendService{
         var req = UserRegisterRequest()
         req.userName = name
         req.password = passwd
+        req.email = email
         let data = try! req.jsonUTF8Data()
         NetworkService().request(uri: BackendUri.userRegister, body: data){data in
             do{

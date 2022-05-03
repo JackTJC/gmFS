@@ -7,7 +7,9 @@
 
 import XCTest
 import Foundation
+import CryptoKit
 @testable import gmFS
+
 
 
 class gmFSTests: XCTestCase {
@@ -41,19 +43,72 @@ class gmFSTests: XCTestCase {
         let token = UserDefaults.standard.object(forKey: "user_cache")
         print(token!)
     }
-
-    // enc test
-    func testSm4Enc()throws{
-        let service = GmService("tianjincai", email: "tianjincai@hotmail.com")
-        let testStr = "this is a test data fo sm4 enc"
-        let data = testStr.data(using: .utf8)!
-        let encData = service?.sm4_enc(data)
-        print(encData?.base64EncodedString())
-        let decData = service?.sm4_dec(encData!)
-        print(String(data: decData!, encoding: .utf8))
+    
+   // crypto kit test
+    func testSymmertryKey()throws{
+        let name = "tianjincai"
+        let email = "tianjincai@hotmail.com"
+        let concat = name+email
+        let d = concat.data(using: .utf8)!
+        let key256 = SymmetricKey(data: d)
+        let concat1="tianjincaitianjincai@hotmail.com"
+        let d1 = concat1.data(using: .utf8)!
+        let key2561=SymmetricKey(data: d1)
+        XCTAssert(key256==key2561)
     }
     
+    // test key size
+    func testKeySize()throws{
+        let s = "tianjincai"
+        let hash = SHA256.hash(data: s.data(using: .utf8)!)
+        let key = SymmetricKey(data: hash)
+        print(hash)
+        print(key.bitCount)
+    }
     
+    // chacha test
+    func testCha()throws{
+        let key = getKey()
+        let s = "this is my data to be encrypted"
+        let data = s.data(using: .utf8)!
+        let sealBoxData = try! ChaChaPoly.seal(data, using: key).combined
+        let sealedBox = try! ChaChaPoly.SealedBox(combined: sealBoxData)
+        let decryptedData = try! ChaChaPoly.open(sealedBox, using: key)
+        let decStr = String(data: decryptedData, encoding: .utf8)
+        XCTAssert(decStr==s)
+    }
+    
+    func testAes()throws{
+        let key = getKey()
+        let s = "this is my data used in aes test"
+        let data = s.data(using: .utf8)!
+        let sealBoxData=try! AES.GCM.seal(data, using: key).combined
+        let sealedBox = try! AES.GCM.SealedBox(combined: sealBoxData!)
+        let decryptedData = try! AES.GCM.open(sealedBox, using: key)
+        let decStr = String(data: decryptedData, encoding: .utf8)
+        XCTAssert(decStr == s)
+    }
+    // test share key agreement
+    func testEccKey()throws{
+        let ask = Curve25519.KeyAgreement.PrivateKey()
+        let apk = ask.publicKey.rawRepresentation
+        let bsk = Curve25519.KeyAgreement.PrivateKey()
+        let bpk = bsk.publicKey.rawRepresentation
+        let a_get_bpk = try! Curve25519.KeyAgreement.PublicKey(rawRepresentation: bpk)
+        let b_get_apk = try! Curve25519.KeyAgreement.PublicKey(rawRepresentation: apk)
+        let a_share_key = try! ask.sharedSecretFromKeyAgreement(with: a_get_bpk)
+        let b_share_key = try! bsk.sharedSecretFromKeyAgreement(with: b_get_apk)
+        XCTAssert(a_share_key==b_share_key)
+        let key = SymmetricKey(data: a_share_key)
+        print(key.bitCount)
+    }
+    
+    func getKey()->SymmetricKey{
+        let s = "tianjincai"
+        let  dgst = SHA256.hash(data: s.data(using: .utf8)!)
+        let key = SymmetricKey(data: dgst)
+        return key
+    }
     
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
