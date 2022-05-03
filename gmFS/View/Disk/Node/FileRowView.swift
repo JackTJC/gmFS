@@ -27,7 +27,13 @@ struct FileRowView: View {
             Spacer()
             Menu{
                 Button{
-                    shareClick.toggle()
+                    let sharedFile = SharedFile(fileID: nodeID, fileName: fileName)
+                    do{
+                        try shareService.sendFile(sharedFile: sharedFile)
+                        shareSucc.toggle()
+                    }catch{
+                        shareFailed.toggle()
+                    }
                 }label:{
                     Label("Share", image: "share")
                 }
@@ -36,28 +42,6 @@ struct FileRowView: View {
                 }
             }label: {
                 Label("", systemImage: "ellipsis")
-            }
-        }
-        .sheet(isPresented: self.$shareClick){
-            VStack{
-                Text("Sharing")
-                List{
-                    ForEach(shareService.mcSession.connectedPeers){peer in
-                        Button{
-                            let sharedFile = SharedFile(fileID: nodeID, fileName: fileName)
-                            let encodedData = try! JSONEncoder().encode(sharedFile)
-                            do{
-                                try shareService.mcSession.send(encodedData, toPeers: [peer], with: .reliable)
-                                AppManager.logger.info("send \(sharedFile.fileName) to \(peer.displayName)")
-                                shareSucc.toggle()
-                            }catch{
-                                shareFailed.toggle()
-                            }
-                        }label: {
-                            Label(peer.displayName, systemImage: "iphone")
-                        }
-                    }
-                }
             }
         }
         .simpleToast(isPresented: self.$shareSucc, options: toastOpt){

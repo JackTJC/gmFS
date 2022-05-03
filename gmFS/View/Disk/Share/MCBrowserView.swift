@@ -31,7 +31,8 @@ extension BrowserViewControllerRepresent:MCBrowserViewControllerDelegate{
 
 extension BrowserViewControllerRepresent:UIViewControllerRepresentable{
     func makeUIViewController(context: Context) -> MCBrowserViewController {
-        let controller = MCBrowserViewController(serviceType: ShareService.serviceType, session: shareService.mcSession)
+        let controller = MCBrowserViewController(serviceType: ShareService.serviceType, session: shareService.getSession())
+        controller.maximumNumberOfPeers=1// 仅允许一个连接
         controller.delegate=self
         return controller
     }

@@ -8,15 +8,19 @@
 import Foundation
 import MultipeerConnectivity
 import SwiftUI
+import CryptoKit
 
 final class ShareService:NSObject,ObservableObject{
     static var serviceType = "service"
     private var peerID:MCPeerID!
-    var mcSession:MCSession!
+    private var mcSession:MCSession!
     private var mcNearByAdv:MCNearbyServiceAdvertiser!
     var sharedFileList:[SharedFile] = []
     var toastMsg = ""
     @Published var receiveFile = false
+    var privateKey = Curve25519.KeyAgreement.PrivateKey()
+    private var keyHasAgree = false// 密钥协商是否完成
+    var shareKey:SharedSecret? = nil
     
     override init(){
         peerID=MCPeerID(displayName: UIDevice.current.name)
@@ -26,9 +30,19 @@ final class ShareService:NSObject,ObservableObject{
     }
     
     func startHostNeayBy(){
-        mcNearByAdv = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: ShareService.serviceType)
-        mcNearByAdv.delegate=self
-        mcNearByAdv.startAdvertisingPeer()
+        self.mcNearByAdv = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: ShareService.serviceType)
+        self.mcNearByAdv.delegate=self
+        self.mcNearByAdv.startAdvertisingPeer()
+    }
+    
+    func getSession()->MCSession{
+        return self.mcSession
+    }
+    
+    func sendFile(sharedFile:SharedFile)throws{
+        let encodedData = try JSONEncoder().encode(sharedFile)
+        let encData = try EncryptService.encryptWithSharedSecret(sharedKey: shareKey!, plainText: encodedData)
+        try self.mcSession.send(encData, toPeers: mcSession.connectedPeers, with: .reliable)
     }
 }
 
@@ -41,29 +55,51 @@ extension ShareService:MCSessionDelegate{
             AppManager.logger.info("\(peerID.displayName) change to connecting")
         case .connected:
             AppManager.logger.info("\(peerID.displayName) change to connected")
+            do{
+                try session.send(privateKey.publicKey.rawRepresentation, toPeers: [peerID], with: .reliable)
+            }catch{
+                AppManager.logger.error("send public key error")
+            }
         @unknown default:
             AppManager.logger.info("\(peerID.displayName) unknown state")
         }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        AppManager.logger.info("revice data from \(peerID.displayName)")
-        let sharedFile = try! JSONDecoder().decode(SharedFile.self, from: data)
-        sharedFileList.append(sharedFile)
-        receiveFile.toggle()
-        toastMsg="receive \(sharedFile.fileName) from \(peerID.displayName)"
+        if !keyHasAgree{
+            do{
+                AppManager.logger.info("receivce publick key from \(peerID.displayName)")
+                let peerPk = try Curve25519.KeyAgreement.PublicKey(rawRepresentation: data)
+                self.shareKey = try privateKey.sharedSecretFromKeyAgreement(with: peerPk)
+                AppManager.logger.info("handling success")
+                self.keyHasAgree=true
+            }catch{
+                AppManager.logger.error("handle publick key from \(peerID.displayName) error")
+            }
+        }else{
+            do{
+                let decData = try EncryptService.decryptWithSharedKey(sharedKey: shareKey!, cipherText: data)
+                AppManager.logger.info("revice file data from \(peerID.displayName)")
+                let sharedFile = try JSONDecoder().decode(SharedFile.self, from: decData)
+                self.sharedFileList.append(sharedFile)
+                self.receiveFile.toggle()
+                self.toastMsg="receive \(sharedFile.fileName) from \(peerID.displayName)"
+            }catch{
+                AppManager.logger.error("handle file data error")
+            }
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        AppManager.logger.info("receive stream with name:\(streamName) from \(peerID.displayName)")
+        AppManager.logger.debug("receive stream with name:\(streamName) from \(peerID.displayName)")
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        AppManager.logger.info("receive resource with name:\(resourceName) from \(peerID.displayName)")
+        AppManager.logger.debug("receive resource with name:\(resourceName) from \(peerID.displayName)")
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        AppManager.logger.info("finish receive from \(peerID.displayName)")
+        AppManager.logger.debug("finish receive from \(peerID.displayName)")
     }
 }
 
