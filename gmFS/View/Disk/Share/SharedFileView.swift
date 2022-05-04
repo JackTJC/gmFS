@@ -11,6 +11,7 @@ struct SharedFileView: View {
     var sharedFiles:[SharedFile]
     @State private var saveClick = false
     @State private var selectedFile:SharedFile = SharedFile(fileID: 0, fileName: "", key: Data())
+    @State var saveSucc:Bool = false
     private let userCache = AppManager.getUserCache()
     
     var body: some View {
@@ -31,9 +32,10 @@ struct SharedFileView: View {
         }
         .fullScreenCover(isPresented: self.$saveClick){
             NavigationView{
-                DirTreeView(rootNodeId: userCache.rootNode,sharedFile: self.$selectedFile)
+                DirTreeView(rootNodeId: userCache.rootNode,sharedFile: self.$selectedFile,showingDirTree: self.$saveClick,saveSucc: self.$saveSucc)
             }
         }
+        .toast(isPresented: self.$saveSucc, type: .saveFile, state: .success)
         .navigationBarHidden(true)
     }
 }
