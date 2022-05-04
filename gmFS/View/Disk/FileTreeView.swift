@@ -48,7 +48,6 @@ struct FileTreeView: View {
     
     var body: some View {
         ZStack {
-            //            LoadingView(show: self.$showingLoading)
             List{
                 ForEach(subNodes){node in
                     NodeView(node: node)
@@ -129,7 +128,9 @@ struct FileTreeView: View {
 
 struct FileTree_Previews: PreviewProvider {
     static var previews: some View {
-        FileTreeView(nodeID: 1517026803300962304)
+        NavigationView{
+            FileTreeView(nodeID: 1517026803300962304)
+        }
     }
 }
 

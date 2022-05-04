@@ -21,6 +21,7 @@ class BackendService{
         static var fileDownload = "/file/download"
         static var getNode = "/node/get"
         static var createDir = "/dir/create"
+        static var registerFile = "/file/register"
     }
     func Ping(name:String,
               success:@escaping (PingResponse)->Void,
@@ -139,11 +140,31 @@ class BackendService{
             }catch is JSONDecodingError{
                 AppManager.logger.error("create dir json decode error")
             }catch{
-                AppManager.logger.error("crewate dir get unknown error")
+                AppManager.logger.error("create dir get unknown error")
             }
         }failure: { Error in
             failure(Error)
         }
-        
+    }
+    
+    func RegisterFile(fileID:Int64,dirID:Int64,
+                      success:@escaping (RegisterFileResponse)->Void,
+                      failure:@escaping (Error) -> Void){
+        var req = RegisterFileRequest()
+        req.fileID=fileID
+        req.dirID=dirID
+        let data = try! req.jsonUTF8Data()
+        NetworkService().request(uri: BackendUri.registerFile, body: data){respData in
+            do{
+                let resp = try RegisterFileResponse.init(jsonUTF8Data: respData)
+                success(resp)
+            }catch is JSONDecodingError{
+                AppManager.logger.error("register file json decode error")
+            }catch{
+                AppManager.logger.error("register file get unknown error")
+            }
+        }failure: { Error in
+           failure(Error)
+        }
     }
 }
