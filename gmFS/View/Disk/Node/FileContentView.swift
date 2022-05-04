@@ -12,7 +12,12 @@ import SwiftUI
 struct FileContentView: View {
     @State private var content:String = "default content"
     @State private var name:String = "default name"
+    @EnvironmentObject var shareService:ShareService
     private let userCache =  AppManager.getUserCache()
+    @State private var shareSucc = false
+    @State private var shareFailed = false
+    @State private var key:Data = Data()
+    
     
     var fileNodeID:Int64
     var body: some View {
@@ -29,7 +34,8 @@ struct FileContentView: View {
         .onAppear{
             BackendService().GetNode(nodeID: fileNodeID){ resp in
                 do{
-                    let decFileData = try EncryptService.aesDecrypt(identity: userCache.name, cipherText: resp.node.nodeContent)
+                    self.key = try EncryptService.aesDecrypt(identity: userCache.name, cipherText: resp.node.secretKey)
+                    let decFileData = try EncryptService.aesDecrypt(identity: String(data: key, encoding: .utf8)!, cipherText: resp.node.nodeContent)
                     content = String(data: decFileData, encoding: .utf8)!
                     name = resp.node.nodeName
                 }catch{
@@ -39,12 +45,30 @@ struct FileContentView: View {
                 
             }
         }
+        .toolbar{
+            Button{
+                let sharedFile = SharedFile(fileID: fileNodeID, fileName: name,key: self.key)
+                do{
+                    try shareService.sendFile(sharedFile: sharedFile)
+                    shareSucc.toggle()
+                }catch{
+                    shareFailed.toggle()
+                }
+            }label: {
+                Label("Share",systemImage: "square.and.arrow.up")
+            }
+        }
+        .toast(isPresented: self.$shareSucc, type: .shareFile, state: .success)
+        .toast(isPresented: self.$shareFailed, type: .shareFile, state: .failed)
         .navigationTitle(name)
     }
 }
 
 struct FileContentView_Previews: PreviewProvider {
     static var previews: some View {
-        FileContentView(fileNodeID: 1520730801044459520)
+        NavigationView{
+            FileContentView(fileNodeID: 1520730801044459520)
+                .environmentObject(ShareService())
+        }
     }
 }

@@ -154,6 +154,9 @@ struct Node {
   /// 子节点
   var subNodeList: [Node] = []
 
+  /// 节点密钥，已加密过
+  var secretKey: Data = Data()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -220,6 +223,7 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     5: .same(proto: "createTime"),
     6: .same(proto: "updateTime"),
     7: .same(proto: "subNodeList"),
+    8: .same(proto: "secretKey"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -235,6 +239,7 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
       case 5: try { try decoder.decodeSingularInt64Field(value: &self.createTime) }()
       case 6: try { try decoder.decodeSingularInt64Field(value: &self.updateTime) }()
       case 7: try { try decoder.decodeRepeatedMessageField(value: &self.subNodeList) }()
+      case 8: try { try decoder.decodeSingularBytesField(value: &self.secretKey) }()
       default: break
       }
     }
@@ -262,6 +267,9 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     if !self.subNodeList.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.subNodeList, fieldNumber: 7)
     }
+    if !self.secretKey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.secretKey, fieldNumber: 8)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -273,6 +281,7 @@ extension Node: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     if lhs.createTime != rhs.createTime {return false}
     if lhs.updateTime != rhs.updateTime {return false}
     if lhs.subNodeList != rhs.subNodeList {return false}
+    if lhs.secretKey != rhs.secretKey {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

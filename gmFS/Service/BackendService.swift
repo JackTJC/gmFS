@@ -18,7 +18,6 @@ class BackendService{
         static var userLogin = "/user/login"
         static var userRegister  = "/user/register"
         static var fileUplaod = "/file/upload"
-        static var fileDownload = "/file/download"
         static var getNode = "/node/get"
         static var createDir = "/dir/create"
         static var registerFile = "/file/register"
@@ -28,6 +27,10 @@ class BackendService{
               failure:@escaping(Error)->Void){
         var req = PingRequest()
         req.name=name
+        let userCache = AppManager.getUserCache()
+        var baseReq = BaseReq()
+        baseReq.token = userCache.token
+        req.baseReq = baseReq
         let data = try! req.jsonUTF8Data()
         NetworkService().request(uri: BackendUri.ping, body: data){data in
             do{
@@ -48,6 +51,10 @@ class BackendService{
         var req = UserLoginRequest()
         req.userName = name
         req.password = passwd
+        let userCache = AppManager.getUserCache()
+        var baseReq = BaseReq()
+        baseReq.token = userCache.token
+        req.baseReq = baseReq
         let data = try! req.jsonUTF8Data()
         NetworkService().request(uri: BackendUri.userLogin, body: data){data in
             do{
@@ -69,6 +76,10 @@ class BackendService{
         req.userName = name
         req.password = passwd
         req.email = email
+        let userCache = AppManager.getUserCache()
+        var baseReq = BaseReq()
+        baseReq.token = userCache.token
+        req.baseReq = baseReq
         let data = try! req.jsonUTF8Data()
         NetworkService().request(uri: BackendUri.userRegister, body: data){data in
             do{
@@ -84,13 +95,18 @@ class BackendService{
         }
     }
     
-    func UploadFile(fileName:String,content:Data,parentID:Int64,
+    func UploadFile(fileName:String,content:Data,parentID:Int64,key:Data,
                     success:@escaping (UploadFileReponse)->Void,
                     failure:@escaping (Error)->Void){
         var req = UploadFileRequest()
         req.fileName=fileName
         req.content=content
         req.parentID=parentID
+        req.secretKey=key
+        let userCache = AppManager.getUserCache()
+        var baseReq = BaseReq()
+        baseReq.token = userCache.token
+        req.baseReq = baseReq
         let data = try! req.jsonUTF8Data()
         NetworkService().request(uri: BackendUri.fileUplaod, body: data){data in
             do {
@@ -111,6 +127,10 @@ class BackendService{
                  failure:@escaping(Error)->Void){
         var req = GetNodeRequest()
         req.nodeID = nodeID
+        let userCache = AppManager.getUserCache()
+        var baseReq = BaseReq()
+        baseReq.token = userCache.token
+        req.baseReq = baseReq
         let data = try! req.jsonUTF8Data()
         NetworkService().request(uri: BackendUri.getNode, body: data){ respData in
             do {
@@ -132,6 +152,10 @@ class BackendService{
         var req = CreateDirRequest()
         req.dirName=dirName
         req.parentID=parentID
+        let userCache = AppManager.getUserCache()
+        var baseReq = BaseReq()
+        baseReq.token = userCache.token
+        req.baseReq = baseReq
         let data = try! req.jsonUTF8Data()
         NetworkService().request(uri: BackendUri.createDir, body: data){respData in
             do {
@@ -147,12 +171,17 @@ class BackendService{
         }
     }
     
-    func RegisterFile(fileID:Int64,dirID:Int64,
+    func RegisterFile(fileID:Int64,dirID:Int64,key:Data,
                       success:@escaping (RegisterFileResponse)->Void,
                       failure:@escaping (Error) -> Void){
         var req = RegisterFileRequest()
         req.fileID=fileID
         req.dirID=dirID
+        req.secretKey=key
+        let userCache = AppManager.getUserCache()
+        var baseReq = BaseReq()
+        baseReq.token = userCache.token
+        req.baseReq = baseReq
         let data = try! req.jsonUTF8Data()
         NetworkService().request(uri: BackendUri.registerFile, body: data){respData in
             do{

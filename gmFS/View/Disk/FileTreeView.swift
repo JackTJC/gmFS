@@ -72,8 +72,10 @@ struct FileTreeView: View {
                         defer {selectedFile.stopAccessingSecurityScopedResource()}
                         let fileData = try! Data(contentsOf: selectedFile)
                         do{
-                            let encFileData = try EncryptService.aesEncrypt(identity: userCache.name, plainText: fileData)
-                            BackendService().UploadFile(fileName: selectedFile.lastPathComponent, content: encFileData,parentID: nodeID){resp in
+                            let key = UUID().uuidString
+                            let encFileData = try EncryptService.aesEncrypt(identity: key, plainText: fileData)
+                            let encKey = try EncryptService.aesEncrypt(identity: userCache.name, plainText: key.data(using: .utf8)!)
+                            BackendService().UploadFile(fileName: selectedFile.lastPathComponent, content: encFileData,parentID: nodeID,key: encKey){resp in
                                 // TODO response handle
                             }failure: { err in
                                 // TODO err handle

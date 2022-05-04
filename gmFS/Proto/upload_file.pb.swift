@@ -38,6 +38,9 @@ struct UploadFileRequest {
   /// 文件内容
   var content: Data = Data()
 
+  /// 文件解密key，已经加密过
+  var secretKey: Data = Data()
+
   var baseReq: BaseReq {
     get {return _baseReq ?? BaseReq()}
     set {_baseReq = newValue}
@@ -84,6 +87,7 @@ extension UploadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     2: .same(proto: "parentId"),
     3: .same(proto: "indexList"),
     4: .same(proto: "content"),
+    5: .same(proto: "secretKey"),
     255: .same(proto: "baseReq"),
   ]
 
@@ -97,6 +101,7 @@ extension UploadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.parentID) }()
       case 3: try { try decoder.decodeRepeatedStringField(value: &self.indexList) }()
       case 4: try { try decoder.decodeSingularBytesField(value: &self.content) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.secretKey) }()
       case 255: try { try decoder.decodeSingularMessageField(value: &self._baseReq) }()
       default: break
       }
@@ -120,6 +125,9 @@ extension UploadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     if !self.content.isEmpty {
       try visitor.visitSingularBytesField(value: self.content, fieldNumber: 4)
     }
+    if !self.secretKey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.secretKey, fieldNumber: 5)
+    }
     try { if let v = self._baseReq {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
     } }()
@@ -131,6 +139,7 @@ extension UploadFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     if lhs.parentID != rhs.parentID {return false}
     if lhs.indexList != rhs.indexList {return false}
     if lhs.content != rhs.content {return false}
+    if lhs.secretKey != rhs.secretKey {return false}
     if lhs._baseReq != rhs._baseReq {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

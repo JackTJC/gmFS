@@ -10,12 +10,10 @@ import SwiftUI
 struct SharedFileView: View {
     var sharedFiles:[SharedFile]
     @State private var saveClick = false
-    @State private var selectedFileID:Int64 = 0
-    @State private var selectedFile:SharedFile?
+    @State private var selectedFile:SharedFile = SharedFile(fileID: 0, fileName: "", key: Data())
     private let userCache = AppManager.getUserCache()
     
     var body: some View {
-        
         List{
             ForEach(sharedFiles){file in
                 HStack{
@@ -23,7 +21,7 @@ struct SharedFileView: View {
                     Text(file.fileName)
                     Spacer()
                     Button{
-                        selectedFileID = file.fileID
+                        selectedFile = file
                         saveClick.toggle()
                     }label:{
                         Label("Save", systemImage: "square.and.arrow.down")
@@ -33,7 +31,7 @@ struct SharedFileView: View {
         }
         .fullScreenCover(isPresented: self.$saveClick){
             NavigationView{
-                DirTreeView(rootNodeId: userCache.rootNode,operateID: self.$selectedFileID)
+                DirTreeView(rootNodeId: userCache.rootNode,sharedFile: self.$selectedFile)
             }
         }
         .navigationBarHidden(true)
@@ -41,7 +39,7 @@ struct SharedFileView: View {
 }
 
 struct SharedFileView_Previews: PreviewProvider {
-    static var files = [SharedFile(fileID: 1, fileName: "123"),SharedFile(fileID: 2, fileName: "test")]
+    static var files = [SharedFile(fileID: 1, fileName: "123",key: Data()),SharedFile(fileID: 2, fileName: "test",key: Data())]
     static var previews: some View {
         NavigationView{
             SharedFileView(sharedFiles: files)
