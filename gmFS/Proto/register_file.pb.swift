@@ -29,6 +29,9 @@ struct RegisterFileRequest {
 
   var dirID: Int64 = 0
 
+  /// 文件解密key
+  var secretKey: Data = Data()
+
   var baseReq: BaseReq {
     get {return _baseReq ?? BaseReq()}
     set {_baseReq = newValue}
@@ -73,6 +76,7 @@ extension RegisterFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "fileId"),
     2: .same(proto: "dirId"),
+    3: .same(proto: "secretKey"),
     255: .same(proto: "baseReq"),
   ]
 
@@ -84,6 +88,7 @@ extension RegisterFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.fileID) }()
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.dirID) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.secretKey) }()
       case 255: try { try decoder.decodeSingularMessageField(value: &self._baseReq) }()
       default: break
       }
@@ -101,6 +106,9 @@ extension RegisterFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if self.dirID != 0 {
       try visitor.visitSingularInt64Field(value: self.dirID, fieldNumber: 2)
     }
+    if !self.secretKey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.secretKey, fieldNumber: 3)
+    }
     try { if let v = self._baseReq {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
     } }()
@@ -110,6 +118,7 @@ extension RegisterFileRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   static func ==(lhs: RegisterFileRequest, rhs: RegisterFileRequest) -> Bool {
     if lhs.fileID != rhs.fileID {return false}
     if lhs.dirID != rhs.dirID {return false}
+    if lhs.secretKey != rhs.secretKey {return false}
     if lhs._baseReq != rhs._baseReq {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

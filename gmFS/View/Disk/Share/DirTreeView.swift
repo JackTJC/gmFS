@@ -11,12 +11,12 @@ import SimpleToast
 
 struct DirTreeView: View {
     var rootNodeId:Int64
-    @Binding var operateID:Int64
+    @Binding var sharedFile:SharedFile
     @State private var subNodes:[Node] = []
     @State private var selectedNode:Node?
     @State private var isEditMode:EditMode = .inactive
     @State private var saveSuccess = false
-    
+    private let userCache = AppManager.getUserCache()
     private func fetchDir(){
         BackendService().GetNode(nodeID: rootNodeId){resp in
             var copyNodes  = resp.subNodes.filter{node in // 只需要文件夹
@@ -36,20 +36,21 @@ struct DirTreeView: View {
             HStack{
                 Image(systemName: "folder")
                 Text(node.nodeName)
-            }.background(NavigationLink("",destination: DirTreeView(rootNodeId: node.nodeID,operateID: self.$operateID)))
+            }.background(NavigationLink("",destination: DirTreeView(rootNodeId: node.nodeID,sharedFile: self.$sharedFile)))
         }
         .onAppear{
             fetchDir()
         }
         .toolbar{
-            Button(isEditMode.isEditing ? "保存": "选择") {
+            Button(isEditMode.isEditing ? "Save": "Select") {
                 switch isEditMode {
                 case .active:
                     self.isEditMode = .inactive
                     if self.selectedNode == nil{
                         return
                     }
-                    BackendService().RegisterFile(fileID: operateID, dirID: self.selectedNode!.nodeID){resp in
+                    let encKey = try! EncryptService.aesEncrypt(identity: userCache.name, plainText: self.sharedFile.key)
+                    BackendService().RegisterFile(fileID: self.sharedFile.fileID, dirID: self.selectedNode!.nodeID,key: encKey){resp in
                         switch resp.baseResp.statusCode{
                         case StatusCode.success:
                             saveSuccess=true
@@ -66,25 +67,17 @@ struct DirTreeView: View {
                 }
             }
         }
-        .simpleToast(isPresented: self.$saveSuccess, options: Toast.succOrFailOpt){
-            HStack{
-                Image(systemName: "paperplane")
-                Text("Save Success")
-            }
-            .padding()
-            .background(Color.blue.opacity(0.8))
-            .foregroundColor(Color.white)
-            .cornerRadius(10)
-        }
+        .toast(isPresented: self.$saveSuccess, type: .saveFile, state: .success)
         .environment(\.editMode, $isEditMode)
     }
 }
 
 struct DirTreeView_Previews: PreviewProvider {
     @State static var testOp = Int64(0)
+    @State static var testSharedFile = SharedFile(fileID: 0, fileName: "",key: Data())
     static var previews: some View {
         NavigationView{
-            DirTreeView(rootNodeId: 1517026803300962304,operateID: $testOp)
+            DirTreeView(rootNodeId: 1517026803300962304,sharedFile: $testSharedFile)
         }
     }
 }

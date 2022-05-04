@@ -13,15 +13,15 @@ import CryptoKit
 
 
 class gmFSTests: XCTestCase {
-
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -44,7 +44,7 @@ class gmFSTests: XCTestCase {
         print(token!)
     }
     
-   // crypto kit test
+    // crypto kit test
     func testSymmertryKey()throws{
         let name = "tianjincai"
         let email = "tianjincai@hotmail.com"
@@ -103,12 +103,21 @@ class gmFSTests: XCTestCase {
         print(key.bitCount)
     }
     
+    func testUUID()throws{
+        let uid = UUID()
+        print(uid.uuidString)
+        let dgst = SHA256.hash(data: uid.uuidString.data(using: .utf8)!)
+        let key = SymmetricKey(data: dgst)
+        print(key.bitCount)
+    }
+    
     func getKey()->SymmetricKey{
         let s = "tianjincai"
         let  dgst = SHA256.hash(data: s.data(using: .utf8)!)
         let key = SymmetricKey(data: dgst)
         return key
     }
+    
     
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
