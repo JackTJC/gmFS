@@ -46,6 +46,18 @@ struct FileTreeView: View {
         }
     }
     
+    private func searchFile(){
+        let dgstKeyword = EncryptService.word2SHA256Dgst(keyword: self.searchText)
+        BackendService().SearchFile(keyword: dgstKeyword){resp in
+            var copyNodes = resp.nodeList
+            copyNodes.sort{n1,n2 in
+                return n1.nodeName<n2.nodeName
+            }
+            subNodes=copyNodes
+        }failure: { err in
+            // todo fail
+        }
+    }
     var body: some View {
         ZStack {
             List{
@@ -125,6 +137,9 @@ struct FileTreeView: View {
                 }
             }
             .searchable(text: $searchText,prompt: "Search File")
+            .onSubmit(of: .search){
+                self.searchFile()
+            }
         }
     }
 }

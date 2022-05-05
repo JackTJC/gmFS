@@ -146,6 +146,17 @@ class gmFSTests: XCTestCase {
         return key
     }
     
+    func testSearchFile()throws{
+        let s = "search"
+        let sw = EncryptService.word2SHA256Dgst(keyword: s)
+        BackendService().SearchFile(keyword: sw){resp in
+           print(resp)
+        }failure: { err in
+            print(err)
+        }
+        sleep(1000)
+    }
+    
     
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

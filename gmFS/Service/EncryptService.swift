@@ -47,12 +47,14 @@ class EncryptService{
     static func extractKeyword(fileContent:Data) -> [String]{
         let contentStr = String(data: fileContent, encoding: .utf8)!
         let plainTextKeywords = contentStr.regexGetSub(pattern: "[a-zA-Z]+")
-        let descKeywords = plainTextKeywords.map{ plainKeyword in
-            return SHA256.hash(data: plainKeyword.data(using: .utf8)!).description
+        let dgstKeywords = plainTextKeywords.map{ plainKeyword in
+            return word2SHA256Dgst(keyword: plainKeyword)
         }
-        let res = descKeywords.map{desc in
-            return String(desc.split(separator: " ")[2]) // crypto原生的desc会生成形如 "SHA256 Digest: xxxx" 的字符串, 为了简便这里直接取最后面的部分
-        }
-        return res
+        return dgstKeywords
+    }
+    
+    static func word2SHA256Dgst(keyword:String) -> String{
+        let desc = SHA256.hash(data: keyword.data(using: .utf8)!).description
+        return String(desc.split(separator: " ")[2]) // crypto原生的desc会生成形如 "SHA256 Digest: xxxx" 的字符串, 为了简便这里直接取最后面的部分
     }
 }

@@ -19,7 +19,7 @@ struct AppManager{
     static private var userCacheKey = "user_cache"
     static var logger = Logger()
     static private var userDefaults = UserDefaults.standard
-    static private var userInfoDefault = UserInfoModel(token: "", name: "default name", email: "default@email.com", rootNode: 0)
+    static private var userInfoDefault = UserInfoModel(token: "88a12f42-b45b-47d0-bd7b-626509dae938", name: "default name", email: "default@email.com", rootNode: 0)
     
     
     static func isLogined() -> Bool{
