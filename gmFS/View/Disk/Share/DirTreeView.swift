@@ -15,7 +15,8 @@ struct DirTreeView: View {
     @State private var subNodes:[Node] = []
     @State private var selectedNode:Node?
     @State private var isEditMode:EditMode = .inactive
-    @State private var saveSuccess = false
+    @Binding var showingDirTree:Bool
+    @Binding var saveSucc:Bool
     private let userCache = AppManager.getUserCache()
     private func fetchDir(){
         BackendService().GetNode(nodeID: rootNodeId){resp in
@@ -36,7 +37,7 @@ struct DirTreeView: View {
             HStack{
                 Image(systemName: "folder")
                 Text(node.nodeName)
-            }.background(NavigationLink("",destination: DirTreeView(rootNodeId: node.nodeID,sharedFile: self.$sharedFile)))
+            }.background(NavigationLink("",destination: DirTreeView(rootNodeId: node.nodeID,sharedFile: self.$sharedFile,showingDirTree: self.$showingDirTree,saveSucc: self.$saveSucc)))
         }
         .onAppear{
             fetchDir()
@@ -53,7 +54,8 @@ struct DirTreeView: View {
                     BackendService().RegisterFile(fileID: self.sharedFile.fileID, dirID: self.selectedNode!.nodeID,key: encKey){resp in
                         switch resp.baseResp.statusCode{
                         case StatusCode.success:
-                            saveSuccess=true
+                            saveSucc=true
+                            showingDirTree=false
                         default:
                             break
                         }
@@ -67,17 +69,18 @@ struct DirTreeView: View {
                 }
             }
         }
-        .toast(isPresented: self.$saveSuccess, type: .saveFile, state: .success)
         .environment(\.editMode, $isEditMode)
     }
 }
 
 struct DirTreeView_Previews: PreviewProvider {
     @State static var testOp = Int64(0)
+    @State static var testShowDir = false
     @State static var testSharedFile = SharedFile(fileID: 0, fileName: "",key: Data())
+    @State static var testSaveSucc = false
     static var previews: some View {
         NavigationView{
-            DirTreeView(rootNodeId: 1517026803300962304,sharedFile: $testSharedFile)
+            DirTreeView(rootNodeId: 1517026803300962304,sharedFile: $testSharedFile,showingDirTree: $testShowDir,saveSucc: $testSaveSucc)
         }
     }
 }

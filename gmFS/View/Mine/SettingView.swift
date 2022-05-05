@@ -13,14 +13,13 @@ struct SettingView: View {
         List{
             Button{
                 AppManager.delUserCache()
-                logoutClick = true
+                self.logoutClick.toggle()
             }label:{
                 Label("Logout", systemImage: "pip.exit")
-            }.background{
-                NavigationLink(""){
-                    LoginView().navigationBarBackButtonHidden(true)
-                }.opacity(0)
             }
+        }
+        .fullScreenCover(isPresented: self.$logoutClick){
+            LoginView()
         }
     }
 }

@@ -14,15 +14,10 @@ struct LoginView: View {
     @State private var wrongPasswd = 0
     @State private var showingLoginScreen = false
     @State private var showingRegister = false
-    // alert相关
-    @State private var loginAlert = false
-    @State private var alertText = ""
-    
-    func alertWith(_ text:String){
-        loginAlert=true
-        alertText=text
-    }
-    
+    @State private var showingWrongPasswd = false
+    @State private var showingUserNotExist = false
+    @State private var showingEmptyUserName = false
+    @State private var showingEmptyPasswd = false
     
     var body: some View {
         NavigationView{
@@ -47,11 +42,11 @@ struct LoginView: View {
                     Button("Login"){
                         // Login logic
                         if userName.count==0{
-                            alertWith("Empty UserName")
+                            self.showingEmptyUserName.toggle()
                             return
                         }
                         if passwd.count==0{
-                            alertWith("Empty Passwd")
+                            self.showingEmptyPasswd.toggle()
                             return
                         }
                         BackendService().UserLogin(name: userName, passwd: passwd){resp in
@@ -62,12 +57,10 @@ struct LoginView: View {
                                     AppManager.setUserCache(resp.userInfo, resp.token)
                                 case .userNotFound:
                                     wrongUserName=2
-                                    loginAlert=true
-                                    alertText="User Doesn't Exist"
+                                    self.showingUserNotExist.toggle()
                                 case .wrongPasswd:
                                     wrongPasswd=2
-                                    loginAlert=true
-                                    alertText="Wrong Passwd"
+                                    self.showingWrongPasswd.toggle()
                                 default:
                                     break
                                 }
@@ -80,9 +73,6 @@ struct LoginView: View {
                     .frame(width: 300, height: 50)
                     .background(Color.blue)
                     .cornerRadius(10)
-                    .alert(alertText, isPresented: $loginAlert){
-                        Button("OK"){}
-                    }
                     Button("Register"){
                         showingRegister=true
                     }.frame(width: 300, height: 10, alignment: .trailing)
@@ -103,12 +93,15 @@ struct LoginView: View {
                     }
                     .isDetailLink(false)
                 }
+                .toast(isPresented: self.$showingEmptyPasswd, title: "Empty Password", state: .failed)
+                .toast(isPresented: self.$showingEmptyUserName, title: "Empty User Name", state: .failed)
+                .toast(isPresented: self.$showingUserNotExist, title: "User Not Exist", state: .failed)
+                .toast(isPresented: self.$showingWrongPasswd, title: "Passwd Wrong", state: .failed)
             }
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             .navigationTitle("")
         }
-        
     }
 }
 

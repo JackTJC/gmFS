@@ -15,6 +15,8 @@ class Toast{
     enum `Type`:String{
         case saveFile = "Save"
         case shareFile = "Share"
+        case login = "Login"
+        case register = "Register"
     }
     
     enum State:String{
@@ -42,19 +44,36 @@ extension View{
             .cornerRadius(30)
         }
     }
+    
+    func toast(isPresented:Binding<Bool>,title:String,state:Toast.State) -> some View{
+        return self.simpleToast(isPresented: isPresented, options: Toast.succOrFailOpt){
+            HStack{
+                state == .success ? Image(systemName: "checkmark") : Image(systemName:"xmark")
+                Text(title)
+            }
+            .padding()
+            .background((state == .success ? Color.blue : Color.red).opacity(0.8))
+            .foregroundColor(Color.white)
+            .cornerRadius(30)
+        }
+    }
 }
 
 struct ToastView: View {
     @State var toast = false
     @State var saveSuccess = false
     @State var saveFailed = false
+    @State var loginSuccess = false
+    @State var loginFailed = false
     var body: some View {
         VStack{
             Button("SaveSuccess", action:{saveSuccess.toggle()})
             Button("SaveFailed",action: {saveFailed.toggle()})
+            Button("LoginSuccess", action: {loginSuccess.toggle()})
         }
         .toast(isPresented: self.$saveSuccess, type: .saveFile, state: .success)
         .toast(isPresented: self.$saveFailed, type: .saveFile, state: .failed)
+        .toast(isPresented: self.$loginSuccess, title: "Login Success", state: .success)
     }
 }
 

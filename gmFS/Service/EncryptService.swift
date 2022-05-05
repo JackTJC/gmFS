@@ -42,4 +42,19 @@ class EncryptService{
         return key
     }
     
+    /// 根据文件内容生成搜索关键词
+    /// 仅限于文本文件
+    static func extractKeyword(fileContent:Data) -> [String]{
+        let contentStr = String(data: fileContent, encoding: .utf8)!
+        let plainTextKeywords = contentStr.regexGetSub(pattern: "[a-zA-Z]+")
+        let dgstKeywords = plainTextKeywords.map{ plainKeyword in
+            return word2SHA256Dgst(keyword: plainKeyword)
+        }
+        return dgstKeywords
+    }
+    
+    static func word2SHA256Dgst(keyword:String) -> String{
+        let desc = SHA256.hash(data: keyword.data(using: .utf8)!).description
+        return String(desc.split(separator: " ")[2]) // crypto原生的desc会生成形如 "SHA256 Digest: xxxx" 的字符串, 为了简便这里直接取最后面的部分
+    }
 }

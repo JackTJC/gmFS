@@ -21,6 +21,7 @@ class BackendService{
         static var getNode = "/node/get"
         static var createDir = "/dir/create"
         static var registerFile = "/file/register"
+        static var searchFile = "/file/search"
     }
     func Ping(name:String,
               success:@escaping (PingResponse)->Void,
@@ -95,7 +96,7 @@ class BackendService{
         }
     }
     
-    func UploadFile(fileName:String,content:Data,parentID:Int64,key:Data,
+    func UploadFile(fileName:String,content:Data,parentID:Int64,key:Data,keywords:[String],
                     success:@escaping (UploadFileReponse)->Void,
                     failure:@escaping (Error)->Void){
         var req = UploadFileRequest()
@@ -103,6 +104,7 @@ class BackendService{
         req.content=content
         req.parentID=parentID
         req.secretKey=key
+        req.indexList=keywords
         let userCache = AppManager.getUserCache()
         var baseReq = BaseReq()
         baseReq.token = userCache.token
@@ -193,7 +195,31 @@ class BackendService{
                 AppManager.logger.error("register file get unknown error")
             }
         }failure: { Error in
-           failure(Error)
+            failure(Error)
+        }
+    }
+    
+    func SearchFile(keyword:String,
+                    success:@escaping (SearchFileResponse)->Void,
+                    failure:@escaping (Error) -> Void){
+        var req = SearchFileRequest()
+        req.keyword = keyword
+        let userCache = AppManager.getUserCache()
+        var baseReq = BaseReq()
+        baseReq.token=userCache.token
+        req.baseReq=baseReq
+        let data = try! req.jsonUTF8Data()
+        NetworkService().request(uri: BackendUri.searchFile, body: data){respData in
+            do{
+                let resp = try SearchFileResponse.init(jsonUTF8Data: respData)
+                success(resp)
+            }catch is JSONDecodingError{
+                AppManager.logger.error("search file json decode error")
+            }catch{
+                AppManager.logger.error("search file get unknown error")
+            }
+        }failure: { Error in
+            failure(Error)
         }
     }
 }

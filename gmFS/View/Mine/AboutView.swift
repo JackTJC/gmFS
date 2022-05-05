@@ -12,7 +12,7 @@ struct AboutView: View {
         VStack{
             Image("about")
                 .resizable()
-                .frame(width: 144, height: 144)
+                .frame(width: 120, height: 120)
             aboutSubLineView(header: "Designed By", content: "JincaiTian")
             aboutSubLineView(header: "Guided By", content: "WeiWang")
             aboutSubLineView(header: "Version", content: "1.0.0")
