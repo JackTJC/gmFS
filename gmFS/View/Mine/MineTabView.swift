@@ -28,17 +28,18 @@ struct MineTabView: View {
                     Text("ChangePassword")
                 }.background(NavigationLink("",destination: PasswdChgView()).opacity(0))
                 HStack{
-                    Image("mine")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                    Text("About")
-                }.background(NavigationLink("",destination: AboutView()).opacity(0))
-                HStack{
                     Image("setting")
                         .resizable()
                         .frame(width: 40, height: 40)
                     Text("Settings")
                 }.background(NavigationLink("",destination: SettingView()).opacity(0))
+                HStack{
+                    Image("mine")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                    Text("About")
+                }.background(NavigationLink("",destination: AboutView()).opacity(0))
+                
             }
         }
         .onAppear{
@@ -50,7 +51,7 @@ struct MineTabView: View {
 
 struct MeView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        NavigationView{
             MineTabView(avatar: Image("default_avatar"))
         }
     }

@@ -75,7 +75,8 @@ struct FileTreeView: View {
                             let key = UUID().uuidString
                             let encFileData = try EncryptService.aesEncrypt(identity: key, plainText: fileData)
                             let encKey = try EncryptService.aesEncrypt(identity: userCache.name, plainText: key.data(using: .utf8)!)
-                            BackendService().UploadFile(fileName: selectedFile.lastPathComponent, content: encFileData,parentID: nodeID,key: encKey){resp in
+                            let keywords = EncryptService.extractKeyword(fileContent: fileData)
+                            BackendService().UploadFile(fileName: selectedFile.lastPathComponent, content: encFileData,parentID: nodeID,key: encKey,keywords: keywords){resp in
                                 // TODO response handle
                             }failure: { err in
                                 // TODO err handle

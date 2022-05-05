@@ -103,12 +103,40 @@ class gmFSTests: XCTestCase {
         print(key.bitCount)
     }
     
+    func testEnc2()throws{
+        let s = "this is test data"
+        let encData1 = try EncryptService.aesEncrypt(identity: "tianjincai", plainText: s.data(using: .utf8)!)
+        let encData2 = try EncryptService.aesEncrypt(identity: "tianjincai", plainText: s.data(using: .utf8)!)
+        XCTAssert(encData1==encData2)
+        print(encData1.base64EncodedString())
+        print(encData2.base64EncodedString())
+    }
+    
+    func testSplit()throws{
+        let s = "this is test data"
+        print(s.split(separator:" "))
+    }
+    
     func testUUID()throws{
         let uid = UUID()
         print(uid.uuidString)
         let dgst = SHA256.hash(data: uid.uuidString.data(using: .utf8)!)
         let key = SymmetricKey(data: dgst)
         print(key.bitCount)
+    }
+    
+    func testRegex()throws{
+        let s = "this is my test for regex, hello world! just one TEST"
+        print(s.regexGetSub(pattern: "[a-zA-Z]+"))
+    }
+    
+    func testExtract()throws{
+        let s = "this is my test for regex, hello world! just one TEST"
+        let res1 = EncryptService.extractKeyword(fileContent: s.data(using: .utf8)!)
+        let res2 = EncryptService.extractKeyword(fileContent: s.data(using: .utf8)!)
+
+        print(res1)
+        print(res2)
     }
     
     func getKey()->SymmetricKey{

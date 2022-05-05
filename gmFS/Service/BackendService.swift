@@ -95,7 +95,7 @@ class BackendService{
         }
     }
     
-    func UploadFile(fileName:String,content:Data,parentID:Int64,key:Data,
+    func UploadFile(fileName:String,content:Data,parentID:Int64,key:Data,keywords:[String],
                     success:@escaping (UploadFileReponse)->Void,
                     failure:@escaping (Error)->Void){
         var req = UploadFileRequest()
@@ -103,6 +103,7 @@ class BackendService{
         req.content=content
         req.parentID=parentID
         req.secretKey=key
+        req.indexList=keywords
         let userCache = AppManager.getUserCache()
         var baseReq = BaseReq()
         baseReq.token = userCache.token
