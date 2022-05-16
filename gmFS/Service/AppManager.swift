@@ -33,7 +33,7 @@ struct AppManager{
     
     static func getUserCache() -> UserInfoModel{
 #if DEBUG
-        userInfoDefault = UserInfoModel(token: "", name: "default name", email: "default@email.com", rootNode:1517026803300962304 )
+        userInfoDefault = UserInfoModel(token: "90ce22fc-d893-4a51-83f0-09c7881907aa", name: "default name", email: "default@email.com", rootNode:1517026803300962304 )
 #endif
         if let data = userDefaults.value(forKey: userCacheKey) as? Data {
             let userCache = try? PropertyListDecoder().decode(UserInfoModel.self, from: data)

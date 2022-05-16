@@ -12,12 +12,15 @@ struct LoginView: View {
     @State private var passwd = ""
     @State private var wrongUserName = 0
     @State private var wrongPasswd = 0
-    @State private var showingLoginScreen = false
+    @State private var loginSuccess = false
     @State private var showingRegister = false
-    @State private var showingWrongPasswd = false
-    @State private var showingUserNotExist = false
-    @State private var showingEmptyUserName = false
-    @State private var showingEmptyPasswd = false
+    @State private var showingToast = false
+    @State private var toastText = ""
+    
+    private func toastWithErr(err:String){
+        showingToast = true
+        toastText = err
+    }
     
     var body: some View {
         NavigationView{
@@ -27,6 +30,7 @@ struct LoginView: View {
                 Circle().scale(1.35).foregroundColor(.white)
                 VStack{
                     Text("Login").font(.largeTitle).bold().padding().foregroundColor(.black)
+                    // input field
                     TextField("Username",text: $userName)
                         .padding()
                         .frame(width: 300, height: 50)
@@ -42,31 +46,33 @@ struct LoginView: View {
                     Button("Login"){
                         // Login logic
                         if userName.count==0{
-                            self.showingEmptyUserName.toggle()
+                            self.toastWithErr(err: "empty user name")
                             return
                         }
                         if passwd.count==0{
-                            self.showingEmptyPasswd.toggle()
+                            self.toastWithErr(err: "empty passwd")
                             return
                         }
                         BackendService().UserLogin(name: userName, passwd: passwd){resp in
                             if resp.hasBaseResp{
                                 switch resp.baseResp.statusCode{
                                 case .success:
-                                    showingLoginScreen=true
+                                    self.loginSuccess=true
                                     AppManager.setUserCache(resp.userInfo, resp.token)
                                 case .userNotFound:
                                     wrongUserName=2
-                                    self.showingUserNotExist.toggle()
+                                    self.toastWithErr(err: "user not found")
                                 case .wrongPasswd:
                                     wrongPasswd=2
-                                    self.showingWrongPasswd.toggle()
+                                    self.toastWithErr(err: "wrong password")
+                                case .commonErr:
+                                    self.toastWithErr(err: "internal server error")
                                 default:
                                     break
                                 }
                             }
                         }failure: { error in
-                            // TODO error handle
+                            self.toastWithErr(err: "internal server error")
                         }
                     }
                     .foregroundColor(.white)
@@ -76,27 +82,17 @@ struct LoginView: View {
                     Button("Register"){
                         showingRegister=true
                     }.frame(width: 300, height: 10, alignment: .trailing)
-                    // to homepage
-                    NavigationLink(isActive: $showingLoginScreen){
-                        HomeView()
-                            .navigationTitle("")
-                            .navigationBarHidden(true)
-                            .navigationBarBackButtonHidden(true)
-                    }label: {
-                        EmptyView()
-                    }.isDetailLink(false)
-                    // to register
-                    NavigationLink(isActive:$showingRegister){
-                        RegisterView()
+                    
+                    NavigationLink(isActive:self.$loginSuccess){
+                        HomeView().navigationBarBackButtonHidden(true)
                     }label: {
                         EmptyView()
                     }
-                    .isDetailLink(false)
                 }
-                .toast(isPresented: self.$showingEmptyPasswd, title: "Empty Password", state: .failed)
-                .toast(isPresented: self.$showingEmptyUserName, title: "Empty User Name", state: .failed)
-                .toast(isPresented: self.$showingUserNotExist, title: "User Not Exist", state: .failed)
-                .toast(isPresented: self.$showingWrongPasswd, title: "Passwd Wrong", state: .failed)
+            }
+            .toast(isPresented: self.$showingToast, title: self.toastText, state: .failed)
+            .fullScreenCover(isPresented: self.$showingRegister){
+                RegisterView()
             }
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)

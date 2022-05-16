@@ -17,6 +17,10 @@ class Toast{
         case shareFile = "Share"
         case login = "Login"
         case register = "Register"
+        case readFile = "Read File"
+        case add = "Add"
+        case load = "Load"
+        case startHost = "Start Host"
     }
     
     enum State:String{
@@ -25,7 +29,27 @@ class Toast{
     }
     
     static let succOrFailOpt = SimpleToastOptions(alignment: .bottom, hideAfter: 3, animation: .default, modifierType: .scale)
-    
+    static func getToastContent(type:Toast.`Type`,state:Toast.State) -> some View{
+        return  HStack{
+            state == .success ? Image(systemName: "checkmark") : Image(systemName:"xmark")
+            Text(type.rawValue)
+            Text(state.rawValue)
+        }
+        .padding()
+        .background((state == .success ? Color.blue : Color.red).opacity(0.8))
+        .foregroundColor(Color.white)
+        .cornerRadius(30)
+    }
+    static func getToastContent(title:String,state:Toast.State)->some View{
+        return  HStack{
+            state == .success ? Image(systemName: "checkmark") : Image(systemName:"xmark")
+            Text(title)
+        }
+        .padding()
+        .background((state == .success ? Color.blue : Color.red).opacity(0.8))
+        .foregroundColor(Color.white)
+        .cornerRadius(30)
+    }
 }
 
 
@@ -33,28 +57,25 @@ class Toast{
 extension View{
     func toast(isPresented:Binding<Bool>,type:Toast.`Type`,state:Toast.State) -> some View{
         return self.simpleToast(isPresented: isPresented, options: Toast.succOrFailOpt){
-            HStack{
-                state == .success ? Image(systemName: "checkmark") : Image(systemName:"xmark")
-                Text(type.rawValue)
-                Text(state.rawValue)
-            }
-            .padding()
-            .background((state == .success ? Color.blue : Color.red).opacity(0.8))
-            .foregroundColor(Color.white)
-            .cornerRadius(30)
+            Toast.getToastContent(type: type, state: state)
         }
     }
     
     func toast(isPresented:Binding<Bool>,title:String,state:Toast.State) -> some View{
         return self.simpleToast(isPresented: isPresented, options: Toast.succOrFailOpt){
-            HStack{
-                state == .success ? Image(systemName: "checkmark") : Image(systemName:"xmark")
-                Text(title)
-            }
-            .padding()
-            .background((state == .success ? Color.blue : Color.red).opacity(0.8))
-            .foregroundColor(Color.white)
-            .cornerRadius(30)
+            Toast.getToastContent(title: title, state: state)
+        }
+    }
+    
+    func toast(isPresented:Binding<Bool>,type:Toast.`Type`,state:Toast.State,onDismiss:(()->Void)?)->some View{
+        return self.simpleToast(isPresented: isPresented, options: Toast.succOrFailOpt, onDismiss: onDismiss){
+            Toast.getToastContent(type: type, state: state)
+        }
+    }
+    
+    func toast(isPresented:Binding<Bool>,title:String,state:Toast.State,onDissmiss:(()->Void)?)->some View{
+        return self.simpleToast(isPresented: isPresented, options: Toast.succOrFailOpt, onDismiss: onDissmiss){
+            return Toast.getToastContent(title: title, state: state)
         }
     }
 }

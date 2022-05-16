@@ -10,7 +10,7 @@ import Foundation
 
 class NetworkService:NSObject,URLSessionDelegate{
     let selfSignedHost = ["121.5.224.250"]
-    private static var backendHost = "https://121.5.224.250:9000"
+    private static var backendHost = "https://121.5.224.250:8888"
     private static var defaultHeader = ["Content-Type":"application/json"]
     func request(uri:String,method:String = "POST",body:Data,
                  header:[String:String] = NetworkService.defaultHeader,

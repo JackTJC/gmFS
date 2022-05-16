@@ -18,18 +18,12 @@ struct HomeView: View {
         TabView(selection: self.$tab){
             NavigationView{
                 FileTreeView(nodeID: rootNodeId)
-                    .navigationBarHidden(true)
-                    .navigationBarBackButtonHidden(true)
-                    .navigationTitle("")
             }
             .tabItem{
                 Label("Disk",systemImage: "folder")
             }.tag(Tab.fileShare)
             NavigationView{
                 MineTabView(avatar: Image("default_avatar"))
-                    .navigationBarHidden(true)
-                    .navigationBarBackButtonHidden(true)
-                    .navigationTitle("")
             }
             .tabItem{
                 Label("Mine",systemImage: "person")
@@ -42,6 +36,8 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        NavigationView{
+            HomeView()
+        }
     }
 }

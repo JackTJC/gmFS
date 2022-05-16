@@ -16,6 +16,7 @@ struct FileContentView: View {
     private let userCache =  AppManager.getUserCache()
     @State private var shareSucc = false
     @State private var shareFailed = false
+    @State private var showingNoConnected = false
     @State private var key:Data = Data()
     
     
@@ -34,8 +35,8 @@ struct FileContentView: View {
         .onAppear{
             BackendService().GetNode(nodeID: fileNodeID){ resp in
                 do{
-                    self.key = try EncryptService.aesDecrypt(identity: userCache.name, cipherText: resp.node.secretKey)
-                    let decFileData = try EncryptService.aesDecrypt(identity: String(data: key, encoding: .utf8)!, cipherText: resp.node.nodeContent)
+                    self.key = try EncryptService.symDecWithId(identity: userCache.name, cipherText: resp.node.secretKey)
+                    let decFileData = try EncryptService.symDecWithId(identity: String(data: key, encoding: .utf8)!, cipherText: resp.node.nodeContent)
                     content = String(data: decFileData, encoding: .utf8)!
                     name = resp.node.nodeName
                 }catch{
@@ -47,6 +48,10 @@ struct FileContentView: View {
         }
         .toolbar{
             Button{
+                if shareService.getConnectedPeerCnt()==0{
+                    self.showingNoConnected.toggle()
+                    return
+                }
                 let sharedFile = SharedFile(fileID: fileNodeID, fileName: name,key: self.key)
                 do{
                     try shareService.sendFile(sharedFile: sharedFile)
@@ -60,6 +65,7 @@ struct FileContentView: View {
         }
         .toast(isPresented: self.$shareSucc, type: .shareFile, state: .success)
         .toast(isPresented: self.$shareFailed, type: .shareFile, state: .failed)
+        .toast(isPresented: self.$showingNoConnected, title: "no device to share", state: .failed)
         .navigationTitle(name)
     }
 }

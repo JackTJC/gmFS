@@ -11,13 +11,15 @@ struct RegisterView: View {
     @State private var userName = ""
     @State private var passwd = ""
     @State private var email = ""
-    @State private var showingAlert = false
-    @State private var alerText = ""
     @State private var registerSuccess = false
-    func alertWith(_ text:String){
-        showingAlert=true
-        alerText=text
+    @State private var showingToast = false
+    @State private var taostText = ""
+    
+    private func toastErr(err:String){
+        showingToast = true
+        taostText = err
     }
+    
     var body: some View {
         ZStack{
             Color.blue.ignoresSafeArea()
@@ -43,26 +45,24 @@ struct RegisterView: View {
                     .cornerRadius(10)
                 Button("Register"){
                     if !userName.isValidUserName{
-                        alertWith("Invalid User Name")
+                        self.toastErr(err: "invalid user name")
                         return
                     }
                     if !passwd.isValidPasswd{
-                        alertWith("Invalid Password")
+                        self.toastErr(err: "invalid password")
                         return
                     }
                     if !email.isValidEmail{
-                        alertWith("Invalid Email")
+                        self.toastErr(err: "invalid email")
                         return
                     }
                     BackendService().UserRegister(name: userName, passwd: passwd, email: email){ resp in
                         if resp.hasBaseResp{
                             switch resp.baseResp.statusCode{
                             case .userExist:
-                                showingAlert=true
-                                alerText="User Have Exist"
+                                self.toastErr(err: "user have existed")
                             case .commonErr:
-                                showingAlert = true
-                                alerText = "Internal Server Error"
+                                self.toastErr(err: "internal server error")
                             case .success:
                                 registerSuccess=true
                             default:
@@ -77,14 +77,13 @@ struct RegisterView: View {
                 .frame(width: 300, height: 50)
                 .background(Color.blue)
                 .cornerRadius(10)
-                .alert(alerText, isPresented: $showingAlert){
-                    Button("OK"){}
-                }
                 NavigationLink(destination: LoginView(),isActive: $registerSuccess){
                     EmptyView()
                 }
             }
         }
+        .toast(isPresented: self.$showingToast, title: self.taostText, state: .failed)
+        .toast(isPresented: self.$registerSuccess, type: .register, state: .success)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")

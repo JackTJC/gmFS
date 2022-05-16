@@ -18,9 +18,10 @@ final class ShareService:NSObject,ObservableObject{
     var sharedFileList:[SharedFile] = []
     var toastMsg = ""
     @Published var receiveFile = false
-    var privateKey = Curve25519.KeyAgreement.PrivateKey()
+    private var privateKey = Curve25519.KeyAgreement.PrivateKey()
     private var keyHasAgree = false// 密钥协商是否完成
-    var shareKey:SharedSecret? = nil
+    private var symKey:SymmetricKey = SymmetricKey(size: .bits256)
+    
     
     override init(){
         peerID=MCPeerID(displayName: UIDevice.current.name)
@@ -39,9 +40,13 @@ final class ShareService:NSObject,ObservableObject{
         return self.mcSession
     }
     
+    func getConnectedPeerCnt()->Int{
+        return self.mcSession.connectedPeers.count
+    }
+    
     func sendFile(sharedFile:SharedFile)throws{
         let encodedData = try JSONEncoder().encode(sharedFile)
-        let encData = try EncryptService.encryptWithSharedSecret(sharedKey: shareKey!, plainText: encodedData)
+        let encData = try EncryptService.encryptWithSymKey(key: self.symKey, plainText: encodedData)
         try self.mcSession.send(encData, toPeers: mcSession.connectedPeers, with: .reliable)
     }
 }
@@ -50,6 +55,7 @@ extension ShareService:MCSessionDelegate{
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .notConnected:
+            keyHasAgree = false
             AppManager.logger.info("\(peerID.displayName) change to not connected")
         case .connecting:
             AppManager.logger.info("\(peerID.displayName) change to connecting")
@@ -70,7 +76,8 @@ extension ShareService:MCSessionDelegate{
             do{
                 AppManager.logger.info("receivce publick key from \(peerID.displayName)")
                 let peerPk = try Curve25519.KeyAgreement.PublicKey(rawRepresentation: data)
-                self.shareKey = try privateKey.sharedSecretFromKeyAgreement(with: peerPk)
+                let shareKey = try privateKey.sharedSecretFromKeyAgreement(with: peerPk)
+                self.symKey = shareKey.hkdfDerivedSymmetricKey(using: SHA256.self, salt: EncryptService.saltData, sharedInfo: Data(), outputByteCount: 32)
                 AppManager.logger.info("handling success")
                 self.keyHasAgree=true
             }catch{
@@ -78,7 +85,7 @@ extension ShareService:MCSessionDelegate{
             }
         }else{
             do{
-                let decData = try EncryptService.decryptWithSharedKey(sharedKey: shareKey!, cipherText: data)
+                let decData = try EncryptService.decryptWithSymKey(key: self.symKey, cipherText: data)
                 AppManager.logger.info("revice file data from \(peerID.displayName)")
                 let sharedFile = try JSONDecoder().decode(SharedFile.self, from: decData)
                 self.sharedFileList.append(sharedFile)

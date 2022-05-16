@@ -20,7 +20,7 @@ struct DirTreeView: View {
     private let userCache = AppManager.getUserCache()
     private func fetchDir(){
         BackendService().GetNode(nodeID: rootNodeId){resp in
-            var copyNodes  = resp.subNodes.filter{node in // 只需要文件夹
+            var copyNodes  = resp.node.subNodeList.filter{node in // 只需要文件夹
                 return node.nodeType==NodeType.dir
             }
             copyNodes.sort{ n1,n2 in // 字典序排序
@@ -37,7 +37,7 @@ struct DirTreeView: View {
             HStack{
                 Image(systemName: "folder")
                 Text(node.nodeName)
-            }.background(NavigationLink("",destination: DirTreeView(rootNodeId: node.nodeID,sharedFile: self.$sharedFile,showingDirTree: self.$showingDirTree,saveSucc: self.$saveSucc)))
+            }.background(NavigationLink("",destination: DirTreeView(rootNodeId: node.nodeID,sharedFile: self.$sharedFile,showingDirTree: self.$showingDirTree,saveSucc: self.$saveSucc)).opacity(0))
         }
         .onAppear{
             fetchDir()
@@ -50,7 +50,7 @@ struct DirTreeView: View {
                     if self.selectedNode == nil{
                         return
                     }
-                    let encKey = try! EncryptService.aesEncrypt(identity: userCache.name, plainText: self.sharedFile.key)
+                    let encKey = try! EncryptService.symEncWithId(identity: userCache.name, plainText: self.sharedFile.key)
                     BackendService().RegisterFile(fileID: self.sharedFile.fileID, dirID: self.selectedNode!.nodeID,key: encKey){resp in
                         switch resp.baseResp.statusCode{
                         case StatusCode.success:
