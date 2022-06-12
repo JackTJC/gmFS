@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SharedFileView: View {
+    @StateObject var shareSrv:ShareService
     var sharedFiles:[SharedFile]
     @State private var saveClick = false
     @State private var selectedFile:SharedFile = SharedFile(fileID: 0, fileName: "", key: Data())
@@ -16,7 +17,7 @@ struct SharedFileView: View {
     
     var body: some View {
         List{
-            ForEach(sharedFiles){file in
+            ForEach(self.shareSrv.recvFiles){file in
                 HStack{
                     Image(systemName: "doc.text")
                     Text(file.fileName)
@@ -44,7 +45,7 @@ struct SharedFileView_Previews: PreviewProvider {
     static var files = [SharedFile(fileID: 1, fileName: "123",key: Data()),SharedFile(fileID: 2, fileName: "test",key: Data())]
     static var previews: some View {
         NavigationView{
-            SharedFileView(sharedFiles: files)
+            SharedFileView(shareSrv:  ShareService(), sharedFiles: files)
         }
     }
 }

@@ -11,6 +11,7 @@ import SimpleToast
 
 struct DirTreeView: View {
     var rootNodeId:Int64
+    @EnvironmentObject var shareSrv:ShareService
     @Binding var sharedFile:SharedFile
     @State private var subNodes:[Node] = []
     @State private var selectedNode:Node?
@@ -56,6 +57,10 @@ struct DirTreeView: View {
                         case StatusCode.success:
                             saveSucc=true
                             showingDirTree=false
+                            let idx = self.shareSrv.recvFiles.firstIndex{shareFile in
+                                return shareFile.fileID==self.sharedFile.fileID
+                            }
+                            self.shareSrv.recvFiles.remove(at: idx!)
                         default:
                             break
                         }
@@ -81,6 +86,7 @@ struct DirTreeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
             DirTreeView(rootNodeId: 1517026803300962304,sharedFile: $testSharedFile,showingDirTree: $testShowDir,saveSucc: $testSaveSucc)
+                .environmentObject(ShareService())
         }
     }
 }

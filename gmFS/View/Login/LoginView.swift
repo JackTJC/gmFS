@@ -12,15 +12,17 @@ struct LoginView: View {
     @State private var passwd = ""
     @State private var wrongUserName = 0
     @State private var wrongPasswd = 0
-    @State private var loginSuccess = false
+    @State private var showingLoginScreen = false
     @State private var showingRegister = false
-    @State private var showingToast = false
-    @State private var toastText = ""
+    // alert相关
+    @State private var loginAlert = false
+    @State private var alertText = ""
     
-    private func toastWithErr(err:String){
-        showingToast = true
-        toastText = err
+    func alertWith(_ text:String){
+        loginAlert=true
+        alertText=text
     }
+    
     
     var body: some View {
         NavigationView{
@@ -30,7 +32,6 @@ struct LoginView: View {
                 Circle().scale(1.35).foregroundColor(.white)
                 VStack{
                     Text("Login").font(.largeTitle).bold().padding().foregroundColor(.black)
-                    // input field
                     TextField("Username",text: $userName)
                         .padding()
                         .frame(width: 300, height: 50)
@@ -46,57 +47,66 @@ struct LoginView: View {
                     Button("Login"){
                         // Login logic
                         if userName.count==0{
-                            self.toastWithErr(err: "empty user name")
+                            alertWith("Empty UserName")
                             return
                         }
                         if passwd.count==0{
-                            self.toastWithErr(err: "empty passwd")
+                            alertWith("Empty Passwd")
                             return
                         }
                         BackendService().UserLogin(name: userName, passwd: passwd){resp in
                             if resp.hasBaseResp{
                                 switch resp.baseResp.statusCode{
                                 case .success:
-                                    self.loginSuccess=true
+                                    showingLoginScreen=true
                                     AppManager.setUserCache(resp.userInfo, resp.token)
                                 case .userNotFound:
                                     wrongUserName=2
-                                    self.toastWithErr(err: "user not found")
+                                    loginAlert=true
+                                    alertText="User Doesn't Exist"
                                 case .wrongPasswd:
                                     wrongPasswd=2
-                                    self.toastWithErr(err: "wrong password")
-                                case .commonErr:
-                                    self.toastWithErr(err: "internal server error")
+                                    loginAlert=true
+                                    alertText="Wrong Passwd"
                                 default:
                                     break
                                 }
                             }
                         }failure: { error in
-                            self.toastWithErr(err: "internal server error")
+                            // TODO error handle
                         }
                     }
                     .foregroundColor(.white)
                     .frame(width: 300, height: 50)
                     .background(Color.blue)
                     .cornerRadius(10)
+                    .alert(alertText, isPresented: $loginAlert){
+                        Button("OK"){}
+                    }
                     Button("Register"){
                         showingRegister=true
                     }.frame(width: 300, height: 10, alignment: .trailing)
-                    
-                    NavigationLink(isActive:self.$loginSuccess){
-                        HomeView().navigationBarBackButtonHidden(true)
+                    // to homepage
+                    NavigationLink(isActive: $showingLoginScreen){
+                        HomeView()
+                            .navigationTitle("")
+                            .navigationBarHidden(true)
+                            .navigationBarBackButtonHidden(true)
+                    }label: {
+                        EmptyView()
+                    }.isDetailLink(false)
+                    // to register
+                    NavigationLink(isActive:$showingRegister){
+                        RegisterView()
                     }label: {
                         EmptyView()
                     }
+                    .isDetailLink(false)
                 }
-            }
-            .toast(isPresented: self.$showingToast, title: self.toastText, state: .failed)
-            .fullScreenCover(isPresented: self.$showingRegister){
-                RegisterView()
             }
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
-            .navigationTitle("")
+        .navigationTitle("")
         }
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		083A4047281A737300F7991F /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083A4046281A737300F7991F /* AuthenticationServices.framework */; };
 		0855B4B3280FE96E0052D724 /* MCBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855B4B2280FE96E0052D724 /* MCBrowserView.swift */; };
+		0859B2412840CB89009E6712 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859B2402840CB89009E6712 /* SheetView.swift */; };
 		086849BF281D2E28001FDB74 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 086849BE281D2E28001FDB74 /* ActivityIndicatorView */; };
 		086849C2281D2FF1001FDB74 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = 086849C1281D2FF1001FDB74 /* SimpleToast */; };
 		086849C9281E3AC5001FDB74 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086849C8281E3AC5001FDB74 /* LoadingView.swift */; };
@@ -81,6 +82,7 @@
 /* Begin PBXFileReference section */
 		083A4046281A737300F7991F /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		0855B4B2280FE96E0052D724 /* MCBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCBrowserView.swift; sourceTree = "<group>"; };
+		0859B2402840CB89009E6712 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		086849C8281E3AC5001FDB74 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		086B89C6281CE38900660099 /* ca.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ca.p12; sourceTree = "<group>"; };
 		086B89C8281D0D5400660099 /* SharedFileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFileModel.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 		086849C7281E3AB3001FDB74 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0859B2402840CB89009E6712 /* SheetView.swift */,
 				086849C8281E3AC5001FDB74 /* LoadingView.swift */,
 				08CF098D28225908003EDA4D /* ToastView.swift */,
 			);
@@ -533,6 +536,7 @@
 				086B89CB281D0D9300660099 /* SharedFileView.swift in Sources */,
 				2B1F8AFF2807C85E004C4659 /* AppManager.swift in Sources */,
 				2BB0BF3A27E7312000822EFE /* PasswdChgView.swift in Sources */,
+				0859B2412840CB89009E6712 /* SheetView.swift in Sources */,
 				2BC337E927C2417000C01067 /* MineTabView.swift in Sources */,
 				2BB1AB7627FC316200B79F5E /* FileContentView.swift in Sources */,
 				2BB0BF3D27E732D500822EFE /* DirRowView.swift in Sources */,

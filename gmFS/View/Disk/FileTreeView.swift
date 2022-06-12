@@ -141,12 +141,6 @@ struct FileTreeView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showingMCBrowser){
-                BrowserViewControllerRepresent(didFinish: self.$showingMCBrowser, wasCanceled: self.$showingMCBrowser,shareService: self.shareService)
-            }
-            .sheet(isPresented: $showingRecv){
-                SharedFileView(sharedFiles: shareService.sharedFileList)
-            }
             .onAppear{
                 fetchNode()
             }
@@ -186,6 +180,12 @@ struct FileTreeView: View {
                     }
                 }
             }
+            .sheet(isPresented: self.$showingMCBrowser){
+                BrowserViewControllerRepresent(didFinish: self.$showingMCBrowser, wasCanceled: self.$showingMCBrowser,shareService: self.shareService)
+            }
+            .sheet(isPresented: self.$showingRecv){
+                SharedFileView(shareSrv: self.shareService,sharedFiles: shareService.recvFiles)
+            }
         }
     }
 }
@@ -193,7 +193,7 @@ struct FileTreeView: View {
 struct FileTree_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            FileTreeView(nodeID: 1517026803300962304)
+            FileTreeView(nodeID: 1517026803300962304).environmentObject(ShareService())
         }
     }
 }

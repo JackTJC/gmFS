@@ -188,11 +188,21 @@ class gmFSTests: XCTestCase {
         let key = UUID().uuidString
         for i in 1...30{
             let data = fileGen.getXmFile(x: 5*i)
-            let startTime = CFAbsoluteTimeGetCurrent()
-            let encData = try EncryptService.symEncWithId(identity: key, plainText: data)
-            let endTime = CFAbsoluteTimeGetCurrent()
-//            print("\(5*i)m file, cost \((endTime-startTime)*1000000) us to enc, origin size:\(data.count), enced size:\(encData.count)")
-            NSLog("%3dm file, cost %10.2f us, origin size:%10d, enc size:%10d", 5*i,(endTime-startTime)*1000000,data.count,encData.count)
+            var encSum:CFAbsoluteTime = 0
+            var decSum:CFAbsoluteTime = 0
+            for _ in 1...10{
+                var startTime = CFAbsoluteTimeGetCurrent()
+                let encData = try EncryptService.symEncWithId(identity: key, plainText: data)
+                var endTime = CFAbsoluteTimeGetCurrent()
+                encSum+=endTime-startTime
+                startTime = CFAbsoluteTimeGetCurrent()
+                _ = try EncryptService.symDecWithId(identity: key, cipherText: encData)
+                endTime = CFAbsoluteTimeGetCurrent()
+                decSum += endTime-startTime
+            }
+            let encAvg = encSum / 10.0
+            let decAvg = decSum / 10.0
+            NSLog("%3dm file, enc cost %10.2f ms, dec cost %10.2f ms", 5*i,encAvg*1000,decAvg*1000)
         }
     }
     
@@ -260,7 +270,7 @@ class gmFSTests: XCTestCase {
         print(encData.base64EncodedString())
     }
     
-   
+    
 }
 class fileGen{
     static func getXmFile(x:Int)->Data{
@@ -277,5 +287,5 @@ class fileGen{
             ret.append(UUID().uuidString.data(using: .utf8)!)
         }
         return ret
-     }
+    }
 }

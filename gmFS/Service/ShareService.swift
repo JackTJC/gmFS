@@ -15,7 +15,7 @@ final class ShareService:NSObject,ObservableObject{
     private var peerID:MCPeerID!
     private var mcSession:MCSession!
     private var mcNearByAdv:MCNearbyServiceAdvertiser!
-    var sharedFileList:[SharedFile] = []
+    @Published var recvFiles:[SharedFile] = []
     var toastMsg = ""
     @Published var receiveFile = false
     private var privateKey = Curve25519.KeyAgreement.PrivateKey()
@@ -88,7 +88,7 @@ extension ShareService:MCSessionDelegate{
                 let decData = try EncryptService.decryptWithSymKey(key: self.symKey, cipherText: data)
                 AppManager.logger.info("revice file data from \(peerID.displayName)")
                 let sharedFile = try JSONDecoder().decode(SharedFile.self, from: decData)
-                self.sharedFileList.append(sharedFile)
+                self.recvFiles.append(sharedFile)
                 self.receiveFile.toggle()
                 self.toastMsg="receive \(sharedFile.fileName) from \(peerID.displayName)"
             }catch{
