@@ -23,7 +23,7 @@ struct ContentView: View {
                 LoginView()
             }
         }
-        .simpleToast(isPresented: $shareService.receiveFile, options: toastOptions){// receive file toast
+        .simpleToast(isPresented: $shareService.receiveFile, options: toastOptions){// 收到文件弹出提醒
             HStack {
                 Image(systemName: "square.and.arrow.down")
                 Text(shareService.toastMsg)

@@ -8,12 +8,7 @@
 import Foundation
 import os
 
-struct UserInfoModel:Codable{
-    var token:String
-    var name:String
-    var email:String
-    var rootNode:Int64
-}
+
 
 struct AppManager{
     static private var userCacheKey = "user_cache"
@@ -22,17 +17,20 @@ struct AppManager{
     static private var userInfoDefault = UserInfoModel(token: "88a12f42-b45b-47d0-bd7b-626509dae938", name: "default name", email: "default@email.com", rootNode: 0)
     
     
+    /// 判断是否登录
     static func isLogined() -> Bool{
         return userDefaults.object(forKey: userCacheKey) != nil
     }
     
+    /// 设置用户信息本地缓存
     static func setUserCache(_ userInfo:UserInfo,_ token:String){
         let userInfoModel = UserInfoModel(token: token, name: userInfo.userName, email: userInfo.email, rootNode: userInfo.rootID)
         userDefaults.set(try? PropertyListEncoder().encode(userInfoModel), forKey: userCacheKey)
     }
     
+    /// 获取用户本地缓存
     static func getUserCache() -> UserInfoModel{
-#if DEBUG
+#if DEBUG // debug模式返回默认值
         userInfoDefault = UserInfoModel(token: "90ce22fc-d893-4a51-83f0-09c7881907aa", name: "default name", email: "default@email.com", rootNode:1517026803300962304 )
 #endif
         if let data = userDefaults.value(forKey: userCacheKey) as? Data {
@@ -47,6 +45,7 @@ struct AppManager{
         }
     }
     
+    /// 删除用户本地信息缓存
     static func delUserCache(){
         userDefaults.removeObject(forKey: userCacheKey)
     }

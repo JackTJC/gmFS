@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct SharedFile:Codable{
+/// 发送给其他设备的文件
+struct SharedFileModel:Codable{
     var fileID:Int64
     var fileName:String
     var key:Data
 }
 
-extension SharedFile:Identifiable{
+extension SharedFileModel:Identifiable{
     var id:Int64{
         return fileID
     }

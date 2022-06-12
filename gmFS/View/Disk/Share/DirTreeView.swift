@@ -12,7 +12,7 @@ import SimpleToast
 struct DirTreeView: View {
     var rootNodeId:Int64
     @EnvironmentObject var shareSrv:ShareService
-    @Binding var sharedFile:SharedFile
+    @Binding var sharedFile:SharedFileModel
     @State private var subNodes:[Node] = []
     @State private var selectedNode:Node?
     @State private var isEditMode:EditMode = .inactive
@@ -81,7 +81,7 @@ struct DirTreeView: View {
 struct DirTreeView_Previews: PreviewProvider {
     @State static var testOp = Int64(0)
     @State static var testShowDir = false
-    @State static var testSharedFile = SharedFile(fileID: 0, fileName: "",key: Data())
+    @State static var testSharedFile = SharedFileModel(fileID: 0, fileName: "",key: Data())
     @State static var testSaveSucc = false
     static var previews: some View {
         NavigationView{

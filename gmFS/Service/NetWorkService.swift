@@ -10,8 +10,10 @@ import Foundation
 
 class NetworkService:NSObject,URLSessionDelegate{
     let selfSignedHost = ["121.5.224.250"]
-    private static var backendHost = "https://121.5.224.250:8888"
+    private static var backendHost = "https://121.5.224.250:8888" // 服务端接口调用地址
     private static var defaultHeader = ["Content-Type":"application/json"]
+    
+    ///  向服务端发起HTTPS请求
     func request(uri:String,method:String = "POST",body:Data,
                  header:[String:String] = NetworkService.defaultHeader,
                  success:@escaping ((Data) -> Void),
@@ -32,7 +34,7 @@ class NetworkService:NSObject,URLSessionDelegate{
         }
         task.resume()
     }
-    // comes from https://www.hangge.com/blog/cache/detail_991.html
+    //  参考自https://www.hangge.com/blog/cache/detail_991.html
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         switch challenge.protectionSpace.authenticationMethod{
         case NSURLAuthenticationMethodServerTrust:

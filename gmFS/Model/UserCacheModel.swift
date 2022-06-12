@@ -7,4 +7,10 @@
 
 import Foundation
 
-
+/// 用户信息本地记录
+struct UserInfoModel:Codable{
+    var token:String
+    var name:String
+    var email:String
+    var rootNode:Int64
+}

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SharedFileView: View {
     @StateObject var shareSrv:ShareService
-    var sharedFiles:[SharedFile]
+    var sharedFiles:[SharedFileModel]
     @State private var saveClick = false
-    @State private var selectedFile:SharedFile = SharedFile(fileID: 0, fileName: "", key: Data())
+    @State private var selectedFile:SharedFileModel = SharedFileModel(fileID: 0, fileName: "", key: Data())
     @State var saveSucc:Bool = false
     private let userCache = AppManager.getUserCache()
     
@@ -42,7 +42,7 @@ struct SharedFileView: View {
 }
 
 struct SharedFileView_Previews: PreviewProvider {
-    static var files = [SharedFile(fileID: 1, fileName: "123",key: Data()),SharedFile(fileID: 2, fileName: "test",key: Data())]
+    static var files = [SharedFileModel(fileID: 1, fileName: "123",key: Data()),SharedFileModel(fileID: 2, fileName: "test",key: Data())]
     static var previews: some View {
         NavigationView{
             SharedFileView(shareSrv:  ShareService(), sharedFiles: files)

@@ -15,7 +15,7 @@ final class ShareService:NSObject,ObservableObject{
     private var peerID:MCPeerID!
     private var mcSession:MCSession!
     private var mcNearByAdv:MCNearbyServiceAdvertiser!
-    @Published var recvFiles:[SharedFile] = []
+    @Published var recvFiles:[SharedFileModel] = []
     var toastMsg = ""
     @Published var receiveFile = false
     private var privateKey = Curve25519.KeyAgreement.PrivateKey()
@@ -44,7 +44,7 @@ final class ShareService:NSObject,ObservableObject{
         return self.mcSession.connectedPeers.count
     }
     
-    func sendFile(sharedFile:SharedFile)throws{
+    func sendFile(sharedFile:SharedFileModel)throws{
         let encodedData = try JSONEncoder().encode(sharedFile)
         let encData = try EncryptService.encryptWithSymKey(key: self.symKey, plainText: encodedData)
         try self.mcSession.send(encData, toPeers: mcSession.connectedPeers, with: .reliable)
@@ -61,7 +61,7 @@ extension ShareService:MCSessionDelegate{
             AppManager.logger.info("\(peerID.displayName) change to connecting")
         case .connected:
             AppManager.logger.info("\(peerID.displayName) change to connected")
-            do{
+            do{ // 连接后立刻发送自身公钥
                 try session.send(privateKey.publicKey.rawRepresentation, toPeers: [peerID], with: .reliable)
             }catch{
                 AppManager.logger.error("send public key error")
@@ -72,6 +72,7 @@ extension ShareService:MCSessionDelegate{
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        // 如果协商没完成，按公钥解释；否则按SharedFileModel解释
         if !keyHasAgree{
             do{
                 AppManager.logger.info("receivce publick key from \(peerID.displayName)")
@@ -87,7 +88,7 @@ extension ShareService:MCSessionDelegate{
             do{
                 let decData = try EncryptService.decryptWithSymKey(key: self.symKey, cipherText: data)
                 AppManager.logger.info("revice file data from \(peerID.displayName)")
-                let sharedFile = try JSONDecoder().decode(SharedFile.self, from: decData)
+                let sharedFile = try JSONDecoder().decode(SharedFileModel.self, from: decData)
                 self.recvFiles.append(sharedFile)
                 self.receiveFile.toggle()
                 self.toastMsg="receive \(sharedFile.fileName) from \(peerID.displayName)"
@@ -113,6 +114,6 @@ extension ShareService:MCSessionDelegate{
 extension ShareService:MCNearbyServiceAdvertiserDelegate{
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         AppManager.logger.info("receive invitation from \(peerID.displayName)")
-        invitationHandler(true,mcSession)
+        invitationHandler(true,mcSession) // 传true为接受所有邀请
     }
 }

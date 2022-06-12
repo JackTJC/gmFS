@@ -13,6 +13,7 @@ import SwiftUI
 
 
 class BackendService{
+    ///  各个接口的URI
     private class BackendUri{
         static var ping = "/ping"
         static var userLogin = "/user/login"

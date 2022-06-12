@@ -52,7 +52,7 @@ struct FileContentView: View {
                     self.showingNoConnected.toggle()
                     return
                 }
-                let sharedFile = SharedFile(fileID: fileNodeID, fileName: name,key: self.key)
+                let sharedFile = SharedFileModel(fileID: fileNodeID, fileName: name,key: self.key)
                 do{
                     try shareService.sendFile(sharedFile: sharedFile)
                     shareSucc.toggle()
