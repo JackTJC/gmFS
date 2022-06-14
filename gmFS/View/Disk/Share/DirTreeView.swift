@@ -19,10 +19,12 @@ struct DirTreeView: View {
     @Binding var showingDirTree:Bool
     @Binding var saveSucc:Bool
     private let userCache = AppManager.getUserCache()
+    
+    /// 根据rootNodeID拉取文件夹
     private func fetchDir(){
         BackendService().GetNode(nodeID: rootNodeId){resp in
-            var copyNodes  = resp.node.subNodeList.filter{node in // 只需要文件夹
-                return node.nodeType==NodeType.dir
+            var copyNodes  = resp.node.subNodeList.filter{node in
+                return node.nodeType==NodeType.dir// 只需要文件夹
             }
             copyNodes.sort{ n1,n2 in // 字典序排序
                 return n1.nodeName<n2.nodeName
@@ -51,6 +53,7 @@ struct DirTreeView: View {
                     if self.selectedNode == nil{
                         return
                     }
+                    // 使用自己的主密钥加密收到的文件密钥，再调用接口注册文件
                     let encKey = try! EncryptService.symEncWithId(identity: userCache.name, plainText: self.sharedFile.key)
                     BackendService().RegisterFile(fileID: self.sharedFile.fileID, dirID: self.selectedNode!.nodeID,key: encKey){resp in
                         switch resp.baseResp.statusCode{

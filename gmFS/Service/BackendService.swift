@@ -24,19 +24,26 @@ class BackendService{
         static var registerFile = "/file/register"
         static var searchFile = "/file/search"
     }
+    
+    
+    /// 向服务器发起接口调用，逻辑几乎一致，只有Ping给了详细的注释
     func Ping(name:String,
               success:@escaping (PingResponse)->Void,
               failure:@escaping(Error)->Void){
+        // 新建Request对象
+        // 并写入参数
         var req = PingRequest()
         req.name=name
         let userCache = AppManager.getUserCache()
         var baseReq = BaseReq()
         baseReq.token = userCache.token
         req.baseReq = baseReq
+        // 对象序列化为二进制数据
         let data = try! req.jsonUTF8Data()
+        // 发起接口调用
         NetworkService().request(uri: BackendUri.ping, body: data){data in
             do{
-                let resp = try PingResponse.init(jsonUTF8Data: data)
+                let resp = try PingResponse.init(jsonUTF8Data: data)// 反序列化服务端下发的数据为对象
                 success(resp)
             }catch is JSONDecodingError{
                 AppManager.logger.error("ping json decode error")

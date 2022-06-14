@@ -32,7 +32,7 @@ struct FileTreeView: View {
         self.toatText = succ
     }
     
-    /// 根据node id从server拉取node
+    /// 根据node id从服务端拉取node
     private func fetchNode(){
         BackendService().GetNode(nodeID: nodeID){resp in
             switch resp.baseResp.statusCode{
@@ -161,6 +161,7 @@ struct FileTreeView: View {
             }
             .toolbar{
                 ToolbarItemGroup(placement: .navigationBarLeading){
+                    // 添加按钮
                     Menu{
                         Button("File", action: {showingAddFile.toggle()})
                         Button("Directory",action: {showingInputDirName.toggle()})
@@ -169,9 +170,11 @@ struct FileTreeView: View {
                     }
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing){
+                    // 展示收到的文件
                     Button(action: {showingRecv.toggle()}){
                         Label("", systemImage: "arrow.left.arrow.right")
                     }
+                    // 面对面通信相关菜单
                     Menu{
                         Button("Join Session", action: {showingMCBrowser.toggle()})
                         Button("Host Session",action: {shareService.startHostNeayBy()})

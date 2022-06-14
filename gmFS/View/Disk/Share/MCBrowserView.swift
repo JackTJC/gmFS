@@ -29,6 +29,8 @@ extension BrowserViewControllerRepresent:MCBrowserViewControllerDelegate{
     }
 }
 
+/// 将MCBrowserViewController封装为SwiftUI中界面
+/// https://developer.apple.com/tutorials/swiftui/interfacing-with-uikit
 extension BrowserViewControllerRepresent:UIViewControllerRepresentable{
     func makeUIViewController(context: Context) -> MCBrowserViewController {
         let controller = MCBrowserViewController(serviceType: ShareService.serviceType, session: shareService.getSession())

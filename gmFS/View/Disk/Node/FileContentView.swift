@@ -33,6 +33,7 @@ struct FileContentView: View {
             }
         }
         .onAppear{
+            // ui加载时拉取文件内容
             BackendService().GetNode(nodeID: fileNodeID){ resp in
                 do{
                     self.key = try EncryptService.symDecWithId(identity: userCache.name, cipherText: resp.node.secretKey)
@@ -47,6 +48,7 @@ struct FileContentView: View {
             }
         }
         .toolbar{
+            // 分享按钮
             Button{
                 if shareService.getConnectedPeerCnt()==0{
                     self.showingNoConnected.toggle()

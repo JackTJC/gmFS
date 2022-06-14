@@ -30,7 +30,7 @@ struct PasswdChgView: View {
                     .cornerRadius(10)
             }
             Button("Change"){
-                // change logic
+                //TODO 修改密码逻辑
             }
             .frame(width: 150, height: 50)
             .background(Color.blue)

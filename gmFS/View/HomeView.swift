@@ -16,12 +16,14 @@ struct HomeView: View {
     }
     var body: some View {
         TabView(selection: self.$tab){
+            // 网盘tab
             NavigationView{
                 FileTreeView(nodeID: rootNodeId)
             }
             .tabItem{
                 Label("Disk",systemImage: "folder")
             }.tag(Tab.fileShare)
+            // 个人信息tab
             NavigationView{
                 MineTabView(avatar: Image("default_avatar"))
             }

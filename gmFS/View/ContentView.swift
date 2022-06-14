@@ -16,6 +16,7 @@ struct ContentView: View {
     @EnvironmentObject var shareService:ShareService
     
     var body: some View {
+        // 根据是否登录选择展示的页面
         Group{
             if isLogined{
                 HomeView()

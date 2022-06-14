@@ -10,11 +10,14 @@ import SwiftUI
 struct LoginView: View {
     @State private var userName = ""
     @State private var passwd = ""
+    
+    /// 存在错误时，输入框边框显示红色，边框的大小
     @State private var wrongUserName = 0
     @State private var wrongPasswd = 0
     @State private var showingLoginScreen = false
     @State private var showingRegister = false
-    // alert相关
+    
+    /// alert相关
     @State private var loginAlert = false
     @State private var alertText = ""
     

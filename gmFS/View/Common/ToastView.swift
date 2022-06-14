@@ -12,6 +12,7 @@ import SimpleToast
 
 class Toast{
     
+    /// Toast类型枚举
     enum `Type`:String{
         case saveFile = "Save"
         case shareFile = "Share"
@@ -23,12 +24,16 @@ class Toast{
         case startHost = "Start Host"
     }
     
+    /// Toast状态枚举
     enum State:String{
         case success = "Success"
         case failed = "Failed"
     }
     
+    /// toast选项
     static let succOrFailOpt = SimpleToastOptions(alignment: .bottom, hideAfter: 3, animation: .default, modifierType: .scale)
+    
+    /// 根据类型和状态获取toast
     static func getToastContent(type:Toast.`Type`,state:Toast.State) -> some View{
         return  HStack{
             state == .success ? Image(systemName: "checkmark") : Image(systemName:"xmark")
@@ -40,6 +45,7 @@ class Toast{
         .foregroundColor(Color.white)
         .cornerRadius(30)
     }
+    /// 根据标题和状态获取toast
     static func getToastContent(title:String,state:Toast.State)->some View{
         return  HStack{
             state == .success ? Image(systemName: "checkmark") : Image(systemName:"xmark")
@@ -53,7 +59,7 @@ class Toast{
 }
 
 
-
+/// 拓展view使其支持toast
 extension View{
     func toast(isPresented:Binding<Bool>,type:Toast.`Type`,state:Toast.State) -> some View{
         return self.simpleToast(isPresented: isPresented, options: Toast.succOrFailOpt){

@@ -15,6 +15,7 @@ struct RegisterView: View {
     @State private var showingToast = false
     @State private var taostText = ""
     
+    /// 提示错误
     private func toastErr(err:String){
         showingToast = true
         taostText = err
@@ -70,7 +71,7 @@ struct RegisterView: View {
                             }
                         }
                     }failure: { error in
-                        
+                        self.toastErr(err: "client error")
                     }
                 }
                 .foregroundColor(.white)

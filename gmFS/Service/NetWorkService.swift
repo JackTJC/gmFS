@@ -18,13 +18,15 @@ class NetworkService:NSObject,URLSessionDelegate{
                  header:[String:String] = NetworkService.defaultHeader,
                  success:@escaping ((Data) -> Void),
                  failure:@escaping ((Error)->Void)){
-        let config = URLSessionConfiguration.default
+        let config = URLSessionConfiguration.default// 使用默认配置
         let session = URLSession(configuration: config,delegate: self,delegateQueue: OperationQueue.main)
         let url = URL(string: NetworkService.backendHost+uri)!
+        // 新建request对象，并写入body，method，header
         var req = URLRequest(url: url)
         req.httpBody=body
         req.httpMethod = method
         req.allHTTPHeaderFields=header
+        // 新建task
         let task = session.dataTask(with: req){data,resp,error in
             if let data = data{
                 success(data)
@@ -32,6 +34,7 @@ class NetworkService:NSObject,URLSessionDelegate{
                 failure(error)
             }
         }
+        // 调度task
         task.resume()
     }
     //  参考自https://www.hangge.com/blog/cache/detail_991.html

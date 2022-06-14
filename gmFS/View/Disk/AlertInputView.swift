@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-// comes from https://stackoverflow.com/questions/68327621/swiftui-using-alertispresented-with-a-textfield-for-input
+// 参考自：https://stackoverflow.com/questions/68327621/swiftui-using-alertispresented-with-a-textfield-for-input
 extension UIAlertController {
     convenience init(alert: AlertConfig) {
         self.init(title: alert.title, message: nil, preferredStyle: .alert)

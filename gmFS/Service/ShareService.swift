@@ -12,17 +12,32 @@ import CryptoKit
 
 final class ShareService:NSObject,ObservableObject{
     static var serviceType = "service"
+    
+    /// 标识自身设备
     private var peerID:MCPeerID!
+    
+    /// 会话建立后的session
     private var mcSession:MCSession!
+    
+    /// 广播器，广播自身给周围设备
     private var mcNearByAdv:MCNearbyServiceAdvertiser!
+    /// 已收到文件列表，暂存收到的文件
     @Published var recvFiles:[SharedFileModel] = []
+    
     var toastMsg = ""
     @Published var receiveFile = false
+    
+    /// 生成的密钥对
     private var privateKey = Curve25519.KeyAgreement.PrivateKey()
-    private var keyHasAgree = false// 密钥协商是否完成
+    
+    /// 密钥协商是否完成
+    private var keyHasAgree = false
+    
+    /// 协商得到的会话密钥
     private var symKey:SymmetricKey = SymmetricKey(size: .bits256)
     
     
+    /// 构造函数
     override init(){
         peerID=MCPeerID(displayName: UIDevice.current.name)
         mcSession=MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
@@ -30,6 +45,7 @@ final class ShareService:NSObject,ObservableObject{
         mcSession.delegate=self
     }
     
+    /// 建立一个局域网会话并向周围设备广播自己
     func startHostNeayBy(){
         self.mcNearByAdv = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: ShareService.serviceType)
         self.mcNearByAdv.delegate=self
@@ -44,6 +60,8 @@ final class ShareService:NSObject,ObservableObject{
         return self.mcSession.connectedPeers.count
     }
     
+    
+    /// 向已连接的设备发送文件
     func sendFile(sharedFile:SharedFileModel)throws{
         let encodedData = try JSONEncoder().encode(sharedFile)
         let encData = try EncryptService.encryptWithSymKey(key: self.symKey, plainText: encodedData)
@@ -61,7 +79,8 @@ extension ShareService:MCSessionDelegate{
             AppManager.logger.info("\(peerID.displayName) change to connecting")
         case .connected:
             AppManager.logger.info("\(peerID.displayName) change to connected")
-            do{ // 连接后立刻发送自身公钥
+            // 连接后立刻发送自身公钥
+            do{
                 try session.send(privateKey.publicKey.rawRepresentation, toPeers: [peerID], with: .reliable)
             }catch{
                 AppManager.logger.error("send public key error")
@@ -72,8 +91,7 @@ extension ShareService:MCSessionDelegate{
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        // 如果协商没完成，按公钥解释；否则按SharedFileModel解释
-        if !keyHasAgree{
+        if !keyHasAgree{// 如果协商没完成，按公钥解释
             do{
                 AppManager.logger.info("receivce publick key from \(peerID.displayName)")
                 let peerPk = try Curve25519.KeyAgreement.PublicKey(rawRepresentation: data)
@@ -84,7 +102,7 @@ extension ShareService:MCSessionDelegate{
             }catch{
                 AppManager.logger.error("handle publick key from \(peerID.displayName) error")
             }
-        }else{
+        }else{//否则按SharedFileModel解释
             do{
                 let decData = try EncryptService.decryptWithSymKey(key: self.symKey, cipherText: data)
                 AppManager.logger.info("revice file data from \(peerID.displayName)")

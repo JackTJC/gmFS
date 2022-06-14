@@ -12,6 +12,7 @@ struct MineTabView: View {
     @State private var userInfo:UserInfoModel = AppManager.getUserCache()
     var body: some View {
         VStack{
+            // 头像
             avatar
                 .resizable()
                 .clipShape(Circle())
@@ -21,18 +22,21 @@ struct MineTabView: View {
                 .font(.title)
             Text(userInfo.email)
             List{
+                // 修改密码选项
                 HStack{
                     Image("key")
                         .resizable()
                         .frame(width: 40, height: 40)
                     Text("ChangePassword")
                 }.background(NavigationLink("",destination: PasswdChgView()).opacity(0))
+                // 设置选项
                 HStack{
                     Image("setting")
                         .resizable()
                         .frame(width: 40, height: 40)
                     Text("Settings")
                 }.background(NavigationLink("",destination: SettingView()).opacity(0))
+                // About选项
                 HStack{
                     Image("mine")
                         .resizable()
